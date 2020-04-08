@@ -1,0 +1,42 @@
+version: '3'
+
+volumes: 
+  rails_gem:
+  mysql_data:
+
+services: 
+  db: 
+    image: mysql:8.0
+    volumes: 
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: root
+    ports: 
+      - '3306:3306'
+    command: --default-authentication-plugin=mysql_native_password
+
+  app: &rails
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes: 
+      - .:/app
+      - rails_gem:/usr/local/bundle
+    expose:
+      - '3000'
+    ports: 
+      - '3000:3000'
+    command: bundle exec rails server -b '0.0.0.0'
+    depends_on:
+      - db
+
+  webpack:
+    <<: *rails
+    stdin_open: true
+    tty: true
+    command: /app/bin/webpack-dev-server
+    ports:
+      - '3035:3035'
+    depends_on: 
+      - app
