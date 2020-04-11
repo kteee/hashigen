@@ -1,42 +1,51 @@
 version: '3'
 
 volumes: 
-  rails_gem:
+  rails_data:
   mysql_data:
 
 services: 
   db: 
+    container_name: db
+    command: --default-authentication-plugin=mysql_native_password
     image: mysql:8.0
     volumes: 
       - mysql_data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_USER: "${MYSQL_USER}"
     ports: 
-      - '3306:3306'
-    command: --default-authentication-plugin=mysql_native_password
+      - "${DB_PORT}:3306"
 
-  app: &rails
+  back:
+    container_name: back
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile_rails
     volumes: 
-      - .:/app
-      - rails_gem:/usr/local/bundle
+      - ./back:/usr/src/app
+      - rails_data:/usr/local/bundle
     expose:
       - '3000'
     ports: 
-      - '3000:3000'
+      - "${RAILS_PORT}:3000"
     command: bundle exec rails server -b '0.0.0.0'
     depends_on:
       - db
 
-  webpack:
-    <<: *rails
+  front:
+    container_name: front
+    build: 
+      context: .
+      dockerfile: Dockerfile_react
+    volumes: 
+      - ./front:/usr/src/app
     stdin_open: true
     tty: true
-    command: /app/bin/webpack-dev-server
+    expose: 
+      - '3000'
     ports:
-      - '3035:3035'
-    depends_on: 
-      - app
+      - "${REACT_PORT}:3000"
+    command: yarn start
+    depends_on:
+      - back
