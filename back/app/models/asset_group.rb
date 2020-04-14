@@ -1,0 +1,2 @@
+class AssetGroup < ApplicationRecord
+end
