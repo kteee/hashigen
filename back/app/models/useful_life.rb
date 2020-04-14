@@ -1,0 +1,2 @@
+class UsefulLife < ApplicationRecord
+end

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link, LinkProps } from 'react-router-dom';
 
-import { H1 } from '../utils/Text';
+import { H1 } from '../materials/Text';
 
 const Header = () => {
   return (

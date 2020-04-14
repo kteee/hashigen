@@ -1,24 +1,28 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import { RightArrowAlt } from '@styled-icons/boxicons-regular/RightArrowAlt'
 
-interface FunctionItemProp {
-  name: string
-}
+import {functionItemProps} from './FunctionList';
 
-const FunctionItem = (props: FunctionItemProp) => {
-  
-  const onClickHandler = (): void => {
-    console.log('clicked')
-  }
+const FunctionItem = (props: functionItemProps) => {
 
   return (
-    <FunctionItemOuter onClick={onClickHandler}>
-      <FunctionItemName>{props.name}</FunctionItemName>
-      <FunctionItemArrow><RightArrowAlt size='20'/></FunctionItemArrow>
-    </FunctionItemOuter>
-  );
-};
+    <StyledLink to={props.link_to}>
+      <FunctionItemOuter>
+        <FunctionItemName>{props.name}</FunctionItemName>
+        <FunctionItemArrow><RightArrowAlt size='20'/></FunctionItemArrow>
+      </FunctionItemOuter>
+    </StyledLink>
+  )
+
+}
+
+const StyledLink = styled(Link)`
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+`
 
 const FunctionItemOuter = styled.div`
   display: flex;
@@ -27,14 +31,14 @@ const FunctionItemOuter = styled.div`
   padding: 1em;
   border: 1px solid #e6e2d3;
   cursor: pointer;
-`;
+`
 
 const FunctionItemName = styled.div`
   flex-grow: 1;
-`;
+`
 
 const FunctionItemArrow = styled.div`
-`;
+`
 
 
-export default FunctionItem;
+export default FunctionItem

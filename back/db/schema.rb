@@ -10,6 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2020_04_14_094720) do
+
+  create_table "useful_lives", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "year"
+    t.float "old_same_amount"
+    t.float "old_same_ratio"
+    t.float "new_same_amount"
+    t.float "two_five_zero_same_ratio"
+    t.float "two_five_zero_same_ratio_point"
+    t.float "two_five_zero_same_ratio_after_point"
+    t.float "two_zero_zero_same_ratio"
+    t.float "two_zero_zero_same_ratio_point"
+    t.float "two_zero_zero_same_ratio_after_point"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
 end

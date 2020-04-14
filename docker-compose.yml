@@ -1,7 +1,8 @@
 version: '3'
 
 volumes: 
-  rails_data:
+  rails_gems:
+  react_node_modules:
   mysql_data:
 
 services: 
@@ -23,13 +24,13 @@ services:
       context: .
       dockerfile: Dockerfile_rails
     volumes: 
-      - ./back:/usr/src/app
-      - rails_data:/usr/local/bundle
+      - ./back:/usr/src/app:cached
+      - rails_gems:/usr/local/bundle
     expose:
       - '3000'
     ports: 
       - "${RAILS_PORT}:3000"
-    command: bundle exec rails server -b '0.0.0.0'
+    command: bash -c "chmod 755 /usr/src/app/scripts/rails_start.sh && /usr/src/app/scripts/rails_start.sh"
     depends_on:
       - db
 
@@ -39,7 +40,8 @@ services:
       context: .
       dockerfile: Dockerfile_react
     volumes: 
-      - ./front:/usr/src/app
+      - ./front:/usr/src/app:cached
+      - react_node_modules:/usr/src/app/node_modules
     stdin_open: true
     tty: true
     expose: 
