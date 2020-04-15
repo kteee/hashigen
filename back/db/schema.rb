@@ -10,12 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_14_121818) do
+ActiveRecord::Schema.define(version: 2020_04_15_113545) do
 
   create_table "asset_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "asset_type_id"
+    t.index ["asset_type_id"], name: "index_asset_groups_on_asset_type_id"
+  end
+
+  create_table "asset_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "asset_group_id"
+    t.text "item"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "useful_life_id"
+    t.index ["asset_group_id"], name: "index_asset_items_on_asset_group_id"
+    t.index ["useful_life_id"], name: "index_asset_items_on_useful_life_id"
   end
 
   create_table "asset_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -39,4 +51,7 @@ ActiveRecord::Schema.define(version: 2020_04_14_121818) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "asset_groups", "asset_types"
+  add_foreign_key "asset_items", "asset_groups"
+  add_foreign_key "asset_items", "useful_lives"
 end

@@ -1,78 +1,53 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React, {useEffect} from 'react'
+import styled from 'styled-components'
+
 import {Container} from '../materials/Container'
-
-interface usefulLifeProps {
-  id: number
-  year: number
-  old_same_amount: number
-  old_same_ratio: number
-  new_same_amount: number
-  two_five_zero_same_ratio: number
-  two_five_zero_same_ratio_point: number
-  two_five_zero_same_ratio_after_point: number
-  two_zero_zero_same_ratio: number
-  two_zero_zero_same_ratio_point: number
-  two_zero_zero_same_ratio_after_point: number
-
-}
-
-const url = 'http://localhost:5000/api/masters/useful-life'
+import {H2} from '../materials/Text'
+import {StyledButton} from '../materials/Button'
+import {getApiData} from '../utilities/getApiData'
+import {GET_ASSET_ITEM_URL} from '../utilities/urls'
 
 const NewAsset = () => {
 
-  const [usefulLife, setUsefulLife] = useState([])
-
-  const getUsefuLife = async () => {
-    const response = await axios.get(url)
-    setUsefulLife(response.data.data)
-  }
-
-  useEffect((): void => {
-    getUsefuLife()
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getApiData(GET_ASSET_ITEM_URL)
+      console.log(data)
+    } 
+    getData()
   }, [])
-
-  let usefulLifeList = usefulLife.map((item: usefulLifeProps) => {
-    return (
-      <tr>
-        <td>{item.year}</td>
-        <td>{item.old_same_amount}</td>
-        <td>{item.old_same_ratio}</td>
-        <td>{item.new_same_amount}</td>
-        <td>{item.two_five_zero_same_ratio}</td>
-        <td>{item.two_five_zero_same_ratio_point}</td>
-        <td>{item.two_five_zero_same_ratio_after_point}</td>
-        <td>{item.two_zero_zero_same_ratio}</td>
-        <td>{item.two_zero_zero_same_ratio_point}</td>
-        <td>{item.two_zero_zero_same_ratio_after_point}</td>
-      </tr>
-    )
-  })
+  
 
   return (
     <Container>
-      new asset 画面だよ
-      <table>
-        <thead>
-          <tr>
-            <th>年数</th>
-            <th>旧定額法</th>
-            <th>旧定率法</th>
-            <th>新定額法</th>
-            <th>250%定率法</th>
-            <th>250%定率法保証価格</th>
-            <th>250%定率法改定償却率</th>
-            <th>200%定率法</th>
-            <th>200%定率法保証価格</th>
-            <th>200%定率法改定償却率</th>
-          </tr>
-        </thead>
-        <tbody>      
-          {usefulLifeList}
-        </tbody>
-      </table>
+      <H2>新規登録</H2>
+      <StyledDiv>
+        <StyledInput type='text' name='asset-name' placeholder='資産名'/>
+      </StyledDiv>
+      <StyledDiv>
+        <StyledButton>登録する</StyledButton>
+      </StyledDiv>
     </Container>
-  )
+  );
+};
+
+interface StyledInputProps{
+  type?: string
+  name?: string
+  placeholder?: string
 }
 
-export default NewAsset
+const StyledDiv = styled.div`
+  margin-top: 1em;
+`
+
+const StyledInput = styled.input.attrs((props: StyledInputProps) => ({
+  type: props.type ? props.type : undefined,
+  name: props.name ? props.name : undefined,
+  placeholder: props.placeholder ? props.placeholder : undefined
+}))`
+  width: 20em;
+  font-size: 1.2em;
+`
+
+export default NewAsset;

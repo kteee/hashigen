@@ -1,13 +1,16 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
-import FunctionItem from './FunctionItem';
-import { Container } from '../materials/Container';
+import FunctionItem from './FunctionItem'
+import { Container } from '../materials/Container'
 
 export interface functionItemProps {
   name: string
   link_to: string
 }
+
+const FunctionItemsWrapper = styled.div`
+`
 
 const FunctionList = () => {
 
@@ -31,10 +34,8 @@ const FunctionList = () => {
         {FunctionItems}
       </FunctionItemsWrapper>
     </Container>
-  );
-};
+  )
+}
 
-const FunctionItemsWrapper = styled.div`
-`;
 
-export default FunctionList;
+export default FunctionList

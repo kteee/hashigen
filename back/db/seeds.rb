@@ -26,3 +26,12 @@ require 'csv'
 # CSV.foreach('db/csv/asset_group.csv') do |row|
 #   AssetGroup.create(name: row[1])
 # end
+
+# AssetItems
+CSV.foreach('db/csv/asset_item.csv', headers: true) do |row|
+  AssetItem.create(
+    asset_group_id: row[0],
+    item: row[1],
+    useful_life_id: row[3]
+  )
+end

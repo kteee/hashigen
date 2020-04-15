@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface TextProps {
-  color: string
+  color?: string
 }
 
 export const H1 = styled.h1`
