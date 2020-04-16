@@ -15,17 +15,25 @@ class MastersController < ApplicationController
     render json: {data: all_groups}
   end
 
+  def asset_item_count
+    items_count = AssetItem.all.count
+    render :json => {count: items_count}
+  end
+
   def asset_item
-    all_items = AssetItem.all
-    all_items_response = []
-    all_items.each do |item|
-      all_items_response.push(
-        group: item.asset_group.name,
-        item: item.item.split(','),
-        useful_life: item.useful_life.year
+    pagenated_items = AssetItem.page(params[:page]).per(params[:per])
+    total_pages = pagenated_items.total_pages
+    response = []
+    pagenated_items.each do |item|
+      puts item.id
+      response.push(
+        :id => item.id,
+        :group => item.asset_group.name,
+        :item => item.item.split(','),
+        :useful_life => item.useful_life.year
       )
     end
-    render json: {items: all_items_response}
+    render :json => { :items => response, :pages => total_pages}
   end
 
 end

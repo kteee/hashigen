@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, ChangeEvent} from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
 
@@ -10,18 +10,36 @@ import {GET_ASSET_ITEM_URL} from '../utilities/urls'
 const NewAsset = () => {
 
   const [assetItems, setAssetItems] = useState([])
+  const [currentPage, setCurrentPage] = useState('1')
+  const [perPageCount, setPerPageCount] = useState('10')
+  const [totalPages, setTotalPages] = useState()
+  
 
-  useEffect(() => {
-    const getData = async () => {
-      const { data: { items } } = await axios.get(GET_ASSET_ITEM_URL)
-      setAssetItems(items)
-    }
+  const getData = async () => {
+    const url = `${GET_ASSET_ITEM_URL}?per=${perPageCount}&page=${currentPage}`
+    const { data: { items, pages } } = await axios.get(url)
+    setAssetItems(items)
+    setTotalPages(pages)
+    console.log(items)
+    console.log(pages)
+  }
+
+  useEffect(() => {    
     getData()
   }, [])
+
+  const onSelectHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+    setPerPageCount(e.target.value)
+  }
+
+  const onClickHandler = () => {
+    getData()
+  }
 
   let AssetItems = assetItems.map((value: any, index: number) => {
     return (
       <tr key={index}>
+        <td>{value.id}</td>
         <td>{value.group}</td>
         <td>{value.item[0]}</td>
         <td>{value.item[1]}</td>
@@ -42,7 +60,17 @@ const NewAsset = () => {
         <StyledInput type='text' name='asset-name' placeholder='資産名'/>
       </StyledDiv>
       <StyledDiv>
-        <StyledButton>登録する</StyledButton>
+        <label>表示数</label>
+        <select id='disp-num' onChange={onSelectHandler}>
+          <option></option>
+          <option value={5}>5</option>
+          <option value={10}>10</option>
+          <option value={15}>15</option>
+          <option value={20}>20</option>
+        </select>
+      </StyledDiv>
+      <StyledDiv>
+        <StyledButton onClick={onClickHandler}>検索する</StyledButton>
       </StyledDiv>
       <table>
         <tbody>
