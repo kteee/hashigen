@@ -5,8 +5,9 @@ Rails.application.routes.draw do
   get '/api/masters/asset-type', to: 'masters#asset_type'
   get '/api/masters/asset-group', to: 'masters#asset_group'
   get '/api/masters/asset-item', to: 'masters#asset_item'
+  get '/api/masters/dep-method', to: 'masters#dep_method'
 
-  # get 'masters/create'
+  post '/api/assets/create', to: 'assets#create'
   # get 'masters/retrieve'
   # get 'masters/update'
   # get 'masters/destroy'

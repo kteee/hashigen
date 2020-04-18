@@ -28,10 +28,40 @@ require 'csv'
 # end
 
 # AssetItems
-CSV.foreach('db/csv/asset_item.csv', headers: true) do |row|
-  AssetItem.create(
-    asset_group_id: row[0],
-    item: row[1],
-    useful_life_id: row[3]
-  )
-end
+# CSV.foreach('db/csv/asset_item.csv', headers: true) do |row|
+#   AssetItem.create(
+#     asset_group_id: row[0],
+#     item: row[1],
+#     useful_life_id: row[3]
+#   )
+# end
+
+# DepMethods
+# dep_methods = [
+#   {
+#     name: 'two_zero_zero_same_ratio',
+#     display_name: '200%定率法'
+#   },
+#   {
+#     name: 'new_same_amount',
+#     display_name: '新定額法'
+#   },
+#   {
+#     name: 'two_five_zero_same_ratio',
+#     display_name: '250%定率法'
+#   },
+#   {
+#     name: 'old_same_amount',
+#     display_name: '旧定額法'
+#   },
+#   {
+#     name: 'old_same_ratio',
+#     display_name: '旧定率法'
+#   }
+# ]
+# dep_methods.each do |method|
+#   DepreciationMethod.create(
+#     name: method[:name],
+#     display_name: method[:display_name]
+#   )
+# end

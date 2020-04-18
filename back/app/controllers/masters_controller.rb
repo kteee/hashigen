@@ -2,22 +2,34 @@ class MastersController < ApplicationController
 
   def useful_life
     all_useful_lives = UsefulLife.all
-    render json: {data: all_useful_lives}
+    render json: {
+      status:200,
+      data: all_useful_lives
+    }
   end
 
   def asset_type
     all_types = AssetType.all
-    render json: {data: all_types}
+    render json: {
+      status:200,
+      data: all_types
+    }
   end
 
   def asset_group
     all_groups = AssetGroup.all
-    render json: {data: all_groups}
+    render json: {
+      status:200,
+      data: all_groups
+    }
   end
 
   def asset_item_count
     items_count = AssetItem.all.count
-    render json: {count: items_count}
+    render json: {
+      status:200,
+      count: items_count
+    }
   end
 
   def asset_item
@@ -34,7 +46,19 @@ class MastersController < ApplicationController
         useful_life: item.useful_life.year
       )
     end
-    render json: { items: response, pages: total_pages}
+    render json: {
+      status:200,
+      items: response,
+      pages: total_pages
+    }
+  end
+
+  def dep_method
+    all_methods = DepreciationMethod.all
+    render json: {
+      status:200,
+      methods: all_methods
+    }
   end
 
 end
