@@ -3,34 +3,39 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { RightArrowAlt } from '@styled-icons/boxicons-regular/RightArrowAlt'
 
-import {functionItemProps} from './FunctionList';
+import {functionItemProps} from './FunctionListBase';
 
 const FunctionItem = (props: functionItemProps) => {
 
   return (
-    <StyledLink to={props.link_to}>
-      <FunctionItemOuter>
-        <FunctionItemName>{props.name}</FunctionItemName>
-        <FunctionItemArrow><RightArrowAlt size='20'/></FunctionItemArrow>
-      </FunctionItemOuter>
-    </StyledLink>
+    <FunctionItemOuter>
+      <StyledLink to={props.link_to}>
+        <FunctionItemInner>
+          <FunctionItemName>{props.name}</FunctionItemName>
+          <FunctionItemArrow><RightArrowAlt size='20'/></FunctionItemArrow>
+        </FunctionItemInner>
+      </StyledLink>
+    </FunctionItemOuter>
   )
 
 }
 
+const FunctionItemOuter = styled.div`
+ width: 15em;
+  padding: 1em;
+  border: 1px solid #e6e2d3;
+  cursor: pointer;
+`
+
 const StyledLink = styled(Link)`
-  display: inline-block;
+  display: block;
   text-decoration: none;
   color: inherit;
 `
 
-const FunctionItemOuter = styled.div`
+const FunctionItemInner = styled.div`
   display: flex;
   align-items: center;
-  width: 20em;
-  padding: 1em;
-  border: 1px solid #e6e2d3;
-  cursor: pointer;
 `
 
 const FunctionItemName = styled.div`

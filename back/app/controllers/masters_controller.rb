@@ -17,23 +17,24 @@ class MastersController < ApplicationController
 
   def asset_item_count
     items_count = AssetItem.all.count
-    render :json => {count: items_count}
+    render json: {count: items_count}
   end
 
   def asset_item
-    pagenated_items = AssetItem.page(params[:page]).per(params[:per])
+    puts params
+    pagenated_items = AssetItem.where('item LIKE ?', "%#{params[:q]}%").page(params[:page]).per(params[:per])
     total_pages = pagenated_items.total_pages
     response = []
     pagenated_items.each do |item|
       puts item.id
       response.push(
-        :id => item.id,
-        :group => item.asset_group.name,
-        :item => item.item.split(','),
-        :useful_life => item.useful_life.year
+        id: item.id,
+        group: item.asset_group.name,
+        item: item.item.split(','),
+        useful_life: item.useful_life.year
       )
     end
-    render :json => { :items => response, :pages => total_pages}
+    render json: { items: response, pages: total_pages}
   end
 
 end
