@@ -20,7 +20,7 @@ interface usefulLifeProps {
 
 const url = 'http://localhost:5000/api/masters/useful-life'
 
-const UsefulLife = () => {
+export const UsefulLife = () => {
 
   const [usefulLife, setUsefulLife] = useState([])
 
@@ -75,5 +75,3 @@ const UsefulLife = () => {
     </Container>
   )
 }
-
-export default UsefulLife

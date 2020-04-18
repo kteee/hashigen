@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   get '/api/masters/asset-item', to: 'masters#asset_item'
   get '/api/masters/dep-method', to: 'masters#dep_method'
 
+  get '/api/assets/list', to: 'assets#list'
   post '/api/assets/create', to: 'assets#create'
+  get '/api/assets/retrieve', to: 'assets#retrieve'
   # get 'masters/retrieve'
   # get 'masters/update'
   # get 'masters/destroy'

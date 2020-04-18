@@ -1,5 +1,24 @@
 class AssetsController < ApplicationController
 
+  def list
+    all_assets = Asset.all
+    response = []
+    all_assets.each do |asset|
+      response.push({
+        id: asset.id, 
+        name: asset.name,
+        acquisition_date: asset.acquisition_date,
+        acquisition_value: asset.acquisition_value,
+        useful_life: asset.asset_item.useful_life.year,
+        depreciation_method: asset.depreciation_method.display_name,
+        created_at: asset.created_at.strftime("%Y-%m-%d"),
+        updated_at: asset.updated_at.strftime("%Y-%m-%d")
+      })
+    end
+    puts response
+    response_get_success(response)
+  end
+  
   def create
     new_asset = Asset.new(
                   name: params[:name],
@@ -8,11 +27,27 @@ class AssetsController < ApplicationController
                   asset_item_id: params[:assetItemId],
                   depreciation_method_id: params[:depreciationMethodId]
                 )
+
     if new_asset.save
-      response_success
+      response_post_success
     else
       response_error
     end
+  end
+
+  def retrieve
+    asset = Asset.find(params[:id])
+    response = {
+      id: asset.id, 
+      name: asset.name,
+      acquisition_date: asset.acquisition_date,
+      acquisition_value: asset.acquisition_value,
+      useful_life: asset.asset_item.useful_life.year,
+      depreciation_method: asset.depreciation_method.display_name,
+      created_at: asset.created_at.strftime("%Y-%m-%d"),
+      updated_at: asset.updated_at.strftime("%Y-%m-%d")
+    }
+    response_get_success(response)
   end
 
 end
