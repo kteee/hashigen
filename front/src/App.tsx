@@ -4,8 +4,9 @@ import { createGlobalStyle } from 'styled-components'
 
 import Header from './components/Header'
 import FunctionList from './components/FunctionList'
+import NewAsset from './domains/NewAsset/NewAsset'
 import SettingList from './components/SettingList'
-import NewAsset from './components/NewAsset'
+import UsefulLife from './components/UsefulLife'
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route exact path='/function' component={FunctionList}/>
           <Route exact path='/function/new' component={NewAsset}/>
           <Route exact path='/setting' component={SettingList}/>
+          <Route exact path='/setting/useful-life' component={UsefulLife}/>
         </Switch>
       </BrowserRouter>
     </React.Fragment>
