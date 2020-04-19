@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import FunctionListBase from './FunctionListBase'
+import {FunctionListBase} from './FunctionListBase'
 import {Container} from '../materials/Container'
 
-const FunctionList = () => {
+export const FunctionList = () => {
 
   return (
     <Container>
@@ -13,5 +13,3 @@ const FunctionList = () => {
   )
 
 }
-
-export default FunctionList

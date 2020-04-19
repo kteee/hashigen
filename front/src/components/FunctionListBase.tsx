@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import FunctionItem from './FunctionItem'
 
-const FunctionListBase = () => {
+export const FunctionListBase = () => {
 
   const functionItems: functionItemProps[] = [
     {name:'資産登録', link_to:'/function/new'},
@@ -25,8 +25,6 @@ const FunctionListBase = () => {
     </FunctionItemsWrapper>
   )
 }
-
-export default FunctionListBase
 
 export interface functionItemProps {
   name: string

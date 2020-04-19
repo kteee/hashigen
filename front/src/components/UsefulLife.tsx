@@ -1,26 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import {Container} from '../materials/Container'
-import {H2} from '../materials/Text'
-
-interface usefulLifeProps {
-  id: number
-  year: number
-  old_same_amount: number
-  old_same_ratio: number
-  new_same_amount: number
-  two_five_zero_same_ratio: number
-  two_five_zero_same_ratio_point: number
-  two_five_zero_same_ratio_after_point: number
-  two_zero_zero_same_ratio: number
-  two_zero_zero_same_ratio_point: number
-  two_zero_zero_same_ratio_after_point: number
-
-}
+import { Container } from '../materials/Container'
+import { H2 } from '../materials/Text'
+import { UsefulLifeResponse } from '../utilities/types'
 
 const url = 'http://localhost:5000/api/masters/useful-life'
 
-const UsefulLife = () => {
+export const UsefulLife = () => {
 
   const [usefulLife, setUsefulLife] = useState([])
 
@@ -33,19 +19,19 @@ const UsefulLife = () => {
     getUsefuLife()
   }, [])
 
-  let usefulLifeList = usefulLife.map((item: usefulLifeProps) => {
+  let usefulLifeList = usefulLife.map((item: UsefulLifeResponse) => {
     return (
       <tr>
         <td>{item.year}</td>
         <td>{item.old_same_amount}</td>
         <td>{item.old_same_ratio}</td>
         <td>{item.new_same_amount}</td>
-        <td>{item.two_five_zero_same_ratio}</td>
-        <td>{item.two_five_zero_same_ratio_point}</td>
-        <td>{item.two_five_zero_same_ratio_after_point}</td>
-        <td>{item.two_zero_zero_same_ratio}</td>
-        <td>{item.two_zero_zero_same_ratio_point}</td>
-        <td>{item.two_zero_zero_same_ratio_after_point}</td>
+        <td>{item.two_five_zero_same_ratio_base}</td>
+        <td>{item.two_five_zero_same_ratio_guaranteed}</td>
+        <td>{item.two_five_zero_same_ratio_revised}</td>
+        <td>{item.two_zero_zero_same_ratio_base}</td>
+        <td>{item.two_zero_zero_same_ratio_guaranteed}</td>
+        <td>{item.two_zero_zero_same_ratio_revised}</td>
       </tr>
     )
   })
@@ -75,5 +61,3 @@ const UsefulLife = () => {
     </Container>
   )
 }
-
-export default UsefulLife

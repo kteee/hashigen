@@ -12,7 +12,9 @@ const makeBaseUrl = () => {
 
 const baseUrl = makeBaseUrl()
 
-export const GET_ASSET_ITEM_URL = `${baseUrl}/api/masters/asset-item`
-export const GET_USEFUL_LIFE_URL = `${baseUrl}/api/masters/useful-life`
-export const GET_DEP_METHOD_URL = `${baseUrl}/api/masters/dep-method`
-export const POST_NEW_ASSET_URL = `${baseUrl}/api/assets/create`
+export const GET_ASSET_ITEM_URL     = `${baseUrl}/api/masters/asset-item`
+export const GET_USEFUL_LIFE_URL    = `${baseUrl}/api/masters/useful-life`
+export const GET_DEP_METHOD_URL     = `${baseUrl}/api/masters/dep-method`
+export const GET_ASSET_LIST_URL     = `${baseUrl}/api/assets/list`
+export const GET_ASSET_RETRIEVE_URL = `${baseUrl}/api/assets/retrieve`
+export const POST_NEW_ASSET_URL     = `${baseUrl}/api/assets/create`

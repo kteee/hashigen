@@ -12,7 +12,7 @@ export interface functionItemProps {
 const FunctionItemsWrapper = styled.div`
 `
 
-const SettingList = () => {
+export const SettingList = () => {
   const functionItems: functionItemProps[] = [
     {name:'資産登録', link_to:'/setting/new'},
     {name:'資産一覧', link_to:'/setting/list'},
@@ -36,5 +36,3 @@ const SettingList = () => {
   )
 
 }
-
-export default SettingList
