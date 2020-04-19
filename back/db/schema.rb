@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_18_070543) do
+ActiveRecord::Schema.define(version: 2020_04_19_062704) do
 
   create_table "asset_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
@@ -60,12 +60,12 @@ ActiveRecord::Schema.define(version: 2020_04_18_070543) do
     t.float "old_same_amount"
     t.float "old_same_ratio"
     t.float "new_same_amount"
-    t.float "two_five_zero_same_ratio"
-    t.float "two_five_zero_same_ratio_point"
-    t.float "two_five_zero_same_ratio_after_point"
-    t.float "two_zero_zero_same_ratio"
-    t.float "two_zero_zero_same_ratio_point"
-    t.float "two_zero_zero_same_ratio_after_point"
+    t.float "two_five_zero_same_ratio_base"
+    t.float "two_five_zero_same_ratio_revised"
+    t.float "two_five_zero_same_ratio_guaranteed"
+    t.float "two_zero_zero_same_ratio_base"
+    t.float "two_zero_zero_same_ratio_revised"
+    t.float "two_zero_zero_same_ratio_guaranteed"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

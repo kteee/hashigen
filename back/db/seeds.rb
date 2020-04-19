@@ -65,3 +65,20 @@ require 'csv'
 #     display_name: method[:display_name]
 #   )
 # end
+
+# DepMethods(DBrollbackで一部の列が落ちたので復元)
+dep_methods = DepreciationMethod.all
+dep_methods.each do |dep_method|
+  if dep_method.id == 1 then
+    dep_method.display_name = '200%定率法'
+  elsif dep_method.id == 2 then
+    dep_method.display_name = '新定額法'
+  elsif dep_method.id == 3 then
+    dep_method.display_name = '250%定率法'
+  elsif dep_method.id == 4 then
+    dep_method.display_name = '旧定額法'
+  elsif dep_method.id == 5 then
+    dep_method.display_name = '旧定率法'
+  end
+  dep_method.save
+end

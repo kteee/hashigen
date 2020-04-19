@@ -37,17 +37,19 @@ class AssetsController < ApplicationController
 
   def retrieve
     asset = Asset.find(params[:id])
-    response = {
-      id: asset.id, 
-      name: asset.name,
-      acquisition_date: asset.acquisition_date,
-      acquisition_value: asset.acquisition_value,
-      useful_life: asset.asset_item.useful_life.year,
-      depreciation_method: asset.depreciation_method.display_name,
-      created_at: asset.created_at.strftime("%Y-%m-%d"),
-      updated_at: asset.updated_at.strftime("%Y-%m-%d")
-    }
-    response_get_success(response)
+    dep_simulation(asset)
+
+    # response = {
+    #   id: asset.id, 
+    #   name: asset.name,
+    #   acquisition_date: asset.acquisition_date,
+    #   acquisition_value: asset.acquisition_value,
+    #   useful_life: asset.asset_item.useful_life.year,
+    #   depreciation_method: asset.depreciation_method.display_name,
+    #   created_at: asset.created_at.strftime("%Y-%m-%d"),
+    #   updated_at: asset.updated_at.strftime("%Y-%m-%d")
+    # }
+    # response_get_success(response)
   end
 
 end

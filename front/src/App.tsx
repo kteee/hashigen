@@ -20,7 +20,7 @@ const App = () => {
           <Route exact path='/function' component={FunctionList}/>
           <Route exact path='/function/new' component={NewAsset}/>
           <Route exact path='/function/list' component={AssetList}/>
-          <Route exact path='/function/list/:id' children={AssetDetail}/>
+          <Route exact path='/function/list/:id'><AssetDetail /></Route>
           <Route exact path='/setting' component={SettingList}/>
           <Route exact path='/setting/useful-life' component={UsefulLife}/>
         </Switch>
