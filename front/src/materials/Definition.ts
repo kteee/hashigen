@@ -2,6 +2,13 @@ import styled from 'styled-components'
 
 export const StyledDl = styled.dl``
 
-export const StyledDt = styled.dt``
+export const DtDdWrapper = styled.div`
+  display: flex;
+`
 
-export const StyledDd = styled.dd``
+export const StyledDt = styled.dt`
+  
+`
+
+export const StyledDd = styled.dd`
+`

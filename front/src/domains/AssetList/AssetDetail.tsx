@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
 import { Container } from '../../materials/Container'
-import { StyledDl, StyledDt, StyledDd } from '../../materials/Definition'
+import { StyledDl, DtDdWrapper, StyledDt, StyledDd } from '../../materials/Definition'
 import { GET_ASSET_RETRIEVE_URL } from '../../utilities/urls'
 import { AssetDetailResponse, DepSimulationResponse } from '../../utilities/types'
 
@@ -29,10 +29,10 @@ export const AssetDetail = () => {
     if(depSimulation != undefined) {
       const DepSimulation = depSimulation.map((item: DepSimulationResponse) => {
         return (
-          <div>
+          <DtDdWrapper>
             <StyledDt>{item.year}</StyledDt>
             <StyledDd>{item.amount}</StyledDd>
-          </div>
+          </DtDdWrapper>
         )
       })
       return DepSimulation
