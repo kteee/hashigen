@@ -37,8 +37,9 @@ class AssetsController < ApplicationController
 
   def retrieve
     asset = Asset.find(params[:id])
-    dep_simulation(asset)
-
+    dep_simulation = dep_simulation(asset)
+    response = { asset: asset, depreciation: dep_simulation}
+    response_get_success(response)
     # response = {
     #   id: asset.id, 
     #   name: asset.name,

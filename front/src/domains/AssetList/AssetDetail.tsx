@@ -3,19 +3,22 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
 import { Container } from '../../materials/Container'
+import { StyledDl, StyledDt, StyledDd } from '../../materials/Definition'
 import { GET_ASSET_RETRIEVE_URL } from '../../utilities/urls'
-import { AssetDetailResponse } from '../../utilities/types'
+import { AssetDetailResponse, DepSimulationResponse } from '../../utilities/types'
 
 export const AssetDetail = () => {
   
   const [asset, setAsset] = useState<AssetDetailResponse | undefined>(undefined)
+  const [depSimulation, setDepSimulation] = useState<DepSimulationResponse[] | undefined>(undefined)
   
   const { id } = useParams()
 
   const getAsset = async () => {
     const url = `${GET_ASSET_RETRIEVE_URL}?id=${id}`
-    const { data : { data } } = await axios.get(url)
-    setAsset(data)
+    const { data: { data: { asset, depreciation } } } = await axios.get(url)
+    setAsset(asset)
+    setDepSimulation(depreciation)
   }
   
   useEffect(() => {
@@ -23,19 +26,16 @@ export const AssetDetail = () => {
   }, [])
 
   const showAssetInfo = () => {
-    if(asset) {
-      return (
-        <div>
-          <p>{asset.id}</p>
-          <p>{asset.name}</p>
-          <p>{asset.acquisition_date}</p>
-          <p>{asset.acquisition_value}</p>
-          <p>{asset.useful_life}</p>
-          <p>{asset.depreciation_method}</p>
-          <p>{asset.created_at}</p>
-          <p>{asset.updated_at}</p>
-        </div>
-      )
+    if(depSimulation != undefined) {
+      const DepSimulation = depSimulation.map((item: DepSimulationResponse) => {
+        return (
+          <div>
+            <StyledDt>{item.year}</StyledDt>
+            <StyledDd>{item.amount}</StyledDd>
+          </div>
+        )
+      })
+      return DepSimulation
     } else {
       return (
         <p>通信中...</p>
@@ -47,7 +47,9 @@ export const AssetDetail = () => {
 
   return (
     <Container>
-      {Asset}
+      <StyledDl>
+        {Asset}
+      </StyledDl>
     </Container>
   )
 }

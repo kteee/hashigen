@@ -15,6 +15,11 @@ export interface AssetDetailResponse {
   updated_at: NumberOrString
 }
 
+export interface DepSimulationResponse {
+  year: number
+  amount: number
+}
+
 export interface UsefulLifeResponse {
   id: number
   year: number
