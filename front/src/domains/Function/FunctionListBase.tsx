@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import FunctionItem from './FunctionItem'
+import { MenuItem } from '../../components/MenuItem'
 
 export const FunctionListBase = () => {
 
@@ -15,7 +15,7 @@ export const FunctionListBase = () => {
 
   const FunctionItems = functionItems.map((item, index) => {
     return (
-      <FunctionItem key={index} name={item.name} link_to={item.link_to}/>
+      <MenuItem key={index} name={item.name} link_to={item.link_to}/>
     )
   })
 

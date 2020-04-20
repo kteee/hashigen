@@ -3,11 +3,11 @@ import axios from 'axios'
 import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { Container } from '../../materials/Container'
-import { ScreenWrapper, ScreenLeft, ScreenRight } from '../../materials/ScreenDivider'
-import { FunctionListBase } from '../../components/FunctionListBase'
-import { StyledTable } from '../../materials/Table'
-import { GET_ASSET_LIST_URL } from '../../utilities/urls'
+import { Container } from '../../../materials/Container'
+import { ScreenWrapper, ScreenLeft, ScreenRight } from '../../../materials/ScreenDivider'
+import { FunctionListBase } from '../FunctionListBase'
+import { StyledTable } from '../../../materials/Table'
+import { GET_ASSET_LIST_URL } from '../../../utilities/urls'
 
 const StyledLink = styled(Link)`
 

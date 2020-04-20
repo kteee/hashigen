@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Container } from '../materials/Container'
-import { H2 } from '../materials/Text'
-import { UsefulLifeResponse } from '../utilities/types'
+import { Container } from '../../../materials/Container'
+import { H2 } from '../../../materials/Text'
+import { UsefulLifeResponse } from '../../../utilities/types'
 
 const url = 'http://localhost:5000/api/masters/useful-life'
 

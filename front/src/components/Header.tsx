@@ -4,31 +4,13 @@ import { Link, LinkProps } from 'react-router-dom';
 
 import { H1 } from '../materials/Text';
 
-const Header = () => {
-  return (
-    <header>
-      <HeaderWrapper>
-      <FlexGrow1>
-        <CustomLink to='/'><HeaderH1 color='white'>Hashigen</HeaderH1></CustomLink>
-      </FlexGrow1>
-      <nav>
-        <List>
-          <CustomLink to='/function'><ListItem >機能</ListItem></CustomLink>
-          <CustomLink to='/setting'><ListItem >設定</ListItem></CustomLink>
-          <CustomLink to='/login'><ListItem >ログイン</ListItem></CustomLink>
-        </List>
-      </nav>
-      </HeaderWrapper>
-    </header>
-  )
-}
-
 interface ListItemProps {
   color?: string
 }
 
-const HeaderWrapper = styled.div`
+const StyledHeader = styled.header`
   display: flex;
+  height: 4em;
   align-items: center;
   background-color: #db7093;
 `;
@@ -41,23 +23,59 @@ const HeaderH1 = styled(H1)`
   margin-left: 0.5em;
 `;
 
+const Nav = styled.nav`
+  height: 100%;
+`
+
 const List = styled.ul`
   display: flex;
   list-style: none;
-`;
-
-const CustomLink = styled(Link)`
-  text-decoration: none;
+  height: 100%;
+  margin: 0;
+  align-items: center;
 `;
 
 const ListItem = styled.li`
   color: ${(props:ListItemProps) => (props.color ? props.color : 'white')};
-  margin-right: 0.5em;
-  padding: 0.3em 1em;
-  border-radius: 0.3em;
+  height: 100%;
+  padding: 0 1em;
   &:hover {
     background-color: #eea29a;
   }
 `;
 
-export default Header;
+const CustomLink = styled(Link)`
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+  padding: 0 1em;
+  line-height: 4em;
+`;
+
+export const Header = () => {
+  return (
+    <StyledHeader>
+      <FlexGrow1>
+        <CustomLink to='/'><HeaderH1 color='white'>Hashigen</HeaderH1></CustomLink>
+      </FlexGrow1>
+      <Nav>
+        <List>
+          <ListItem>
+            <CustomLink to='/function'>機能</CustomLink>
+          </ListItem>
+          <ListItem>
+            <CustomLink to='/setting'>設定</CustomLink>
+          </ListItem>
+          <ListItem>
+            <CustomLink to='/logout'>ログアウト</CustomLink>
+          </ListItem>
+          <ListItem>
+            <CustomLink to='/signup'>新規登録</CustomLink>
+          </ListItem>
+        </List>
+      </Nav>
+    </StyledHeader>
+  )
+}

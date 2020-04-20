@@ -2,13 +2,15 @@ import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
 
-import Header from './components/Header'
-import { FunctionList } from './components/FunctionList'
-import { NewAsset } from './domains/NewAsset/NewAsset'
-import { AssetList } from './domains/AssetList/AssetList'
-import { AssetDetail } from './domains/AssetList/AssetDetail'
-import { SettingList } from './components/SettingList'
-import { UsefulLife } from './components/UsefulLife'
+import { Header } from './components/Header'
+import { Signup } from './domains/Signup/Signup'
+import { FunctionList } from './domains/Function/FunctionList'
+import { NewAsset } from './domains/Function/NewAsset/NewAsset'
+import { AssetList } from './domains/Function/AssetList/AssetList'
+import { AssetDetail } from './domains/Function/AssetList/AssetDetail'
+import { SettingList } from './domains/Setting/SettingList'
+import { Account } from './domains/Setting/Account/Account'
+import { UsefulLife } from './domains/Setting/UsefulLife/UsefulLife'
 
 const App = () => {
   return (
@@ -17,11 +19,13 @@ const App = () => {
         <GlobalStyle />
         <Header />
         <Switch>
+          <Route exact path='/signup' component={Signup}/>
           <Route exact path='/function' component={FunctionList}/>
           <Route exact path='/function/new' component={NewAsset}/>
           <Route exact path='/function/list' component={AssetList}/>
           <Route exact path='/function/list/:id'><AssetDetail /></Route>
           <Route exact path='/setting' component={SettingList}/>
+          <Route exact path='/setting/account' component={Account}/>
           <Route exact path='/setting/useful-life' component={UsefulLife}/>
         </Switch>
       </BrowserRouter>

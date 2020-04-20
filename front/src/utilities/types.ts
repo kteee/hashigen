@@ -3,6 +3,11 @@ type NumberOrString = Number | String // railsからのデータが何か分か�
 
 // props
 
+// useState
+type UseStateArgs = (string | number)
+export type UseState<T> = (T | undefined)
+export type UseStateCallback = { (args: UseStateArgs) :void }
+
 // api fetch
 export interface AssetDetailResponse {
   id: NumberOrString 

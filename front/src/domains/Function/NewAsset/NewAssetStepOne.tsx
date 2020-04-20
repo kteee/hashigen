@@ -3,10 +3,10 @@ import axios from 'axios'
 import Pagination from '@material-ui/lab/Pagination';
 import styled from 'styled-components'
 
-import {H3} from '../../materials/Text'
-import {StyledInput} from '../../materials/Input'
-import {GET_ASSET_ITEM_URL} from '../../utilities/urls'
-import {FlexWrapper} from '../../materials/Flex'
+import {H3} from '../../../materials/Text'
+import {StyledInput} from '../../../materials/Input'
+import {GET_ASSET_ITEM_URL} from '../../../utilities/urls'
+import {FlexWrapper} from '../../../materials/Flex'
 
 interface NewAssetStepOneProps {
   setItemSelected: any

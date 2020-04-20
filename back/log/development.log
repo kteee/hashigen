@@ -33367,3 +33367,506 @@ Processing by AssetsController#retrieve as HTML
 Completed 200 OK in 34ms (Views: 1.6ms | ActiveRecord: 4.9ms | Allocations: 3612)
 
 
+Started GET "/api/assets/list" for 172.21.0.1 at 2020-04-20 10:04:02 +0000
+  [1m[35m (2.0ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (10.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by AssetsController#list as HTML
+  [1m[36mAsset Load (6.3ms)[0m  [1m[34mSELECT `assets`.* FROM `assets`[0m
+  ↳ app/controllers/assets_controller.rb:6:in `list'
+  [1m[36mAssetItem Load (4.2ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE `asset_items`.`id` = 334 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mUsefulLife Load (4.8ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mDepreciationMethod Load (3.7ms)[0m  [1m[34mSELECT `depreciation_methods`.* FROM `depreciation_methods` WHERE `depreciation_methods`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:13:in `block in list'
+  [1m[36mAssetItem Load (0.9ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE `asset_items`.`id` = 324 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mUsefulLife Load (0.8ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mDepreciationMethod Load (0.8ms)[0m  [1m[34mSELECT `depreciation_methods`.* FROM `depreciation_methods` WHERE `depreciation_methods`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:13:in `block in list'
+  [1m[36mAssetItem Load (0.9ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE `asset_items`.`id` = 291 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 4 LIMIT 1[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mCACHE DepreciationMethod Load (0.1ms)[0m  [1m[34mSELECT `depreciation_methods`.* FROM `depreciation_methods` WHERE `depreciation_methods`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/assets_controller.rb:13:in `block in list'
+Completed 200 OK in 215ms (Views: 1.2ms | ActiveRecord: 53.5ms | Allocations: 28887)
+
+
+Started GET "/api/assets/retrieve?id=3" for 172.21.0.1 at 2020-04-20 10:04:19 +0000
+Processing by AssetsController#retrieve as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAsset Load (1.2ms)[0m  [1m[34mSELECT `assets`.* FROM `assets` WHERE `assets`.`id` = 3 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:39:in `retrieve'
+  [1m[36mAssetItem Load (0.9ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE `asset_items`.`id` = 291 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:58:in `dep_simulation'
+  [1m[36mUsefulLife Load (0.9ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:58:in `dep_simulation'
+  [1m[36mCACHE UsefulLife Load (0.1ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 4 LIMIT 1[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/assets_controller.rb:59:in `dep_simulation'
+  [1m[36mDepreciationMethod Load (1.0ms)[0m  [1m[34mSELECT `depreciation_methods`.* FROM `depreciation_methods` WHERE `depreciation_methods`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:60:in `dep_simulation'
+Completed 200 OK in 38ms (Views: 1.4ms | ActiveRecord: 4.2ms | Allocations: 3645)
+
+
+Started GET "/api/masters/asset-item?per=10&page=1&q=" for 172.21.0.1 at 2020-04-20 10:04:24 +0000
+Processing by MastersController#asset_item as HTML
+  Parameters: {"per"=>"10", "page"=>"1", "q"=>""}
+  [1m[35m (4.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `asset_items` WHERE (item LIKE '%%')[0m
+  ↳ app/controllers/masters_controller.rb:38:in `asset_item'
+  [1m[36mAssetItem Load (1.0ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE (item LIKE '%%') LIMIT 10 OFFSET 0[0m
+  ↳ app/controllers/masters_controller.rb:40:in `asset_item'
+  [1m[36mAssetGroup Load (4.8ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.9ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 49 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.2ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.3ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 46 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.1ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 49 LIMIT 1[0m  [["id", 49], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.1ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.1ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 46 LIMIT 1[0m  [["id", 46], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (2.2ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 33 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.1ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 40 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.3ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 30 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.7ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 38 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.4ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.3ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 38 LIMIT 1[0m  [["id", 38], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.1ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.1ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 38 LIMIT 1[0m  [["id", 38], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+Completed 200 OK in 303ms (Views: 1.0ms | ActiveRecord: 30.8ms | Allocations: 18056)
+
+
+Started GET "/api/assets/list" for 172.21.0.1 at 2020-04-20 10:04:26 +0000
+Processing by AssetsController#list as HTML
+  [1m[36mAsset Load (1.6ms)[0m  [1m[34mSELECT `assets`.* FROM `assets`[0m
+  ↳ app/controllers/assets_controller.rb:6:in `list'
+  [1m[36mAssetItem Load (1.1ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE `asset_items`.`id` = 334 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mUsefulLife Load (1.2ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mDepreciationMethod Load (0.9ms)[0m  [1m[34mSELECT `depreciation_methods`.* FROM `depreciation_methods` WHERE `depreciation_methods`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:13:in `block in list'
+  [1m[36mAssetItem Load (0.7ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE `asset_items`.`id` = 324 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mUsefulLife Load (1.2ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mDepreciationMethod Load (1.2ms)[0m  [1m[34mSELECT `depreciation_methods`.* FROM `depreciation_methods` WHERE `depreciation_methods`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:13:in `block in list'
+  [1m[36mAssetItem Load (1.1ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE `asset_items`.`id` = 291 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mCACHE UsefulLife Load (0.1ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 4 LIMIT 1[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mCACHE DepreciationMethod Load (0.1ms)[0m  [1m[34mSELECT `depreciation_methods`.* FROM `depreciation_methods` WHERE `depreciation_methods`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/assets_controller.rb:13:in `block in list'
+Completed 200 OK in 97ms (Views: 1.9ms | ActiveRecord: 9.1ms | Allocations: 6895)
+
+
+Started GET "/api/masters/asset-item?per=10&page=1&q=" for 172.21.0.1 at 2020-04-20 10:16:12 +0000
+  [1m[35m (0.8ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by MastersController#asset_item as HTML
+  Parameters: {"per"=>"10", "page"=>"1", "q"=>""}
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `asset_items` WHERE (item LIKE '%%')[0m
+  ↳ app/controllers/masters_controller.rb:38:in `asset_item'
+  [1m[36mAssetItem Load (1.0ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE (item LIKE '%%') LIMIT 10 OFFSET 0[0m
+  ↳ app/controllers/masters_controller.rb:40:in `asset_item'
+  [1m[36mAssetGroup Load (2.5ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (2.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 49 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.1ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (2.1ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 46 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.3ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 49 LIMIT 1[0m  [["id", 49], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 46 LIMIT 1[0m  [["id", 46], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.2ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (2.6ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 33 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.2ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.3ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 40 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.2ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 30 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.1ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (0.9ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 38 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (1.3ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 38 LIMIT 1[0m  [["id", 38], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 38 LIMIT 1[0m  [["id", 38], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+Completed 200 OK in 207ms (Views: 0.9ms | ActiveRecord: 17.4ms | Allocations: 14425)
+
+
+Started GET "/api/masters/asset-item?per=10&page=1&q=" for 172.21.0.1 at 2020-04-20 10:18:16 +0000
+Processing by MastersController#asset_item as HTML
+  Parameters: {"per"=>"10", "page"=>"1", "q"=>""}
+  [1m[35m (3.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `asset_items` WHERE (item LIKE '%%')[0m
+  ↳ app/controllers/masters_controller.rb:38:in `asset_item'
+  [1m[36mAssetItem Load (10.4ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE (item LIKE '%%') LIMIT 10 OFFSET 0[0m
+  ↳ app/controllers/masters_controller.rb:40:in `asset_item'
+  [1m[36mAssetGroup Load (1.5ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.3ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 49 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 46 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.1ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 49 LIMIT 1[0m  [["id", 49], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.1ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 46 LIMIT 1[0m  [["id", 46], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.9ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 33 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.1ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (0.9ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 40 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.1ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.2ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 30 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.1ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (0.9ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 38 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 38 LIMIT 1[0m  [["id", 38], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 38 LIMIT 1[0m  [["id", 38], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+Completed 200 OK in 334ms (Views: 2.5ms | ActiveRecord: 23.1ms | Allocations: 14423)
+
+
+  [1m[35m (2.1ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT GET_LOCK('5277929974492897470', 0)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreateUsers (20200420104951)
+  [1m[35m (35.4ms)[0m  [1m[35mCREATE TABLE `users` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `email` varchar(255), `password` varchar(255), `name` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.9ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200420104951')[0m
+  [1m[35m (4.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateRoles (20200420105111)
+  [1m[35m (35.8ms)[0m  [1m[35mCREATE TABLE `roles` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `display_name` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200420105111')[0m
+  [1m[35m (6.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (4.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT RELEASE_LOCK('5277929974492897470')[0m
+  [1m[35m (1.1ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (4.0ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (2.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT GET_LOCK('5277929974492897470', 0)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreateRoles (20200420105111)
+  [1m[35m (53.7ms)[0m  [1m[35mDROP TABLE `roles`[0m
+  [1m[36mprimary::SchemaMigration Destroy (24.1ms)[0m  [1m[31mDELETE FROM `schema_migrations` WHERE `schema_migrations`.`version` = '20200420105111'[0m
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT RELEASE_LOCK('5277929974492897470')[0m
+  [1m[35m (0.9ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (2.8ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (3.1ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (2.8ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT GET_LOCK('5277929974492897470', 0)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreateUsers (20200420104951)
+  [1m[35m (45.3ms)[0m  [1m[35mDROP TABLE `users`[0m
+  [1m[36mprimary::SchemaMigration Destroy (8.4ms)[0m  [1m[31mDELETE FROM `schema_migrations` WHERE `schema_migrations`.`version` = '20200420104951'[0m
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT RELEASE_LOCK('5277929974492897470')[0m
+  [1m[35m (2.1ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (3.6ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT GET_LOCK('5277929974492897470', 0)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreateRoles (20200420105111)
+  [1m[35m (49.3ms)[0m  [1m[35mCREATE TABLE `roles` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `display_name` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (2.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200420105111')[0m
+  [1m[35m (12.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.6ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT RELEASE_LOCK('5277929974492897470')[0m
+  [1m[35m (0.6ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (1.2ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Create (0.7ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `display_name`, `created_at`, `updated_at`) VALUES ('admin', '管理者', '2020-04-20 10:59:15.506834', '2020-04-20 10:59:15.506834')[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (2.9ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` LIMIT 11[0m
+  [1m[35m (1.1ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT GET_LOCK('5277929974492897470', 0)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreateUsers (20200420110159)
+  [1m[35m (62.5ms)[0m  [1m[35mCREATE TABLE `users` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `email` varchar(255), `password` varchar(255), `name` varchar(255), `role_id` bigint NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL,  INDEX `index_users_on_role_id`  (`role_id`), CONSTRAINT `fk_rails_642f17018b`
+FOREIGN KEY (`role_id`)
+  REFERENCES `roles` (`id`)
+)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (6.1ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200420110159')[0m
+  [1m[35m (7.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.8ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT RELEASE_LOCK('5277929974492897470')[0m
+  [1m[35m (1.6ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (3.1ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT GET_LOCK('5277929974492897470', 0)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreateUsers (20200420110159)
+  [1m[35m (62.6ms)[0m  [1m[35mDROP TABLE `users`[0m
+  [1m[36mprimary::SchemaMigration Destroy (12.5ms)[0m  [1m[31mDELETE FROM `schema_migrations` WHERE `schema_migrations`.`version` = '20200420110159'[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT RELEASE_LOCK('5277929974492897470')[0m
+  [1m[35m (1.3ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (1.9ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT GET_LOCK('5277929974492897470', 0)[0m
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreateUsers (20200420110159)
+  [1m[35m (57.1ms)[0m  [1m[35mCREATE TABLE `users` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `email` varchar(255), `password` varchar(255), `name` varchar(255), `role_id` bigint, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL,  INDEX `index_users_on_role_id`  (`role_id`), CONSTRAINT `fk_rails_642f17018b`
+FOREIGN KEY (`role_id`)
+  REFERENCES `roles` (`id`)
+)[0m
+  [1m[35m (1.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (4.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200420110159')[0m
+  [1m[35m (7.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.6ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT RELEASE_LOCK('5277929974492897470')[0m
+  [1m[35m (1.7ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (3.1ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Started GET "/api/masters/asset-item?per=10&page=1&q=" for 172.21.0.1 at 2020-04-20 12:22:59 +0000
+  [1m[35m (1.1ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (11.9ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by MastersController#asset_item as HTML
+  Parameters: {"per"=>"10", "page"=>"1", "q"=>""}
+  [1m[35m (16.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `asset_items` WHERE (item LIKE '%%')[0m
+  ↳ app/controllers/masters_controller.rb:38:in `asset_item'
+  [1m[36mAssetItem Load (1.0ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE (item LIKE '%%') LIMIT 10 OFFSET 0[0m
+  ↳ app/controllers/masters_controller.rb:40:in `asset_item'
+  [1m[36mAssetGroup Load (6.1ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (5.4ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 49 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (0.8ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 46 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.2ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 49 LIMIT 1[0m  [["id", 49], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 46 LIMIT 1[0m  [["id", 46], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.1ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 33 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (0.9ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 40 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (0.9ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 30 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.1ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (2.6ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 38 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.1ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 38 LIMIT 1[0m  [["id", 38], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.1ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 38 LIMIT 1[0m  [["id", 38], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+Completed 200 OK in 314ms (Views: 0.8ms | ActiveRecord: 62.8ms | Allocations: 32110)
+
+
+Started GET "/api/assets/list" for 172.21.0.1 at 2020-04-20 12:23:21 +0000
+Processing by AssetsController#list as HTML
+  [1m[36mAsset Load (4.8ms)[0m  [1m[34mSELECT `assets`.* FROM `assets`[0m
+  ↳ app/controllers/assets_controller.rb:6:in `list'
+  [1m[36mAssetItem Load (1.3ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE `asset_items`.`id` = 334 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mUsefulLife Load (0.9ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mDepreciationMethod Load (4.3ms)[0m  [1m[34mSELECT `depreciation_methods`.* FROM `depreciation_methods` WHERE `depreciation_methods`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:13:in `block in list'
+  [1m[36mAssetItem Load (0.9ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE `asset_items`.`id` = 324 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mUsefulLife Load (0.9ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mDepreciationMethod Load (1.1ms)[0m  [1m[34mSELECT `depreciation_methods`.* FROM `depreciation_methods` WHERE `depreciation_methods`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:13:in `block in list'
+  [1m[36mAssetItem Load (0.5ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE `asset_items`.`id` = 291 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 4 LIMIT 1[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mCACHE DepreciationMethod Load (0.0ms)[0m  [1m[34mSELECT `depreciation_methods`.* FROM `depreciation_methods` WHERE `depreciation_methods`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/assets_controller.rb:13:in `block in list'
+Completed 200 OK in 95ms (Views: 1.5ms | ActiveRecord: 24.3ms | Allocations: 14893)
+
+
+Started GET "/api/masters/asset-item?per=10&page=1&q=" for 172.21.0.1 at 2020-04-20 12:23:24 +0000
+Processing by MastersController#asset_item as HTML
+  Parameters: {"per"=>"10", "page"=>"1", "q"=>""}
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `asset_items` WHERE (item LIKE '%%')[0m
+  ↳ app/controllers/masters_controller.rb:38:in `asset_item'
+  [1m[36mAssetItem Load (0.8ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE (item LIKE '%%') LIMIT 10 OFFSET 0[0m
+  ↳ app/controllers/masters_controller.rb:40:in `asset_item'
+  [1m[36mAssetGroup Load (0.8ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (0.8ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 49 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (0.8ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 46 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 49 LIMIT 1[0m  [["id", 49], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 46 LIMIT 1[0m  [["id", 46], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (0.8ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 33 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (0.9ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 40 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (0.7ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 30 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.1ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (0.9ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 38 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.1ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 38 LIMIT 1[0m  [["id", 38], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.1ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.1ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 38 LIMIT 1[0m  [["id", 38], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+Completed 200 OK in 136ms (Views: 1.0ms | ActiveRecord: 8.8ms | Allocations: 14444)
+
+
+Started GET "/api/assets/list" for 172.21.0.1 at 2020-04-20 12:23:25 +0000
+Processing by AssetsController#list as HTML
+  [1m[36mAsset Load (1.0ms)[0m  [1m[34mSELECT `assets`.* FROM `assets`[0m
+  ↳ app/controllers/assets_controller.rb:6:in `list'
+  [1m[36mAssetItem Load (1.2ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE `asset_items`.`id` = 334 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mUsefulLife Load (4.3ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mDepreciationMethod Load (1.3ms)[0m  [1m[34mSELECT `depreciation_methods`.* FROM `depreciation_methods` WHERE `depreciation_methods`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:13:in `block in list'
+  [1m[36mAssetItem Load (1.4ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE `asset_items`.`id` = 324 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mUsefulLife Load (1.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mDepreciationMethod Load (0.9ms)[0m  [1m[34mSELECT `depreciation_methods`.* FROM `depreciation_methods` WHERE `depreciation_methods`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:13:in `block in list'
+  [1m[36mAssetItem Load (0.9ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE `asset_items`.`id` = 291 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 4 LIMIT 1[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mCACHE DepreciationMethod Load (0.0ms)[0m  [1m[34mSELECT `depreciation_methods`.* FROM `depreciation_methods` WHERE `depreciation_methods`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/assets_controller.rb:13:in `block in list'
+Completed 200 OK in 67ms (Views: 1.0ms | ActiveRecord: 12.1ms | Allocations: 6895)
+
+
+Started GET "/api/assets/list" for 172.21.0.1 at 2020-04-20 12:29:05 +0000
+  [1m[35m (1.0ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by AssetsController#list as HTML
+  [1m[36mAsset Load (1.1ms)[0m  [1m[34mSELECT `assets`.* FROM `assets`[0m
+  ↳ app/controllers/assets_controller.rb:6:in `list'
+  [1m[36mAssetItem Load (5.0ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE `asset_items`.`id` = 334 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mUsefulLife Load (2.4ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mDepreciationMethod Load (2.9ms)[0m  [1m[34mSELECT `depreciation_methods`.* FROM `depreciation_methods` WHERE `depreciation_methods`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:13:in `block in list'
+  [1m[36mAssetItem Load (0.8ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE `asset_items`.`id` = 324 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mUsefulLife Load (3.8ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mDepreciationMethod Load (0.8ms)[0m  [1m[34mSELECT `depreciation_methods`.* FROM `depreciation_methods` WHERE `depreciation_methods`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:13:in `block in list'
+  [1m[36mAssetItem Load (0.8ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE `asset_items`.`id` = 291 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 4 LIMIT 1[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/assets_controller.rb:12:in `block in list'
+  [1m[36mCACHE DepreciationMethod Load (0.0ms)[0m  [1m[34mSELECT `depreciation_methods`.* FROM `depreciation_methods` WHERE `depreciation_methods`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/assets_controller.rb:13:in `block in list'
+Completed 200 OK in 148ms (Views: 1.2ms | ActiveRecord: 17.8ms | Allocations: 6889)
+
+

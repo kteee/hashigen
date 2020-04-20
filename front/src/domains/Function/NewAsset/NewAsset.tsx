@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
 
-import {FunctionListBase} from '../../components/FunctionListBase'
+import {FunctionListBase} from '../FunctionListBase'
 import NewAssetStepOne from './NewAssetStepOne'
 import {NewAssetStepTwo} from './NewAssetStepTwo'
-import {Container} from '../../materials/Container'
-import {H2} from '../../materials/Text'
-import {ScreenWrapper, ScreenLeft, ScreenRight} from '../../materials/ScreenDivider'
+import {Container} from '../../../materials/Container'
+import {H2} from '../../../materials/Text'
+import {ScreenWrapper, ScreenLeft, ScreenRight} from '../../../materials/ScreenDivider'
 
 export const NewAsset = () => {
 
