@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
 
 import { Header } from './components/Header'
+import { Login } from './domains/Login/Login'
 import { Signup } from './domains/Signup/Signup'
 import { FunctionList } from './domains/Function/FunctionList'
 import { NewAsset } from './domains/Function/NewAsset/NewAsset'
@@ -20,6 +21,7 @@ const App = () => {
         <Header />
         <Switch>
           <Route exact path='/signup' component={Signup}/>
+          <Route exact path='/login' component={Login}/>
           <Route exact path='/function' component={FunctionList}/>
           <Route exact path='/function/new' component={NewAsset}/>
           <Route exact path='/function/list' component={AssetList}/>

@@ -68,8 +68,11 @@ export const Header = () => {
           <ListItem>
             <CustomLink to='/setting'>設定</CustomLink>
           </ListItem>
-          <ListItem>
+          {/* <ListItem>
             <CustomLink to='/logout'>ログアウト</CustomLink>
+          </ListItem> */}
+          <ListItem>
+            <CustomLink to='/login'>ログイン</CustomLink>
           </ListItem>
           <ListItem>
             <CustomLink to='/signup'>新規登録</CustomLink>

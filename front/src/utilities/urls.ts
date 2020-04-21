@@ -18,3 +18,5 @@ export const GET_DEP_METHOD_URL     = `${baseUrl}/api/masters/dep-method`
 export const GET_ASSET_LIST_URL     = `${baseUrl}/api/assets/list`
 export const GET_ASSET_RETRIEVE_URL = `${baseUrl}/api/assets/retrieve`
 export const POST_NEW_ASSET_URL     = `${baseUrl}/api/assets/create`
+export const USERS_URL              = `${baseUrl}/api/users`
+export const LOGIN_URL              = `${baseUrl}/api/login`
