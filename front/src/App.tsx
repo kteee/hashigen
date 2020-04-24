@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
 
 import { Header } from './components/Header'
-import { Login } from './domains/Login/Login'
+import Login from './domains/Login/Login'
 import { Signup } from './domains/Signup/Signup'
 import { FunctionList } from './domains/Function/FunctionList'
 import { NewAsset } from './domains/Function/NewAsset/NewAsset'

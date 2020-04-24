@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :validate_token, except: :create
+
   def index
   end
 
@@ -13,6 +15,12 @@ class UsersController < ApplicationController
   end
   
   def show
+    @user = User.find(params[:id])
+    if(@decoded_data.user_id === @user.user_id)
+      response_get_success(@user)
+    else 
+      response_error
+    end
   end
 
   def update

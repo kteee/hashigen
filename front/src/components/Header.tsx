@@ -1,8 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link, LinkProps } from 'react-router-dom';
+import React, {useEffect} from 'react'
+import axios from 'axios'
+import styled from 'styled-components'
+import { Link, LinkProps } from 'react-router-dom'
 
-import { H1 } from '../materials/Text';
+import { H1 } from '../materials/Text'
+import { getAuthHeader, getUserId } from '../utilities/auth'
+import { USERS_URL } from '../utilities/urls'
 
 interface ListItemProps {
   color?: string
@@ -55,6 +58,23 @@ const CustomLink = styled(Link)`
 `;
 
 export const Header = () => {
+
+  const getMe = async () => {
+    const header = getAuthHeader()
+    const userId = getUserId()
+    const url = `${USERS_URL}/${userId}`
+    const response = await axios.get(url, {
+      headers: {
+        Authorization: header
+      }
+    })
+    console.log(response)
+  }    
+  
+  useEffect(() => {
+    getMe() 
+  }, [])
+
   return (
     <StyledHeader>
       <FlexGrow1>

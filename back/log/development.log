@@ -34413,3 +34413,597 @@ Processing by LoginController#login as HTML
 Completed 200 OK in 314ms (Views: 0.3ms | ActiveRecord: 7.2ms | Allocations: 5272)
 
 
+Started POST "/api/login" for 172.21.0.1 at 2020-04-21 15:23:05 +0000
+  [1m[35m (1.9ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (8.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by LoginController#login as HTML
+  Parameters: {"email"=>"mugi@gmail.com", "password"=>"[FILTERED]", "login"=>{"email"=>"mugi@gmail.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :login[0m
+  [1m[36mUser Load (2.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'mugi@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/login_controller.rb:5:in `login'
+Completed 200 OK in 337ms (Views: 0.3ms | ActiveRecord: 11.7ms | Allocations: 6179)
+
+
+Started POST "/api/login" for 172.21.0.1 at 2020-04-21 15:26:26 +0000
+Processing by LoginController#login as HTML
+  Parameters: {"email"=>"keitahighbridge@gmail.com", "password"=>"[FILTERED]", "login"=>{"email"=>"keitahighbridge@gmail.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :login[0m
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'keitahighbridge@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/login_controller.rb:5:in `login'
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.9ms | Allocations: 1173)
+
+
+  
+NoMethodError (undefined method `authenticate' for nil:NilClass):
+  
+app/controllers/login_controller.rb:6:in `login'
+Started POST "/api/login" for 172.21.0.1 at 2020-04-21 15:26:41 +0000
+Processing by LoginController#login as HTML
+  Parameters: {"email"=>"mugi@gmail.com", "password"=>"[FILTERED]", "login"=>{"email"=>"mugi@gmail.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :login[0m
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'mugi@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/login_controller.rb:5:in `login'
+Completed 200 OK in 269ms (Views: 0.2ms | ActiveRecord: 1.2ms | Allocations: 856)
+
+
+Started POST "/api/login" for 172.21.0.1 at 2020-04-21 15:26:47 +0000
+Processing by LoginController#login as HTML
+  Parameters: {"email"=>"mugi@gmail.com", "password"=>"[FILTERED]", "login"=>{"email"=>"mugi@gmail.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :login[0m
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'mugi@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/login_controller.rb:5:in `login'
+Completed 200 OK in 278ms (Views: 0.2ms | ActiveRecord: 0.8ms | Allocations: 823)
+
+
+Started POST "/api/login" for 172.21.0.1 at 2020-04-21 15:27:16 +0000
+Processing by LoginController#login as HTML
+  Parameters: {"email"=>"mugi@gmail.com", "password"=>"[FILTERED]", "login"=>{"email"=>"mugi@gmail.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :login[0m
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'mugi@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/login_controller.rb:5:in `login'
+Completed 200 OK in 299ms (Views: 0.2ms | ActiveRecord: 1.0ms | Allocations: 804)
+
+
+Started GET "/api/users" for 172.21.0.1 at 2020-04-21 16:00:57 +0000
+  [1m[35m (0.6ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#index as HTML
+Completed 204 No Content in 0ms (ActiveRecord: 0.0ms | Allocations: 40)
+
+
+Started GET "/api/users" for 172.21.0.1 at 2020-04-21 16:01:19 +0000
+Processing by UsersController#index as HTML
+Completed 204 No Content in 1ms (ActiveRecord: 0.0ms | Allocations: 26)
+
+
+Started GET "/api/users" for 172.21.0.1 at 2020-04-21 16:04:09 +0000
+Processing by UsersController#index as HTML
+Completed 204 No Content in 0ms (ActiveRecord: 0.0ms | Allocations: 26)
+
+
+Started GET "/api/users" for 172.21.0.1 at 2020-04-21 16:10:41 +0000
+  [1m[35m (0.6ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#index as HTML
+Completed 204 No Content in 1ms (ActiveRecord: 0.0ms | Allocations: 43)
+
+
+Started GET "/api/users" for 172.21.0.1 at 2020-04-21 16:11:36 +0000
+Processing by UsersController#index as HTML
+Completed 204 No Content in 0ms (ActiveRecord: 0.0ms | Allocations: 26)
+
+
+Started GET "/api/users" for 172.21.0.1 at 2020-04-21 16:11:55 +0000
+Processing by UsersController#index as HTML
+Completed 204 No Content in 1ms (ActiveRecord: 0.0ms | Allocations: 26)
+
+
+Started GET "/api/users" for 172.21.0.1 at 2020-04-21 16:13:45 +0000
+Processing by UsersController#index as HTML
+Completed 204 No Content in 0ms (ActiveRecord: 0.0ms | Allocations: 26)
+
+
+Started GET "/api/users/null" for 172.21.0.1 at 2020-04-21 16:14:47 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"null"}
+Completed 204 No Content in 0ms (ActiveRecord: 0.0ms | Allocations: 26)
+
+
+Started GET "/api/users/null" for 172.21.0.1 at 2020-04-21 16:15:12 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"null"}
+Completed 204 No Content in 0ms (ActiveRecord: 0.0ms | Allocations: 26)
+
+
+Started GET "/api/users/" for 172.21.0.1 at 2020-04-21 16:16:06 +0000
+Processing by UsersController#index as HTML
+Completed 204 No Content in 1ms (ActiveRecord: 0.0ms | Allocations: 26)
+
+
+Started GET "/api/users/null" for 172.21.0.1 at 2020-04-21 16:16:41 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"null"}
+Completed 204 No Content in 1ms (ActiveRecord: 0.0ms | Allocations: 26)
+
+
+Started GET "/api/users/null" for 172.21.0.1 at 2020-04-22 09:57:23 +0000
+  [1m[35m (0.7ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (10.5ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"null"}
+Completed 204 No Content in 1ms (ActiveRecord: 0.0ms | Allocations: 71)
+
+
+Started POST "/api/login" for 172.21.0.1 at 2020-04-22 09:57:39 +0000
+Processing by LoginController#login as HTML
+  Parameters: {"email"=>"keita@gmail.com", "password"=>"[FILTERED]", "login"=>{"email"=>"keita@gmail.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :login[0m
+  [1m[36mUser Load (5.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'keita@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/login_controller.rb:5:in `login'
+Completed 200 OK in 344ms (Views: 0.2ms | ActiveRecord: 18.1ms | Allocations: 6172)
+
+
+Started POST "/api/login" for 172.21.0.1 at 2020-04-22 10:08:16 +0000
+  [1m[35m (5.4ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by LoginController#login as HTML
+  Parameters: {"email"=>"keita@gmail.com", "password"=>"[FILTERED]", "login"=>{"email"=>"keita@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'keita@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/login_controller.rb:5:in `login'
+Completed 200 OK in 290ms (Views: 0.2ms | ActiveRecord: 1.5ms | Allocations: 5054)
+
+
+Started POST "/api/login" for 172.21.0.1 at 2020-04-23 09:24:42 +0000
+  [1m[35m (1.0ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by LoginController#login as HTML
+  Parameters: {"email"=>"mugi@gmail.com", "password"=>"[FILTERED]", "login"=>{"email"=>"mugi@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'mugi@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/login_controller.rb:5:in `login'
+Completed 200 OK in 314ms (Views: 0.2ms | ActiveRecord: 0.9ms | Allocations: 5081)
+
+
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-23 09:33:31 +0000
+  [1m[35m (2.0ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 200 OK in 64ms (Views: 0.5ms | ActiveRecord: 1.5ms | Allocations: 5023)
+
+
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-23 09:35:45 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 200 OK in 42ms (Views: 0.8ms | ActiveRecord: 13.8ms | Allocations: 5028)
+
+
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-23 09:37:58 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms | Allocations: 127)
+
+
+  
+JWT::DecodeError (Not enough or too many segments):
+  
+app/controllers/application_controller.rb:24:in `decode'
+app/controllers/application_controller.rb:33:in `validate_token'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-23 09:43:21 +0000
+  [1m[35m (1.4ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 126)
+
+
+  
+JWT::DecodeError (Not enough or too many segments):
+  
+app/controllers/application_controller.rb:24:in `decode'
+app/controllers/application_controller.rb:33:in `validate_token'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-23 09:44:41 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 200 OK in 61ms (Views: 0.6ms | ActiveRecord: 10.5ms | Allocations: 5464)
+
+
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-23 09:45:25 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms | Allocations: 124)
+
+
+  
+JWT::DecodeError (Not enough or too many segments):
+  
+app/controllers/application_controller.rb:24:in `decode'
+app/controllers/application_controller.rb:34:in `validate_token'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-23 09:48:09 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 200 OK in 45ms (Views: 0.5ms | ActiveRecord: 12.6ms | Allocations: 5172)
+
+
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-23 11:52:58 +0000
+  [1m[35m (1.6ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 132ms (ActiveRecord: 0.0ms | Allocations: 66111)
+
+
+  
+NameError (undefined local variable or method `header_full' for #<UsersController:0x00007fde483bd2a0>
+Did you mean?  header):
+  
+app/controllers/application_controller.rb:31:in `validate_token'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-23 12:04:27 +0000
+  [1m[35m (0.7ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (7.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 113ms (ActiveRecord: 0.0ms | Allocations: 66097)
+
+
+  
+NameError (undefined local variable or method `header_full' for #<UsersController:0x000055dc22fb50f0>
+Did you mean?  header):
+  
+app/controllers/application_controller.rb:31:in `validate_token'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-23 12:31:38 +0000
+  [1m[35m (0.5ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 436ms (ActiveRecord: 0.0ms | Allocations: 66074)
+
+
+  
+NameError (undefined local variable or method `header_full' for #<UsersController:0x00007fc42c598a38>
+Did you mean?  header):
+  
+app/controllers/application_controller.rb:31:in `validate_token'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-23 12:42:51 +0000
+  [1m[35m (0.8ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 303ms (ActiveRecord: 0.0ms | Allocations: 66066)
+
+
+  
+NameError (undefined local variable or method `header_full' for #<UsersController:0x00007fc42c91f378>
+Did you mean?  header):
+  
+app/controllers/application_controller.rb:31:in `validate_token'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-23 14:33:04 +0000
+  [1m[35m (1.7ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 319ms (ActiveRecord: 0.0ms | Allocations: 66066)
+
+
+  
+NameError (undefined local variable or method `header_full' for #<UsersController:0x00007fc42c9fe6b8>
+Did you mean?  header):
+  
+app/controllers/application_controller.rb:31:in `validate_token'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-23 15:35:33 +0000
+  [1m[35m (1.1ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (6.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 88ms (ActiveRecord: 21.0ms | Allocations: 7373)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587720283}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-24 10:00:36 +0000
+  [1m[35m (1.8ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms | Allocations: 179)
+
+
+  
+JWT::ExpiredSignature (Signature has expired):
+  
+app/controllers/application_controller.rb:24:in `decode'
+app/controllers/application_controller.rb:31:in `validate_token'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-24 10:24:51 +0000
+  [1m[35m (3.8ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 179)
+
+
+  
+JWT::ExpiredSignature (Signature has expired):
+  
+app/controllers/application_controller.rb:24:in `decode'
+app/controllers/application_controller.rb:31:in `validate_token'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-24 10:33:00 +0000
+  [1m[35m (32.9ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 179)
+
+
+  
+JWT::ExpiredSignature (Signature has expired):
+  
+app/controllers/application_controller.rb:24:in `decode'
+app/controllers/application_controller.rb:31:in `validate_token'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-24 10:33:50 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms | Allocations: 179)
+
+
+  
+JWT::ExpiredSignature (Signature has expired):
+  
+app/controllers/application_controller.rb:24:in `decode'
+app/controllers/application_controller.rb:31:in `validate_token'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-24 10:35:15 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 179)
+
+
+  
+JWT::ExpiredSignature (Signature has expired):
+  
+app/controllers/application_controller.rb:24:in `decode'
+app/controllers/application_controller.rb:31:in `validate_token'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-24 10:35:18 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms | Allocations: 179)
+
+
+  
+JWT::ExpiredSignature (Signature has expired):
+  
+app/controllers/application_controller.rb:24:in `decode'
+app/controllers/application_controller.rb:31:in `validate_token'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-24 13:26:23 +0000
+  [1m[35m (1.0ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (8.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 214)
+
+
+  
+JWT::ExpiredSignature (Signature has expired):
+  
+app/controllers/application_controller.rb:24:in `decode'
+app/controllers/application_controller.rb:31:in `validate_token'
+Started GET "/api/masters/asset-item?per=10&page=1&q=" for 172.21.0.1 at 2020-04-24 13:27:06 +0000
+Processing by MastersController#asset_item as HTML
+  Parameters: {"per"=>"10", "page"=>"1", "q"=>""}
+  [1m[35m (10.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `asset_items` WHERE (item LIKE '%%')[0m
+  ↳ app/controllers/masters_controller.rb:38:in `asset_item'
+  [1m[36mAssetItem Load (1.5ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE (item LIKE '%%') LIMIT 10 OFFSET 0[0m
+  ↳ app/controllers/masters_controller.rb:40:in `asset_item'
+  [1m[36mAssetGroup Load (11.6ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (7.4ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 49 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.1ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 46 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 49 LIMIT 1[0m  [["id", 49], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 46 LIMIT 1[0m  [["id", 46], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.2ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 33 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.1ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.1ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 40 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.1ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 30 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (0.9ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 38 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 38 LIMIT 1[0m  [["id", 38], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.2ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 38 LIMIT 1[0m  [["id", 38], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+Completed 200 OK in 336ms (Views: 0.6ms | ActiveRecord: 61.7ms | Allocations: 32169)
+
+
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-24 13:28:00 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms | Allocations: 184)
+
+
+  
+JWT::ExpiredSignature (Signature has expired):
+  
+app/controllers/application_controller.rb:24:in `decode'
+app/controllers/application_controller.rb:31:in `validate_token'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-24 13:28:53 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms | Allocations: 180)
+
+
+  
+JWT::ExpiredSignature (Signature has expired):
+  
+app/controllers/application_controller.rb:24:in `decode'
+app/controllers/application_controller.rb:31:in `validate_token'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-24 13:31:32 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 180)
+
+
+  
+JWT::ExpiredSignature (Signature has expired):
+  
+app/controllers/application_controller.rb:24:in `decode'
+app/controllers/application_controller.rb:31:in `validate_token'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-24 13:32:46 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 180)
+
+
+  
+JWT::ExpiredSignature (Signature has expired):
+  
+app/controllers/application_controller.rb:24:in `decode'
+app/controllers/application_controller.rb:31:in `validate_token'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-24 13:32:54 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms | Allocations: 180)
+
+
+  
+JWT::ExpiredSignature (Signature has expired):
+  
+app/controllers/application_controller.rb:24:in `decode'
+app/controllers/application_controller.rb:31:in `validate_token'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-24 13:34:37 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 180)
+
+
+  
+JWT::ExpiredSignature (Signature has expired):
+  
+app/controllers/application_controller.rb:24:in `decode'
+app/controllers/application_controller.rb:31:in `validate_token'
+Started POST "/api/login" for 172.21.0.1 at 2020-04-24 14:38:38 +0000
+  [1m[35m (0.6ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by LoginController#login as HTML
+  Parameters: {"email"=>"keitahighbridge@gmail.com", "password"=>"[FILTERED]", "login"=>{"email"=>"keitahighbridge@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (4.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'keitahighbridge@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/login_controller.rb:5:in `login'
+Completed 500 Internal Server Error in 33ms (ActiveRecord: 11.8ms | Allocations: 2545)
+
+
+  
+NoMethodError (undefined method `authenticate' for nil:NilClass):
+  
+app/controllers/login_controller.rb:6:in `login'
+Started POST "/api/login" for 172.21.0.1 at 2020-04-24 14:38:51 +0000
+Processing by LoginController#login as HTML
+  Parameters: {"email"=>"mugi@gmail.com", "password"=>"[FILTERED]", "login"=>{"email"=>"mugi@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'mugi@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/login_controller.rb:5:in `login'
+Completed 200 OK in 320ms (Views: 0.2ms | ActiveRecord: 4.9ms | Allocations: 3908)
+
+
+Started POST "/api/login" for 172.21.0.1 at 2020-04-24 14:39:17 +0000
+Processing by LoginController#login as HTML
+  Parameters: {"email"=>"keita@gmail.com", "password"=>"[FILTERED]", "login"=>{"email"=>"keita@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'keita@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/login_controller.rb:5:in `login'
+Completed 200 OK in 328ms (Views: 0.1ms | ActiveRecord: 1.0ms | Allocations: 812)
+
+
+Started GET "/api/users/3" for 172.21.0.1 at 2020-04-24 14:44:19 +0000
+  [1m[35m (0.8ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (11.8ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (3.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 102ms (ActiveRecord: 16.8ms | Allocations: 7166)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>3, "exp"=>1587825557}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started POST "/api/login" for 172.21.0.1 at 2020-04-24 14:44:34 +0000
+Processing by LoginController#login as HTML
+  Parameters: {"email"=>"mugi@gmail.com", "password"=>"[FILTERED]", "login"=>{"email"=>"mugi@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'mugi@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/login_controller.rb:5:in `login'
+Completed 200 OK in 331ms (Views: 0.2ms | ActiveRecord: 0.9ms | Allocations: 1043)
+
+
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-24 15:13:01 +0000
+  [1m[35m (1.3ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 1.2ms | Allocations: 1839)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587825874}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started POST "/api/login" for 172.21.0.1 at 2020-04-24 15:13:13 +0000
+Processing by LoginController#login as HTML
+  Parameters: {"email"=>"keitahighbridge@gmail.com", "password"=>"[FILTERED]", "login"=>{"email"=>"keitahighbridge@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'keitahighbridge@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/login_controller.rb:5:in `login'
+Completed 500 Internal Server Error in 41ms (ActiveRecord: 0.9ms | Allocations: 1169)
+
+
+  
+NoMethodError (undefined method `authenticate' for nil:NilClass):
+  
+app/controllers/login_controller.rb:6:in `login'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-24 15:31:37 +0000
+  [1m[35m (0.8ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 77ms (ActiveRecord: 1.1ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587825874}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started POST "/api/login" for 172.21.0.1 at 2020-04-24 15:31:52 +0000
+Processing by LoginController#login as HTML
+  Parameters: {"email"=>"mugi@gmail.com", "password"=>"[FILTERED]", "login"=>{"email"=>"mugi@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'mugi@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/login_controller.rb:5:in `login'
+Completed 200 OK in 274ms (Views: 0.2ms | ActiveRecord: 1.1ms | Allocations: 799)
+
+
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-24 15:32:10 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 41ms (ActiveRecord: 1.8ms | Allocations: 1825)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'

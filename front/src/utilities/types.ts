@@ -1,7 +1,33 @@
 // common
 type NumberOrString = Number | String // railsからのデータが何か分からないときはこれを使う
 
+// reducers
+export interface LoginReducerType {
+  type: string
+}
+
+export interface LoginReducer {
+  login: boolean
+  userName: string
+}
+
+export interface LoginReducerDispatch {
+  login: any
+}
+
 // props
+export interface ReduxProps {
+  state: object
+  login: any
+}
+
+export interface SnackbarProps {
+  open: boolean
+  autoHideDuration: number
+  onClose: any
+  message: string
+}
+
 
 // useState
 type UseStateArgs = (string | number)
