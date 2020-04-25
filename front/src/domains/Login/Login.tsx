@@ -1,25 +1,27 @@
 import React, { useState, ChangeEvent } from 'react'
 import axios from 'axios'
-import { Dispatch } from 'redux'
-import { connect } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { useHistory, Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { Signup } from '../Signup/Signup'
 import { Container } from '../../materials/Container'
 import { H2 }  from '../../materials/Text'
 import { StyledInput } from '../../materials/Input'
 import { StyledButton } from '../../materials/Button'
 import { LOGIN_URL } from '../../utilities/urls'
 import { UseState } from '../../utilities/types'
-import { ReduxProps, LoginReducerType } from '../../utilities/types'
-import { actionType } from '../../reducer/actionTypes'
-import { Messagebox } from '../../materials/Mesagebox'
+import { loginAction } from '../../reducer/action'
+import { Messagebox } from '../../components/Mesagebox'
 
 const StyledDiv = styled.div`
   margin-bottom: 1em;
 `
 
-const Login = (props: ReduxProps) => {
+const StyledLink = styled(Link)`
+`
+
+export const Login = () => {
 
   const [email, setEmail] = useState<UseState<string>>(undefined)
   const [password, setPassword] = useState<UseState<string>>(undefined)
@@ -27,6 +29,8 @@ const Login = (props: ReduxProps) => {
   const [open, setOpen] = useState(false)
 
   const history = useHistory()
+
+  const dispatch = useDispatch()
 
   const loginUser = async () => {
     const { data: { token, user_id } } = await axios.post(LOGIN_URL, {
@@ -37,7 +41,7 @@ const Login = (props: ReduxProps) => {
       setOpen(true)
       localStorage.setItem('token', token)
       localStorage.setItem('user_id', user_id)
-      props.login()
+      dispatch(loginAction())
       history.push({pathname: '/'})
     } else {
       setMessage('ログインに失敗しました')
@@ -76,6 +80,9 @@ const Login = (props: ReduxProps) => {
       <StyledDiv>
         <StyledButton onClick={clickHandler}>ログイン</StyledButton>
       </StyledDiv>
+      <StyledDiv>
+        <StyledLink to='/signup'>アカウント未登録の場合</StyledLink>
+      </StyledDiv>
       <Messagebox 
         open={open}
         autoHideDuration={6000}
@@ -85,13 +92,3 @@ const Login = (props: ReduxProps) => {
     </Container>
   )
 }
-
-const mapDispathToProps = (dispatch: Dispatch<LoginReducerType>) => {
-  return({
-    login: () => dispatch({ type: actionType.LOGIN })
-  })
-}
-
-const connector = connect(null, mapDispathToProps)
-
-export default connector(Login)

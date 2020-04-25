@@ -35007,3 +35007,564 @@ Completed 500 Internal Server Error in 41ms (ActiveRecord: 1.8ms | Allocations: 
 NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
   
 app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 03:59:49 +0000
+  [1m[35m (1.3ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (7.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (3.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 68ms (ActiveRecord: 12.7ms | Allocations: 7160)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 04:35:17 +0000
+  [1m[35m (3.8ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 30ms (ActiveRecord: 1.0ms | Allocations: 1861)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 04:39:59 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 2.2ms | Allocations: 1836)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 04:40:19 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (32.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 57ms (ActiveRecord: 32.9ms | Allocations: 1836)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 04:47:30 +0000
+  [1m[35m (1.0ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (5.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 30ms (ActiveRecord: 5.4ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 04:47:37 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (3.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 84ms (ActiveRecord: 3.3ms | Allocations: 1824)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 05:08:02 +0000
+  [1m[35m (0.7ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 20ms (ActiveRecord: 2.2ms | Allocations: 1831)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 05:09:44 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (4.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 28ms (ActiveRecord: 4.8ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 05:15:44 +0000
+  [1m[35m (0.9ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (2.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 37ms (ActiveRecord: 2.6ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 05:15:55 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 97ms (ActiveRecord: 2.1ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 05:19:00 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (7.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 60ms (ActiveRecord: 7.9ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 13:33:16 +0000
+  [1m[35m (2.2ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (10.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (5.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 48ms (ActiveRecord: 14.0ms | Allocations: 7160)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 13:39:50 +0000
+  [1m[35m (6.0ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (3.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 37ms (ActiveRecord: 3.9ms | Allocations: 1861)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 13:44:55 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 1.6ms | Allocations: 1836)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 13:52:19 +0000
+  [1m[35m (0.8ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 23ms (ActiveRecord: 0.9ms | Allocations: 1831)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 13:56:04 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (10.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 95ms (ActiveRecord: 10.0ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 13:58:45 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (4.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 81ms (ActiveRecord: 4.5ms | Allocations: 1836)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 14:01:47 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 44ms (ActiveRecord: 0.7ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 14:06:30 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 35ms (ActiveRecord: 1.2ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 14:31:29 +0000
+  [1m[35m (1.1ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 21ms (ActiveRecord: 2.2ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 14:32:01 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (3.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 53ms (ActiveRecord: 3.4ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 14:37:21 +0000
+  [1m[35m (0.9ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (10.0ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (5.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 84ms (ActiveRecord: 20.8ms | Allocations: 7159)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 14:43:06 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 17ms (ActiveRecord: 1.6ms | Allocations: 1872)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 14:43:50 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.7ms | Allocations: 1836)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 14:44:07 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (32.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 51ms (ActiveRecord: 32.7ms | Allocations: 1836)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 15:00:07 +0000
+  [1m[35m (2.2ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (4.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 4.9ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 15:00:27 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (7.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 109ms (ActiveRecord: 7.2ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 15:01:15 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (6.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 84ms (ActiveRecord: 6.2ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 15:02:29 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 62ms (ActiveRecord: 1.2ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 15:02:49 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 25ms (ActiveRecord: 1.7ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 15:04:51 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 40ms (ActiveRecord: 1.0ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587828712}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started POST "/api/login" for 172.21.0.1 at 2020-04-25 15:05:05 +0000
+Processing by LoginController#login as HTML
+  Parameters: {"email"=>"mugi@gmail.com", "password"=>"[FILTERED]", "login"=>{"email"=>"mugi@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'mugi@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/login_controller.rb:5:in `login'
+Completed 200 OK in 309ms (Views: 0.3ms | ActiveRecord: 1.0ms | Allocations: 1016)
+
+
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 15:05:14 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 38ms (ActiveRecord: 2.3ms | Allocations: 1822)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587913506}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 15:06:15 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 27ms (ActiveRecord: 1.8ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587913506}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started POST "/api/login" for 172.21.0.1 at 2020-04-25 15:06:27 +0000
+Processing by LoginController#login as HTML
+  Parameters: {"email"=>"mugi@gmail.com", "password"=>"[FILTERED]", "login"=>{"email"=>"mugi@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'mugi@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/login_controller.rb:5:in `login'
+Completed 200 OK in 358ms (Views: 0.3ms | ActiveRecord: 1.3ms | Allocations: 798)
+
+
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 15:13:31 +0000
+  [1m[35m (1.7ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 31ms (ActiveRecord: 1.4ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587913587}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 15:26:03 +0000
+  [1m[35m (5.7ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (44.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 84ms (ActiveRecord: 44.1ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587913587}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 15:26:16 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.6ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587913587}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started POST "/api/login" for 172.21.0.1 at 2020-04-25 15:26:34 +0000
+Processing by LoginController#login as HTML
+  Parameters: {"email"=>"mugi@gmail.com", "password"=>"[FILTERED]", "login"=>{"email"=>"mugi@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'mugi@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/login_controller.rb:5:in `login'
+Completed 200 OK in 320ms (Views: 0.2ms | ActiveRecord: 1.1ms | Allocations: 799)
+
+
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 15:33:12 +0000
+  [1m[35m (20.7ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (4.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 41ms (ActiveRecord: 4.6ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587914794}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 15:33:22 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 26ms (ActiveRecord: 2.0ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587914794}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started POST "/api/login" for 172.21.0.1 at 2020-04-25 15:33:44 +0000
+Processing by LoginController#login as HTML
+  Parameters: {"email"=>"mugi@gmail.com", "password"=>"[FILTERED]", "login"=>{"email"=>"mugi@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'mugi@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/login_controller.rb:5:in `login'
+Completed 200 OK in 325ms (Views: 0.2ms | ActiveRecord: 1.3ms | Allocations: 798)
+
+
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 15:37:11 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 0.8ms | Allocations: 1822)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587915224}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 15:38:32 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (3.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 28ms (ActiveRecord: 3.2ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587915224}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 15:38:54 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 29ms (ActiveRecord: 1.0ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587915224}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-25 15:40:27 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 62ms (ActiveRecord: 1.1ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587915224}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started POST "/api/login" for 172.21.0.1 at 2020-04-25 15:40:37 +0000
+Processing by LoginController#login as HTML
+  Parameters: {"email"=>"mugi@gmail.com", "password"=>"[FILTERED]", "login"=>{"email"=>"mugi@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'mugi@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/login_controller.rb:5:in `login'
+Completed 200 OK in 313ms (Views: 0.2ms | ActiveRecord: 1.3ms | Allocations: 798)
+
+

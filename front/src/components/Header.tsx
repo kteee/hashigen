@@ -1,11 +1,13 @@
 import React, {useEffect} from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
-import { Link, LinkProps } from 'react-router-dom'
+import { connect, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import { H1 } from '../materials/Text'
 import { getAuthHeader, getUserId } from '../utilities/auth'
 import { USERS_URL } from '../utilities/urls'
+import { LoginReducerState } from '../utilities/types'
 
 interface ListItemProps {
   color?: string
@@ -57,7 +59,16 @@ const CustomLink = styled(Link)`
   line-height: 4em;
 `;
 
+interface StoreState {
+  loginReducer: LoginReducerState
+}
+
+const loginSelector = (state: StoreState) => state.loginReducer.loggedIn
+
 export const Header = () => {
+
+  const isLoggedin = useSelector(loginSelector)
+  console.log(isLoggedin)
 
   const getMe = async () => {
     const header = getAuthHeader()
@@ -75,29 +86,41 @@ export const Header = () => {
     getMe() 
   }, [])
 
+  const setMenuList = () => {
+    if(isLoggedin){
+      return (
+        <List>
+        <ListItem>
+          <CustomLink to='/function'>機能</CustomLink>
+        </ListItem>
+        <ListItem>
+          <CustomLink to='/setting'>設定</CustomLink>
+        </ListItem>
+        <ListItem>
+          <CustomLink to='/logout'>ログアウト</CustomLink>
+        </ListItem>
+      </List>
+      )
+    } else {
+      return (
+        <List>
+          <ListItem>
+            <CustomLink to='/login'>ログイン</CustomLink>
+          </ListItem>
+        </List>
+      )
+    }
+  }
+
+  const MenuList = setMenuList()
+
   return (
     <StyledHeader>
       <FlexGrow1>
         <CustomLink to='/'><HeaderH1 color='white'>Hashigen</HeaderH1></CustomLink>
       </FlexGrow1>
       <Nav>
-        <List>
-          <ListItem>
-            <CustomLink to='/function'>機能</CustomLink>
-          </ListItem>
-          <ListItem>
-            <CustomLink to='/setting'>設定</CustomLink>
-          </ListItem>
-          {/* <ListItem>
-            <CustomLink to='/logout'>ログアウト</CustomLink>
-          </ListItem> */}
-          <ListItem>
-            <CustomLink to='/login'>ログイン</CustomLink>
-          </ListItem>
-          <ListItem>
-            <CustomLink to='/signup'>新規登録</CustomLink>
-          </ListItem>
-        </List>
+        {MenuList}
       </Nav>
     </StyledHeader>
   )

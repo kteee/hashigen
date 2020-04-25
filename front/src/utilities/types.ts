@@ -2,18 +2,19 @@
 type NumberOrString = Number | String // railsからのデータが何か分からないときはこれを使う
 
 // reducers
-export interface LoginReducerType {
-  type: string
-}
-
-export interface LoginReducer {
-  login: boolean
-  userName: string
+export interface LoginReducerState {
+  loggedIn: boolean
 }
 
 export interface LoginReducerDispatch {
   login: any
 }
+
+export interface LoginReducerDispatchType {
+  type: string
+}
+
+export interface LoginReducerProps extends LoginReducerState, LoginReducerDispatch {}
 
 // props
 export interface ReduxProps {
