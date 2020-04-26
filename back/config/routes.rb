@@ -14,5 +14,6 @@ Rails.application.routes.draw do
   get '/api/masters/dep-method', to: 'masters#dep_method'
 
   post '/api/login', to: 'login#login'
+  post '/api/session', to: 'login#session'
 
 end

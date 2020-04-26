@@ -6,11 +6,9 @@ import { MenuItem } from '../../components/MenuItem'
 export const FunctionListBase = () => {
 
   const functionItems: functionItemProps[] = [
-    {name:'資産登録', link_to:'/function/new'},
-    {name:'資産一覧', link_to:'/function/list'},
-    {name:'PL分析', link_to:'/function/pl'},
-    {name:'BS分析', link_to:'/function/bs'},
-    {name:'税務分析', link_to:'/function/tax'}
+    {name:'新規資産の登録', link_to:'/function/new'},
+    {name:'既存資産の引き継ぎ', link_to:'/function/transfer'},
+    {name:'資産一覧', link_to:'/function/list'}
   ];
 
   const FunctionItems = functionItems.map((item, index) => {

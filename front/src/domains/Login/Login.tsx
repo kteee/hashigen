@@ -36,14 +36,14 @@ export const Login = () => {
   const dispatch = useDispatch()
 
   const loginUser = async () => {
-    const { data: { token, user_id } } = await axios.post(LOGIN_URL, {
+    const { data: { token, exp } } = await axios.post(LOGIN_URL, {
       email: email,
       password: password
     })
     if(token){
       setOpen(true)
       localStorage.setItem('token', token)
-      localStorage.setItem('user_id', user_id)
+      localStorage.setItem('exp', exp)
       dispatch(loginAction())
       history.push({pathname: '/'})
     } else {

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_26_014000) do
+ActiveRecord::Schema.define(version: 2020_04_26_142415) do
 
   create_table "accounting_periods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "start"
@@ -61,6 +61,9 @@ ActiveRecord::Schema.define(version: 2020_04_26_014000) do
     t.bigint "depreciation_method_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "account_id"
+    t.integer "year_start_book_value"
+    t.index ["account_id"], name: "index_assets_on_account_id"
     t.index ["asset_item_id"], name: "index_assets_on_asset_item_id"
     t.index ["depreciation_method_id"], name: "index_assets_on_depreciation_method_id"
   end
@@ -109,6 +112,7 @@ ActiveRecord::Schema.define(version: 2020_04_26_014000) do
   add_foreign_key "asset_groups", "asset_types"
   add_foreign_key "asset_items", "asset_groups"
   add_foreign_key "asset_items", "useful_lives"
+  add_foreign_key "assets", "accounts"
   add_foreign_key "assets", "asset_items"
   add_foreign_key "assets", "depreciation_methods"
   add_foreign_key "users", "roles"

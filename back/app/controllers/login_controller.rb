@@ -12,6 +12,14 @@ class LoginController < ApplicationController
     end
   end
 
+  def session
+    validate_token
+    @user_id = @decoded_data[:user_id]
+    if User.find(@user_id)
+      render status: 200, json: { message: 'token seems fine' }
+    end
+  end
+
   private
     def login_params
       params.require(:login).permit(:email, :password)

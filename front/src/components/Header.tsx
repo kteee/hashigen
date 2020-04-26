@@ -1,13 +1,14 @@
 import React, {useEffect} from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
-import { connect, useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { H1 } from '../materials/Text'
-import { getAuthHeader, getUserId } from '../utilities/auth'
-import { USERS_URL } from '../utilities/urls'
+import { setHeaders } from '../utilities/auth'
+import { SESSION_URL } from '../utilities/urls'
 import { LoginReducerState } from '../utilities/types'
+import { loginAction } from '../reducer/action'
 
 interface ListItemProps {
   color?: string
@@ -67,23 +68,26 @@ const loginSelector = (state: StoreState) => state.loginReducer.loggedIn
 
 export const Header = () => {
 
-  const isLoggedin = useSelector(loginSelector)
-  console.log(isLoggedin)
+  const isLoggedin = useSelector(loginSelector) 
+  const dispatch = useDispatch()
 
-  const getMe = async () => {
-    const header = getAuthHeader()
-    const userId = getUserId()
-    const url = `${USERS_URL}/${userId}`
-    const response = await axios.get(url, {
-      headers: {
-        Authorization: header
+  const validateToken = async () => {
+    const tokenExpDateStr = localStorage.getItem('exp')
+    if(typeof tokenExpDateStr === 'string') {
+      const tokenExpDate = new Date(tokenExpDateStr)
+      const currentDate = new Date()
+      if(tokenExpDate > currentDate) {
+        const headers = setHeaders()
+        const response = await axios.post(SESSION_URL, {}, headers)
+        if(response.status===200) {
+          dispatch(loginAction())
+        }
       }
-    })
-    console.log(response)
+    }
   }    
   
   useEffect(() => {
-    getMe() 
+    validateToken() 
   }, [])
 
   const setMenuList = () => {

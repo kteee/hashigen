@@ -18,4 +18,5 @@ export const GET_DEP_METHOD_URL   = `${baseUrl}/api/masters/dep-method`
 export const ASSETS_URL           = `${baseUrl}/api/assets`
 export const USERS_URL            = `${baseUrl}/api/users`
 export const LOGIN_URL            = `${baseUrl}/api/login`
+export const SESSION_URL          = `${baseUrl}/api/session`
 export const ACCOUNTS_URL         = `${baseUrl}/api/accounts`

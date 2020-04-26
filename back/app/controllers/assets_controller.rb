@@ -15,19 +15,11 @@ class AssetsController < ApplicationController
         updated_at: asset.updated_at.strftime("%Y-%m-%d")
       })
     end
-    puts response
     response_get_success(response)
   end
   
   def create
-    new_asset = Asset.new(
-                  name: params[:name],
-                  acquisition_date: params[:acquisitionDate],
-                  acquisition_value: params[:acquisitionValue],
-                  asset_item_id: params[:assetItemId],
-                  depreciation_method_id: params[:depreciationMethodId]
-                )
-
+    new_asset = Asset.new(params)
     if new_asset.save
       response_post_success
     else
@@ -37,24 +29,13 @@ class AssetsController < ApplicationController
 
   def show
     asset = Asset.find(params[:id])
-    dep_simulation = dep_simulation(asset)
-    response = { asset: asset, depreciation: dep_simulation}
+    depreciation = depreciate(asset)
+    response = { asset: asset, depreciation: depreciation}
     response_get_success(response)
-    # response = {
-    #   id: asset.id, 
-    #   name: asset.name,
-    #   acquisition_date: asset.acquisition_date,
-    #   acquisition_value: asset.acquisition_value,
-    #   useful_life: asset.asset_item.useful_life.year,
-    #   depreciation_method: asset.depreciation_method.display_name,
-    #   created_at: asset.created_at.strftime("%Y-%m-%d"),
-    #   updated_at: asset.updated_at.strftime("%Y-%m-%d")
-    # }
-    # response_get_success(response)
   end
 
   public # 定額法と定率法の共通部分をここで定義
-    def dep_simulation(asset)
+    def depreciate(asset)
       useful_life = asset.asset_item.useful_life.id
       dep_ratios = UsefulLife.find(useful_life)
       dep_method =  asset.depreciation_method.id
