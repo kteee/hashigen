@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_20_110159) do
+ActiveRecord::Schema.define(version: 2020_04_26_014000) do
+
+  create_table "accounting_periods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "start"
+    t.string "end"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.bigint "accounting_period_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["accounting_period_id"], name: "index_accounts_on_accounting_period_id"
+    t.index ["user_id"], name: "index_accounts_on_user_id"
+  end
 
   create_table "asset_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
@@ -87,6 +104,8 @@ ActiveRecord::Schema.define(version: 2020_04_20_110159) do
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
+  add_foreign_key "accounts", "accounting_periods"
+  add_foreign_key "accounts", "users"
   add_foreign_key "asset_groups", "asset_types"
   add_foreign_key "asset_items", "asset_groups"
   add_foreign_key "asset_items", "useful_lives"

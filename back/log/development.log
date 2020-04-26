@@ -35568,3 +35568,784 @@ Processing by LoginController#login as HTML
 Completed 200 OK in 313ms (Views: 0.2ms | ActiveRecord: 1.3ms | Allocations: 798)
 
 
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-26 00:11:01 +0000
+  [1m[35m (1.6ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (8.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (3.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 84ms (ActiveRecord: 16.6ms | Allocations: 7159)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587915638}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started POST "/api/login" for 172.21.0.1 at 2020-04-26 00:11:30 +0000
+Processing by LoginController#login as HTML
+  Parameters: {"email"=>"mugi@gmail.com", "password"=>"[FILTERED]", "login"=>{"email"=>"mugi@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'mugi@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/login_controller.rb:5:in `login'
+Completed 200 OK in 324ms (Views: 0.2ms | ActiveRecord: 1.4ms | Allocations: 1043)
+
+
+Started GET "/api/masters/asset-item?per=10&page=1&q=" for 172.21.0.1 at 2020-04-26 00:12:09 +0000
+Processing by MastersController#asset_item as HTML
+  Parameters: {"per"=>"10", "page"=>"1", "q"=>""}
+  [1m[35m (16.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `asset_items` WHERE (item LIKE '%%')[0m
+  ↳ app/controllers/masters_controller.rb:38:in `asset_item'
+  [1m[36mAssetItem Load (1.4ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE (item LIKE '%%') LIMIT 10 OFFSET 0[0m
+  ↳ app/controllers/masters_controller.rb:40:in `asset_item'
+  [1m[36mAssetGroup Load (6.1ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (6.6ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 49 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.1ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (3.2ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 46 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.7ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 49 LIMIT 1[0m  [["id", 49], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.1ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 46 LIMIT 1[0m  [["id", 46], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.5ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 33 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.5ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 40 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.4ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 30 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.1ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 38 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.1ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 38 LIMIT 1[0m  [["id", 38], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.1ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 38 LIMIT 1[0m  [["id", 38], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+Completed 200 OK in 361ms (Views: 1.2ms | ActiveRecord: 66.2ms | Allocations: 31045)
+
+
+Started GET "/api/assets/list" for 172.21.0.1 at 2020-04-26 00:12:12 +0000
+Processing by AssetsController#show as HTML
+  Parameters: {"id"=>"list"}
+  [1m[36mAsset Load (2.6ms)[0m  [1m[34mSELECT `assets`.* FROM `assets` WHERE `assets`.`id` = NULL LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:39:in `show'
+Completed 404 Not Found in 31ms (ActiveRecord: 9.3ms | Allocations: 1776)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Asset with 'id'=list):
+  
+app/controllers/assets_controller.rb:39:in `show'
+Started GET "/api/masters/asset-item?per=10&page=1&q=" for 172.21.0.1 at 2020-04-26 00:12:21 +0000
+Processing by MastersController#asset_item as HTML
+  Parameters: {"per"=>"10", "page"=>"1", "q"=>""}
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `asset_items` WHERE (item LIKE '%%')[0m
+  ↳ app/controllers/masters_controller.rb:38:in `asset_item'
+  [1m[36mAssetItem Load (1.4ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE (item LIKE '%%') LIMIT 10 OFFSET 0[0m
+  ↳ app/controllers/masters_controller.rb:40:in `asset_item'
+  [1m[36mAssetGroup Load (1.2ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 49 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.1ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 46 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 49 LIMIT 1[0m  [["id", 49], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.1ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.1ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 46 LIMIT 1[0m  [["id", 46], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (2.1ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 33 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.8ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 40 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.3ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.2ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 30 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.1ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 38 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.1ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 38 LIMIT 1[0m  [["id", 38], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.1ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.1ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 38 LIMIT 1[0m  [["id", 38], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+Completed 200 OK in 160ms (Views: 1.2ms | ActiveRecord: 13.3ms | Allocations: 14425)
+
+
+Started GET "/api/assets/list" for 172.21.0.1 at 2020-04-26 00:12:22 +0000
+Processing by AssetsController#show as HTML
+  Parameters: {"id"=>"list"}
+  [1m[36mAsset Load (1.8ms)[0m  [1m[34mSELECT `assets`.* FROM `assets` WHERE `assets`.`id` = NULL LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:39:in `show'
+Completed 404 Not Found in 12ms (ActiveRecord: 1.8ms | Allocations: 613)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Asset with 'id'=list):
+  
+app/controllers/assets_controller.rb:39:in `show'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-26 00:22:43 +0000
+  [1m[35m (2.6ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 24ms (ActiveRecord: 1.5ms | Allocations: 1825)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587946291}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started POST "/api/users" for 172.21.0.1 at 2020-04-26 00:23:30 +0000
+Processing by UsersController#create as HTML
+  Parameters: {"email"=>"keitahighbridge@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role_id"=>1, "user"=>{"email"=>"keitahighbridge@gmail.com", "role_id"=>1}}
+[31mUnpermitted parameter: :user[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:10:in `create'
+  [1m[36mRole Load (5.0ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` WHERE `roles`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:10:in `create'
+DEPRECATION WARNING: Uniqueness validator will no longer enforce case sensitive comparison in Rails 6.1. To continue case sensitive comparison on the :email attribute in User model, pass `case_sensitive: true` option explicitly to the uniqueness validator. (called from create at /usr/src/app/app/controllers/users_controller.rb:10)
+  [1m[36mUser Exists? (5.7ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'keitahighbridge@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:10:in `create'
+  [1m[36mUser Create (8.5ms)[0m  [1m[32mINSERT INTO `users` (`email`, `password_digest`, `role_id`, `created_at`, `updated_at`) VALUES ('keitahighbridge@gmail.com', '$2a$12$dTJuWauE0YpV5I8lRHloluLdVhUjWFQQVCg5.4xaQCVZMKTO9NZy.', 1, '2020-04-26 00:23:30.421717', '2020-04-26 00:23:30.421717')[0m
+  ↳ app/controllers/users_controller.rb:10:in `create'
+  [1m[35m (6.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:10:in `create'
+Completed 201 Created in 384ms (Views: 0.2ms | ActiveRecord: 31.8ms | Allocations: 9545)
+
+
+Started POST "/api/login" for 172.21.0.1 at 2020-04-26 00:23:41 +0000
+Processing by LoginController#login as HTML
+  Parameters: {"email"=>"keitahighbridge@gmail.com", "password"=>"[FILTERED]", "login"=>{"email"=>"keitahighbridge@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'keitahighbridge@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/login_controller.rb:5:in `login'
+Completed 200 OK in 304ms (Views: 0.2ms | ActiveRecord: 1.1ms | Allocations: 802)
+
+
+Started GET "/api/assets" for 172.21.0.1 at 2020-04-26 00:23:47 +0000
+Processing by AssetsController#index as HTML
+  [1m[36mAsset Load (5.3ms)[0m  [1m[34mSELECT `assets`.* FROM `assets`[0m
+  ↳ app/controllers/assets_controller.rb:6:in `index'
+  [1m[36mAssetItem Load (1.6ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE `asset_items`.`id` = 334 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in index'
+  [1m[36mUsefulLife Load (1.3ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in index'
+  [1m[36mDepreciationMethod Load (5.3ms)[0m  [1m[34mSELECT `depreciation_methods`.* FROM `depreciation_methods` WHERE `depreciation_methods`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:13:in `block in index'
+  [1m[36mAssetItem Load (1.4ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE `asset_items`.`id` = 324 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in index'
+  [1m[36mUsefulLife Load (1.1ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in index'
+  [1m[36mDepreciationMethod Load (1.8ms)[0m  [1m[34mSELECT `depreciation_methods`.* FROM `depreciation_methods` WHERE `depreciation_methods`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:13:in `block in index'
+  [1m[36mAssetItem Load (1.1ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE `asset_items`.`id` = 291 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in index'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 4 LIMIT 1[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/assets_controller.rb:12:in `block in index'
+  [1m[36mCACHE DepreciationMethod Load (0.0ms)[0m  [1m[34mSELECT `depreciation_methods`.* FROM `depreciation_methods` WHERE `depreciation_methods`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/assets_controller.rb:13:in `block in index'
+Completed 200 OK in 124ms (Views: 0.7ms | ActiveRecord: 27.3ms | Allocations: 13801)
+
+
+Started GET "/api/assets/1" for 172.21.0.1 at 2020-04-26 00:23:52 +0000
+Processing by AssetsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mAsset Load (1.4ms)[0m  [1m[34mSELECT `assets`.* FROM `assets` WHERE `assets`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:39:in `show'
+  [1m[36mAssetItem Load (1.0ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE `asset_items`.`id` = 334 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:58:in `dep_simulation'
+  [1m[36mUsefulLife Load (2.4ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:58:in `dep_simulation'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 4 LIMIT 1[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/assets_controller.rb:59:in `dep_simulation'
+  [1m[36mDepreciationMethod Load (1.2ms)[0m  [1m[34mSELECT `depreciation_methods`.* FROM `depreciation_methods` WHERE `depreciation_methods`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:60:in `dep_simulation'
+Completed 200 OK in 40ms (Views: 0.8ms | ActiveRecord: 6.0ms | Allocations: 3417)
+
+
+Started GET "/api/masters/asset-item?per=10&page=1&q=" for 172.21.0.1 at 2020-04-26 00:23:56 +0000
+Processing by MastersController#asset_item as HTML
+  Parameters: {"per"=>"10", "page"=>"1", "q"=>""}
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `asset_items` WHERE (item LIKE '%%')[0m
+  ↳ app/controllers/masters_controller.rb:38:in `asset_item'
+  [1m[36mAssetItem Load (1.0ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE (item LIKE '%%') LIMIT 10 OFFSET 0[0m
+  ↳ app/controllers/masters_controller.rb:40:in `asset_item'
+  [1m[36mAssetGroup Load (1.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (0.9ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 49 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.1ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 46 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 49 LIMIT 1[0m  [["id", 49], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 46 LIMIT 1[0m  [["id", 46], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (0.9ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 33 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.1ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 40 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.8ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 30 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mUsefulLife Load (1.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 38 LIMIT 1[0m
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.0ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 38 LIMIT 1[0m  [["id", 38], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+  [1m[36mCACHE AssetGroup Load (0.1ms)[0m  [1m[34mSELECT `asset_groups`.* FROM `asset_groups` WHERE `asset_groups`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:44:in `block in asset_item'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 38 LIMIT 1[0m  [["id", 38], ["LIMIT", 1]]
+  ↳ app/controllers/masters_controller.rb:46:in `block in asset_item'
+Completed 200 OK in 116ms (Views: 0.7ms | ActiveRecord: 10.6ms | Allocations: 14424)
+
+
+Started GET "/api/assets" for 172.21.0.1 at 2020-04-26 00:23:59 +0000
+Processing by AssetsController#index as HTML
+  [1m[36mAsset Load (4.9ms)[0m  [1m[34mSELECT `assets`.* FROM `assets`[0m
+  ↳ app/controllers/assets_controller.rb:6:in `index'
+  [1m[36mAssetItem Load (1.6ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE `asset_items`.`id` = 334 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in index'
+  [1m[36mUsefulLife Load (2.5ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in index'
+  [1m[36mDepreciationMethod Load (0.9ms)[0m  [1m[34mSELECT `depreciation_methods`.* FROM `depreciation_methods` WHERE `depreciation_methods`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:13:in `block in index'
+  [1m[36mAssetItem Load (1.2ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE `asset_items`.`id` = 324 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in index'
+  [1m[36mUsefulLife Load (1.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in index'
+  [1m[36mDepreciationMethod Load (1.0ms)[0m  [1m[34mSELECT `depreciation_methods`.* FROM `depreciation_methods` WHERE `depreciation_methods`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:13:in `block in index'
+  [1m[36mAssetItem Load (0.8ms)[0m  [1m[34mSELECT `asset_items`.* FROM `asset_items` WHERE `asset_items`.`id` = 291 LIMIT 1[0m
+  ↳ app/controllers/assets_controller.rb:12:in `block in index'
+  [1m[36mCACHE UsefulLife Load (0.0ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives` WHERE `useful_lives`.`id` = 4 LIMIT 1[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/assets_controller.rb:12:in `block in index'
+  [1m[36mCACHE DepreciationMethod Load (0.0ms)[0m  [1m[34mSELECT `depreciation_methods`.* FROM `depreciation_methods` WHERE `depreciation_methods`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/assets_controller.rb:13:in `block in index'
+Completed 200 OK in 76ms (Views: 0.3ms | ActiveRecord: 14.1ms | Allocations: 6875)
+
+
+Started GET "/api/masters/useful-life" for 172.21.0.1 at 2020-04-26 00:24:10 +0000
+Processing by MastersController#useful_life as HTML
+  [1m[36mUsefulLife Load (1.9ms)[0m  [1m[34mSELECT `useful_lives`.* FROM `useful_lives`[0m
+  ↳ app/controllers/masters_controller.rb:5:in `useful_life'
+Completed 200 OK in 48ms (Views: 44.9ms | ActiveRecord: 1.9ms | Allocations: 16600)
+
+
+Started GET "/api/users/4" for 172.21.0.1 at 2020-04-26 00:37:55 +0000
+  [1m[35m (9.7ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 40ms (ActiveRecord: 1.4ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>4, "exp"=>1587947022}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/4" for 172.21.0.1 at 2020-04-26 00:38:21 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 107ms (ActiveRecord: 2.2ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>4, "exp"=>1587947022}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/4" for 172.21.0.1 at 2020-04-26 00:57:46 +0000
+  [1m[35m (0.6ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 29ms (ActiveRecord: 2.0ms | Allocations: 1822)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>4, "exp"=>1587947022}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/4" for 172.21.0.1 at 2020-04-26 01:04:11 +0000
+  [1m[35m (1.6ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (3.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 3.0ms | Allocations: 1822)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>4, "exp"=>1587947022}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started GET "/api/users/4" for 172.21.0.1 at 2020-04-26 01:04:57 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 24ms (ActiveRecord: 1.3ms | Allocations: 1821)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>4, "exp"=>1587947022}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+  [1m[35m (1.8ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT GET_LOCK('5277929974492897470', 0)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreateAccountingPeriods (20200426012112)
+  [1m[35m (60.7ms)[0m  [1m[35mCREATE TABLE `accounting_periods` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `start` varchar(255), `end` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200426012112')[0m
+  [1m[35m (4.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (7.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT RELEASE_LOCK('5277929974492897470')[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (2.7ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (2.8ms)[0m  [1m[34mSELECT GET_LOCK('5277929974492897470', 0)[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreateAccounts (20200426014000)
+  [1m[35m (91.1ms)[0m  [1m[35mCREATE TABLE `accounts` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `accounting_period_id` bigint, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL,  INDEX `index_accounts_on_accounting_period_id`  (`accounting_period_id`), CONSTRAINT `fk_rails_60a6ae3e88`
+FOREIGN KEY (`accounting_period_id`)
+  REFERENCES `accounting_periods` (`id`)
+)[0m
+  [1m[35m (1.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (1.1ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200426014000')[0m
+  [1m[35m (9.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT RELEASE_LOCK('5277929974492897470')[0m
+  [1m[35m (1.2ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (1.1ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (2.1ms)[0m  [1m[34mSELECT GET_LOCK('5277929974492897470', 0)[0m
+  [1m[35m (4.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to AddReferencesColumnToAccounts (20200426020053)
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT RELEASE_LOCK('5277929974492897470')[0m
+  [1m[35m (1.6ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (2.6ms)[0m  [1m[34mSELECT GET_LOCK('5277929974492897470', 0)[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to AddReferencesColumnToAccounts (20200426020053)
+  [1m[35m (63.3ms)[0m  [1m[35mALTER TABLE `accounts` ADD `user_id_id` bigint[0m
+  [1m[35m (46.2ms)[0m  [1m[35mCREATE  INDEX `index_accounts_on_user_id_id`  ON `accounts` (`user_id_id`) [0m
+  [1m[35m (1.8ms)[0m  [1m[35mALTER TABLE `accounts` ADD CONSTRAINT `fk_rails_8307187119`
+FOREIGN KEY (`user_id_id`)
+  REFERENCES `user_ids` (`id`)
+[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT RELEASE_LOCK('5277929974492897470')[0m
+  [1m[35m (3.3ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT GET_LOCK('5277929974492897470', 0)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to AddReferencesColumnToAccounts (20200426020053)
+  [1m[35m (51.0ms)[0m  [1m[35mALTER TABLE `accounts` ADD `user_id` bigint[0m
+  [1m[35m (71.7ms)[0m  [1m[35mCREATE  INDEX `index_accounts_on_user_id`  ON `accounts` (`user_id`) [0m
+  [1m[35m (128.1ms)[0m  [1m[35mALTER TABLE `accounts` ADD CONSTRAINT `fk_rails_b1e30bebc8`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (1.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (2.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200426020053')[0m
+  [1m[35m (13.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.8ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT RELEASE_LOCK('5277929974492897470')[0m
+  [1m[35m (0.8ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (2.2ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (2.9ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (3.9ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT GET_LOCK('5277929974492897470', 0)[0m
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to AddReferencesColumnToAccounts (20200426020053)
+  [1m[35m (46.8ms)[0m  [1m[35mALTER TABLE `accounts` DROP FOREIGN KEY fk_rails_b1e30bebc8[0m
+  [1m[35m (96.7ms)[0m  [1m[35mALTER TABLE `accounts` DROP COLUMN `user_id`[0m
+  [1m[36mprimary::SchemaMigration Destroy (12.3ms)[0m  [1m[31mDELETE FROM `schema_migrations` WHERE `schema_migrations`.`version` = '20200426020053'[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT RELEASE_LOCK('5277929974492897470')[0m
+  [1m[35m (1.4ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (2.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (3.7ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (2.7ms)[0m  [1m[34mSELECT GET_LOCK('5277929974492897470', 0)[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreateAccounts (20200426014000)
+  [1m[35m (62.7ms)[0m  [1m[35mDROP TABLE `accounts`[0m
+  [1m[36mprimary::SchemaMigration Destroy (9.6ms)[0m  [1m[31mDELETE FROM `schema_migrations` WHERE `schema_migrations`.`version` = '20200426014000'[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT RELEASE_LOCK('5277929974492897470')[0m
+  [1m[35m (1.3ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (2.9ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (2.5ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT GET_LOCK('5277929974492897470', 0)[0m
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreateAccounts (20200426014000)
+  [1m[35m (71.3ms)[0m  [1m[35mCREATE TABLE `accounts` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `accounting_period_id` bigint, `user_id` bigint, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL,  INDEX `index_accounts_on_accounting_period_id`  (`accounting_period_id`),  INDEX `index_accounts_on_user_id`  (`user_id`), CONSTRAINT `fk_rails_60a6ae3e88`
+FOREIGN KEY (`accounting_period_id`)
+  REFERENCES `accounting_periods` (`id`)
+, CONSTRAINT `fk_rails_b1e30bebc8`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+)[0m
+  [1m[35m (2.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (1.1ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20200426014000')[0m
+  [1m[35m (13.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.4ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (3.9ms)[0m  [1m[34mSELECT RELEASE_LOCK('5277929974492897470')[0m
+  [1m[35m (1.1ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Started POST "/api/login" for 172.21.0.1 at 2020-04-26 02:13:07 +0000
+  [1m[35m (1.1ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by LoginController#login as HTML
+  Parameters: {"email"=>"keitahighbridge@gmail.com", "password"=>"[FILTERED]", "login"=>{"email"=>"keitahighbridge@gmail.com", "password"=>"[FILTERED]"}}
+Completed 500 Internal Server Error in 28ms (ActiveRecord: 0.0ms | Allocations: 1086)
+
+
+  
+NoMethodError (undefined method `arity' for :account:Symbol):
+  
+app/models/user.rb:2:in `<class:User>'
+app/models/user.rb:1:in `<main>'
+app/controllers/login_controller.rb:5:in `login'
+Started POST "/api/login" for 172.21.0.1 at 2020-04-26 02:24:17 +0000
+  [1m[35m (1.7ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by LoginController#login as HTML
+  Parameters: {"email"=>"keitahighbridge@gmail.com", "password"=>"[FILTERED]", "login"=>{"email"=>"keitahighbridge@gmail.com", "password"=>"[FILTERED]"}}
+Completed 500 Internal Server Error in 39ms (ActiveRecord: 0.0ms | Allocations: 1858)
+
+
+  
+NoMethodError (undefined method `arity' for :account:Symbol):
+  
+app/models/user.rb:2:in `<class:User>'
+app/models/user.rb:1:in `<main>'
+app/controllers/login_controller.rb:5:in `login'
+Started POST "/api/login" for 172.21.0.1 at 2020-04-26 02:27:01 +0000
+Processing by LoginController#login as HTML
+  Parameters: {"email"=>"mugi@gmail.com", "password"=>"[FILTERED]", "login"=>{"email"=>"mugi@gmail.com", "password"=>"[FILTERED]"}}
+Completed 500 Internal Server Error in 28ms (ActiveRecord: 0.0ms | Allocations: 1858)
+
+
+  
+NoMethodError (undefined method `arity' for :account:Symbol):
+  
+app/models/user.rb:2:in `<class:User>'
+app/models/user.rb:1:in `<main>'
+app/controllers/login_controller.rb:5:in `login'
+Started POST "/api/login" for 172.21.0.1 at 2020-04-26 02:30:30 +0000
+Processing by LoginController#login as HTML
+  Parameters: {"email"=>"mugi@gmail.com", "password"=>"[FILTERED]", "login"=>{"email"=>"mugi@gmail.com", "password"=>"[FILTERED]"}}
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 0.0ms | Allocations: 1057)
+
+
+  
+NoMethodError (undefined method `arity' for :account:Symbol):
+  
+app/models/user.rb:2:in `<class:User>'
+app/models/user.rb:1:in `<main>'
+app/controllers/login_controller.rb:5:in `login'
+  [1m[35m (1.3ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (4.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Started POST "/api/login" for 172.21.0.1 at 2020-04-26 02:34:52 +0000
+Processing by LoginController#login as HTML
+  Parameters: {"email"=>"mugi@gmail.com", "password"=>"[FILTERED]", "login"=>{"email"=>"mugi@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'mugi@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/login_controller.rb:5:in `login'
+Completed 200 OK in 331ms (Views: 0.3ms | ActiveRecord: 14.2ms | Allocations: 5617)
+
+
+Started POST "/api/accounts" for 172.21.0.1 at 2020-04-26 02:35:24 +0000
+Processing by AccountsController#create as HTML
+  Parameters: {"account_name"=>"高橋工務店", "account_period_start"=>"2020-04-01", "account_period_end"=>"2021-03-31", "account"=>{}}
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 3.5ms | Allocations: 105)
+
+
+  
+JWT::DecodeError (Nil JSON web token):
+  
+app/controllers/application_controller.rb:24:in `decode'
+app/controllers/application_controller.rb:31:in `validate_token'
+Started POST "/api/accounts" for 172.21.0.1 at 2020-04-26 02:46:37 +0000
+  [1m[35m (0.6ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by AccountsController#create as HTML
+  Parameters: {"account_name"=>"高橋工務店", "account_period_start"=>"2020-04-01", "account_period_end"=>"2021-03-31", "account"=>{}}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 90)
+
+
+  
+JWT::DecodeError (Nil JSON web token):
+  
+app/controllers/application_controller.rb:24:in `decode'
+app/controllers/application_controller.rb:31:in `validate_token'
+Started POST "/api/accounts" for 172.21.0.1 at 2020-04-26 02:47:42 +0000
+Processing by AccountsController#create as HTML
+  Parameters: {"account_name"=>"高橋工務店", "account_period_start"=>"2020-04-01", "account_period_end"=>"2021-03-31", "account"=>{}}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 4.3ms | Allocations: 105)
+
+
+  
+JWT::DecodeError (Nil JSON web token):
+  
+app/controllers/application_controller.rb:24:in `decode'
+app/controllers/application_controller.rb:32:in `validate_token'
+Started POST "/api/accounts" for 172.21.0.1 at 2020-04-26 02:48:29 +0000
+Processing by AccountsController#create as HTML
+  Parameters: {"account_name"=>"高橋工務店", "account_period_start"=>"2020-04-01", "account_period_end"=>"2021-03-31", "account"=>{}}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 4.0ms | Allocations: 143)
+
+
+  
+JWT::DecodeError (Nil JSON web token):
+  
+app/controllers/application_controller.rb:24:in `decode'
+app/controllers/application_controller.rb:34:in `validate_token'
+Started POST "/api/accounts" for 172.21.0.1 at 2020-04-26 02:48:54 +0000
+Processing by AccountsController#create as HTML
+  Parameters: {"account_name"=>"高橋工務店", "account_period_start"=>"2020-04-01", "account_period_end"=>"2021-03-31", "account"=>{}}
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 4.2ms | Allocations: 142)
+
+
+  
+JWT::DecodeError (Nil JSON web token):
+  
+app/controllers/application_controller.rb:24:in `decode'
+app/controllers/application_controller.rb:34:in `validate_token'
+Started GET "/api/users/2" for 172.21.0.1 at 2020-04-26 02:49:21 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:18:in `show'
+Completed 500 Internal Server Error in 61ms (ActiveRecord: 9.4ms | Allocations: 6332)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>2, "exp"=>1587954893}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/users_controller.rb:19:in `show'
+Started POST "/api/login" for 172.21.0.1 at 2020-04-26 02:49:26 +0000
+Processing by LoginController#login as HTML
+  Parameters: {"email"=>"keitahighbridge@gmail.com", "password"=>"[FILTERED]", "login"=>{"email"=>"keitahighbridge@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'keitahighbridge@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/login_controller.rb:5:in `login'
+Completed 200 OK in 321ms (Views: 0.2ms | ActiveRecord: 0.9ms | Allocations: 939)
+
+
+Started POST "/api/accounts" for 172.21.0.1 at 2020-04-26 02:49:51 +0000
+Processing by AccountsController#create as HTML
+  Parameters: {"account_name"=>"高橋工務店", "account_period_start"=>"2020-01-01", "account_period_end"=>"2020-12-31", "account"=>{}}
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 3.1ms | Allocations: 1360)
+
+
+  
+NoMethodError (undefined method `user_id' for {"user_id"=>4, "exp"=>1587955767}:ActiveSupport::HashWithIndifferentAccess):
+  
+app/controllers/accounts_controller.rb:9:in `create'
+Started POST "/api/accounts" for 172.21.0.1 at 2020-04-26 02:51:26 +0000
+Processing by AccountsController#create as HTML
+  Parameters: {"account_name"=>"高橋工務店", "account_period_start"=>"2020-01-01", "account_period_end"=>"2020-12-31", "account"=>{}}
+Completed 204 No Content in 92ms (ActiveRecord: 11.7ms | Allocations: 4756)
+
+
+Started POST "/api/accounts" for 172.21.0.1 at 2020-04-26 02:52:14 +0000
+Processing by AccountsController#create as HTML
+  Parameters: {"account_name"=>"高橋工務店", "account_period_start"=>"2020-01-01", "account_period_end"=>"2020-12-31", "account"=>{}}
+Completed 204 No Content in 20ms (ActiveRecord: 10.1ms | Allocations: 3451)
+
+
+  [1m[35m (0.9ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[36mAccountingPeriod Load (3.3ms)[0m  [1m[34mSELECT `accounting_periods`.* FROM `accounting_periods` LIMIT 11[0m
+Started POST "/api/accounts" for 172.21.0.1 at 2020-04-26 02:54:10 +0000
+Processing by AccountsController#create as HTML
+  Parameters: {"account_name"=>"高橋工務店", "account_period_start"=>"2020-01-01", "account_period_end"=>"2020-12-31", "account"=>{}}
+Completed 204 No Content in 24ms (ActiveRecord: 9.2ms | Allocations: 3451)
+
+
+Started POST "/api/accounts" for 172.21.0.1 at 2020-04-26 02:55:29 +0000
+Processing by AccountsController#create as HTML
+  Parameters: {"account_name"=>"高橋工務店", "account_period_start"=>"2020-01-01", "account_period_end"=>"2020-12-31", "account"=>{}}
+Completed 204 No Content in 31ms (ActiveRecord: 13.1ms | Allocations: 3430)
+
+
+Started POST "/api/accounts" for 172.21.0.1 at 2020-04-26 02:56:59 +0000
+Processing by AccountsController#create as HTML
+  Parameters: {"account_name"=>"高橋工務店", "account_period_start"=>"2020-01-01", "account_period_end"=>"2020-12-31", "account"=>{}}
+Completed 204 No Content in 32ms (ActiveRecord: 11.5ms | Allocations: 3470)
+
+
+Started POST "/api/accounts" for 172.21.0.1 at 2020-04-26 02:57:38 +0000
+Processing by AccountsController#create as HTML
+  Parameters: {"account_name"=>"高橋工務店", "account_period_start"=>"2020-01-01", "account_period_end"=>"2020-12-31", "account"=>{}}
+Completed 204 No Content in 27ms (ActiveRecord: 15.7ms | Allocations: 3448)
+
+
+  [1m[35m (1.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAccount Create (3.1ms)[0m  [1m[32mINSERT INTO `accounts` (`name`, `created_at`, `updated_at`) VALUES ('高橋工務店', '2020-04-26 03:04:15.521003', '2020-04-26 03:04:15.521003')[0m
+  [1m[35m (10.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAccount Destroy (8.9ms)[0m  [1m[31mDELETE FROM `accounts` WHERE `accounts`.`id` = 1[0m
+  [1m[35m (13.4ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/api/accounts" for 172.21.0.1 at 2020-04-26 03:07:58 +0000
+  [1m[35m (1.2ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by AccountsController#create as HTML
+  Parameters: {"account_name"=>"高橋工務店", "account_period_start"=>"2020-01-01", "account_period_end"=>"2020-12-31", "account"=>{}}
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:11:in `create'
+  [1m[36mAccount Create (1.1ms)[0m  [1m[32mINSERT INTO `accounts` (`name`, `user_id`, `created_at`, `updated_at`) VALUES ('高橋工務店', 4, '2020-04-26 03:07:59.142924', '2020-04-26 03:07:59.142924')[0m
+  ↳ app/controllers/accounts_controller.rb:11:in `create'
+  [1m[35m (6.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:11:in `create'
+Completed 204 No Content in 52ms (ActiveRecord: 10.8ms | Allocations: 8101)
+
+
+  [1m[35m (1.0ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[36mAccount Load (2.3ms)[0m  [1m[34mSELECT `accounts`.* FROM `accounts` LIMIT 11[0m
+  [1m[36mAccountingPeriod Load (1.5ms)[0m  [1m[34mSELECT `accounting_periods`.* FROM `accounting_periods` LIMIT 11[0m
+Started POST "/api/accounts" for 172.21.0.1 at 2020-04-26 03:15:58 +0000
+  [1m[35m (0.8ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by AccountsController#create as HTML
+  Parameters: {"account_name"=>"高橋工務店", "account_period_start"=>"2020-01-01", "account_period_end"=>"2020-12-31", "account"=>{}}
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:11:in `create'
+  [1m[36mAccount Create (2.0ms)[0m  [1m[32mINSERT INTO `accounts` (`name`, `user_id`, `created_at`, `updated_at`) VALUES ('高橋工務店', 4, '2020-04-26 03:15:58.874423', '2020-04-26 03:15:58.874423')[0m
+  ↳ app/controllers/accounts_controller.rb:11:in `create'
+  [1m[35m (5.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:11:in `create'
+Completed 422 Unprocessable Entity in 40ms (ActiveRecord: 8.0ms | Allocations: 8122)
+
+
+  
+ActiveRecord::RecordInvalid (Validation failed: Account must exist):
+  
+app/controllers/accounts_controller.rb:13:in `create'
+Started POST "/api/accounts" for 172.21.0.1 at 2020-04-26 03:18:25 +0000
+Processing by AccountsController#create as HTML
+  Parameters: {"account_name"=>"高橋工務店", "account_period_start"=>"2020-01-01", "account_period_end"=>"2020-12-31", "account"=>{}}
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:11:in `create'
+  [1m[36mAccount Create (1.1ms)[0m  [1m[32mINSERT INTO `accounts` (`name`, `user_id`, `created_at`, `updated_at`) VALUES ('高橋工務店', 4, '2020-04-26 03:18:25.741278', '2020-04-26 03:18:25.741278')[0m
+  ↳ app/controllers/accounts_controller.rb:11:in `create'
+  [1m[35m (10.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:11:in `create'
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:13:in `create'
+  [1m[36mAccountingPeriod Create (1.5ms)[0m  [1m[32mINSERT INTO `accounting_periods` (`start`, `end`, `created_at`, `updated_at`) VALUES ('2020-01-01', '2020-12-31', '2020-04-26 03:18:25.808724', '2020-04-26 03:18:25.808724')[0m
+  ↳ app/controllers/accounts_controller.rb:13:in `create'
+  [1m[35m (6.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:13:in `create'
+Completed 500 Internal Server Error in 140ms (ActiveRecord: 34.7ms | Allocations: 12041)
+
+
+  
+NoMethodError (undefined method `account_period_id=' for #<Account:0x0000558435dfdea0>
+Did you mean?  accounting_period_id=
+               accounting_period_ids=
+               accounting_period_id
+               accounting_period_id?
+               accounting_period_ids):
+  
+app/controllers/accounts_controller.rb:14:in `create'
+Started POST "/api/accounts" for 172.21.0.1 at 2020-04-26 03:19:38 +0000
+Processing by AccountsController#create as HTML
+  Parameters: {"account_name"=>"高橋工務店", "account_period_start"=>"2020-01-01", "account_period_end"=>"2020-12-31", "account"=>{}}
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:11:in `create'
+  [1m[36mAccount Create (3.4ms)[0m  [1m[32mINSERT INTO `accounts` (`name`, `user_id`, `created_at`, `updated_at`) VALUES ('高橋工務店', 4, '2020-04-26 03:19:38.208867', '2020-04-26 03:19:38.208867')[0m
+  ↳ app/controllers/accounts_controller.rb:11:in `create'
+  [1m[35m (9.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:11:in `create'
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:13:in `create'
+  [1m[36mAccountingPeriod Create (1.7ms)[0m  [1m[32mINSERT INTO `accounting_periods` (`start`, `end`, `created_at`, `updated_at`) VALUES ('2020-01-01', '2020-12-31', '2020-04-26 03:19:38.281688', '2020-04-26 03:19:38.281688')[0m
+  ↳ app/controllers/accounts_controller.rb:13:in `create'
+  [1m[35m (10.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:13:in `create'
+Completed 500 Internal Server Error in 147ms (ActiveRecord: 45.3ms | Allocations: 12078)
+
+
+  
+NoMethodError (undefined method `accountting_period_id=' for #<Account:0x00007fc870008f58>
+Did you mean?  accounting_period_id=
+               accounting_period_id
+               accounting_period_ids=
+               accounting_period_id?
+               accounting_period_ids
+               accounting_periods=
+               accounting_period_id_was
+               accounting_periods):
+  
+app/controllers/accounts_controller.rb:14:in `create'
+Started POST "/api/accounts" for 172.21.0.1 at 2020-04-26 03:20:14 +0000
+Processing by AccountsController#create as HTML
+  Parameters: {"account_name"=>"高橋工務店", "account_period_start"=>"2020-01-01", "account_period_end"=>"2020-12-31", "account"=>{}}
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:11:in `create'
+  [1m[36mAccount Create (1.2ms)[0m  [1m[32mINSERT INTO `accounts` (`name`, `user_id`, `created_at`, `updated_at`) VALUES ('高橋工務店', 4, '2020-04-26 03:20:14.245768', '2020-04-26 03:20:14.245768')[0m
+  ↳ app/controllers/accounts_controller.rb:11:in `create'
+  [1m[35m (5.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:11:in `create'
+  [1m[35m (0.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:13:in `create'
+  [1m[36mAccountingPeriod Create (1.7ms)[0m  [1m[32mINSERT INTO `accounting_periods` (`start`, `end`, `created_at`, `updated_at`) VALUES ('2020-01-01', '2020-12-31', '2020-04-26 03:20:14.288591', '2020-04-26 03:20:14.288591')[0m
+  ↳ app/controllers/accounts_controller.rb:13:in `create'
+  [1m[35m (6.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:13:in `create'
+  [1m[35m (0.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/accounts_controller.rb:15:in `create'
+  [1m[36mAccount Update (6.7ms)[0m  [1m[33mUPDATE `accounts` SET `accounts`.`accounting_period_id` = 3, `accounts`.`updated_at` = '2020-04-26 03:20:14.317421' WHERE `accounts`.`id` = 6[0m
+  ↳ app/controllers/accounts_controller.rb:15:in `create'
+  [1m[35m (9.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/accounts_controller.rb:15:in `create'
+Completed 200 OK in 123ms (Views: 1.6ms | ActiveRecord: 46.7ms | Allocations: 11925)
+
+

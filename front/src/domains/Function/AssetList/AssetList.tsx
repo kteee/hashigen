@@ -7,7 +7,7 @@ import { Container } from '../../../materials/Container'
 import { ScreenWrapper, ScreenLeft, ScreenRight } from '../../../materials/ScreenDivider'
 import { FunctionListBase } from '../FunctionListBase'
 import { StyledTable } from '../../../materials/Table'
-import { GET_ASSET_LIST_URL } from '../../../utilities/urls'
+import { ASSETS_URL } from '../../../utilities/urls'
 
 const StyledLink = styled(Link)`
 
@@ -19,7 +19,7 @@ export const AssetList = () => {
   const { pathname } = useLocation()
 
   const getAssets = async () => {
-    const { data: { data } } = await axios.get(GET_ASSET_LIST_URL)
+    const { data: { data } } = await axios.get(ASSETS_URL)
     setAssetList(data)
   }
 

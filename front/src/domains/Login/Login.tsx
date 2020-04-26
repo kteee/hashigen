@@ -23,6 +23,9 @@ const StyledLink = styled(Link)`
 
 export const Login = () => {
 
+  const EMAIL = 'email'
+  const PASSWORD = 'password'
+
   const [email, setEmail] = useState<UseState<string>>(undefined)
   const [password, setPassword] = useState<UseState<string>>(undefined)
   const [message, setMessage] = useState('ログインしました')
@@ -51,10 +54,10 @@ export const Login = () => {
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     switch (e.target.name) {
-      case 'email':
+      case EMAIL:
         setEmail(e.target.value)
         break
-      case 'password':
+      case PASSWORD:
         setPassword(e.target.value)
         break
     }
@@ -72,10 +75,10 @@ export const Login = () => {
     <Container>
       <H2>ログイン</H2>
       <StyledDiv>
-        <StyledInput type='email' name='email' placeholder='E-mail' onChange={changeHandler}/>
+        <StyledInput type='email' name={EMAIL} placeholder='E-mail' onChange={changeHandler}/>
       </StyledDiv>
       <StyledDiv>
-        <StyledInput type='password' name='password' placeholder='Password' onChange={changeHandler}/>
+        <StyledInput type='password' name={PASSWORD} placeholder='Password' onChange={changeHandler}/>
       </StyledDiv>
       <StyledDiv>
         <StyledButton onClick={clickHandler}>ログイン</StyledButton>

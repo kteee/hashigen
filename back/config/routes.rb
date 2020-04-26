@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   scope :api do
     resources :users
     resources :assets
+    resources :accounts
   end
 
   # 法定設定周りはgetしかせずcontrollerを増やしたくないので手動で作成  

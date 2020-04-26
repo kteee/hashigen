@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import {H3} from '../../../materials/Text'
 import {StyledInput} from '../../../materials/Input'
 import {StyledButton} from '../../../materials/Button'
-import {GET_DEP_METHOD_URL, POST_NEW_ASSET_URL} from '../../../utilities/urls'
+import {GET_DEP_METHOD_URL, ASSETS_URL} from '../../../utilities/urls'
 
 const StyledDiv = styled.div`
   margin-top: 1em;
@@ -35,7 +35,7 @@ export const NewAssetStepTwo = (props: Props) => {
   }
 
   const postNewAsset = async () => {
-    const response = await axios.post(POST_NEW_ASSET_URL, {
+    const response = await axios.post(ASSETS_URL, {
       assetItemId: props.itemSelected,
       name: assetName,
       acquisitionDate: acquisitionDate,

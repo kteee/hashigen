@@ -4,7 +4,7 @@ import axios from 'axios'
 
 import { Container } from '../../../materials/Container'
 import { StyledDl, DtDdWrapper, StyledDt, StyledDd } from '../../../materials/Definition'
-import { GET_ASSET_RETRIEVE_URL } from '../../../utilities/urls'
+import { ASSETS_URL } from '../../../utilities/urls'
 import { AssetDetailResponse, DepSimulationResponse } from '../../../utilities/types'
 
 export const AssetDetail = () => {
@@ -15,7 +15,7 @@ export const AssetDetail = () => {
   const { id } = useParams()
 
   const getAsset = async () => {
-    const url = `${GET_ASSET_RETRIEVE_URL}?id=${id}`
+    const url = `${ASSETS_URL}/${id}`
     const { data: { data: { asset, depreciation } } } = await axios.get(url)
     setAsset(asset)
     setDepSimulation(depreciation)
