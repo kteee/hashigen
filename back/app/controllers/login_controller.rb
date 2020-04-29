@@ -14,8 +14,7 @@ class LoginController < ApplicationController
 
   def session
     validate_token
-    @user_id = @decoded_data[:user_id]
-    if User.find(@user_id)
+    if @current_user
       render status: 200, json: { message: 'token seems fine' }
     end
   end

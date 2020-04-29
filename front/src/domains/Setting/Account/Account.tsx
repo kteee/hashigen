@@ -31,10 +31,13 @@ export const Account = () => {
     switch(e.target.name) {
       case ACCOUNT_NAME:
         setAccountName(val)
+        break
       case ACCOUNT_PERIOD_START:
         setAccountPeriodStart(val)
+        break
       case ACCOUNT_PERIOD_END:
         setAccountPeriodEnd(val)
+        break
     }
   }
 

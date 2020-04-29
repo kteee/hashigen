@@ -5,9 +5,9 @@ class AccountsController < ApplicationController
 
   end
 
+  # テーブルとリレーションを変更したので書き直さないといけない
   def create
-    user_id = @decoded_data[:user_id]
-    new_account = Account.new(name: params[:account_name], user_id: user_id)
+    new_account = Account.new(name: params[:account_name], user_id: @decoded_data[:user_id])
     if new_account.save
       new_accounting_period = AccountingPeriod.new(start: params[:account_period_start], end: params[:account_period_end])
       if new_accounting_period.save
@@ -20,7 +20,7 @@ class AccountsController < ApplicationController
   end
 
   def show
-
+    account = User.find(@decoded_data[:user_id]).account
   end
 
   def update

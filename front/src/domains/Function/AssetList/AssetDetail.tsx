@@ -3,22 +3,24 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
 import { Container } from '../../../materials/Container'
+import { ScreenWrapper, ScreenLeft, ScreenRight } from '../../../materials/ScreenDivider'
+import { FunctionListBase } from '../FunctionListBase'
 import { StyledDl, DtDdWrapper, StyledDt, StyledDd } from '../../../materials/Definition'
 import { ASSETS_URL } from '../../../utilities/urls'
 import { AssetDetailResponse, DepSimulationResponse } from '../../../utilities/types'
+import { setHeaders } from '../../../utilities/auth'
 
 export const AssetDetail = () => {
   
-  const [asset, setAsset] = useState<AssetDetailResponse | undefined>(undefined)
   const [depSimulation, setDepSimulation] = useState<DepSimulationResponse[] | undefined>(undefined)
   
   const { id } = useParams()
 
   const getAsset = async () => {
     const url = `${ASSETS_URL}/${id}`
-    const { data: { data: { asset, depreciation } } } = await axios.get(url)
-    setAsset(asset)
-    setDepSimulation(depreciation)
+    const headers = setHeaders()
+    const { data } = await axios.get(url, headers)
+    setDepSimulation(data)
   }
   
   useEffect(() => {
@@ -47,9 +49,16 @@ export const AssetDetail = () => {
 
   return (
     <Container>
-      <StyledDl>
-        {Asset}
-      </StyledDl>
+      <ScreenWrapper>
+        <ScreenLeft>
+          <FunctionListBase />
+        </ScreenLeft>
+        <ScreenRight>
+          <StyledDl>
+            {Asset}
+          </StyledDl>
+        </ScreenRight>
+      </ScreenWrapper>
     </Container>
   )
 }

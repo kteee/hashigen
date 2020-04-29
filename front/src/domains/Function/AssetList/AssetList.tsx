@@ -8,6 +8,7 @@ import { ScreenWrapper, ScreenLeft, ScreenRight } from '../../../materials/Scree
 import { FunctionListBase } from '../FunctionListBase'
 import { StyledTable } from '../../../materials/Table'
 import { ASSETS_URL } from '../../../utilities/urls'
+import { setHeaders } from '../../../utilities/auth'
 
 const StyledLink = styled(Link)`
 
@@ -19,8 +20,9 @@ export const AssetList = () => {
   const { pathname } = useLocation()
 
   const getAssets = async () => {
-    const { data: { data } } = await axios.get(ASSETS_URL)
-    setAssetList(data)
+    const headers = setHeaders()
+    const { data: { assets } } = await axios.get(ASSETS_URL, headers)
+    setAssetList(assets)
   }
 
   useEffect(() => {

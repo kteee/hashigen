@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::API
 
-  def response_get_success(response_item)
-    render status: 200, json: { data: response_item }
+  def get_request_response_success(response_item)
+    render status: 200, json: response_item
   end
 
   def response_post_success
@@ -27,8 +27,16 @@ class ApplicationController < ActionController::API
   end
 
   def validate_token
-    header = request.headers['Authorization']
-    @decoded_data = JsonWebToken.decode(header)
+    begin
+      header = request.headers['Authorization']
+      @decoded_data = JsonWebToken.decode(header)
+      @current_user = User.find(@decoded_data[:user_id])
+      @current_account = @current_user.account
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { errors: e.message }, status: :unauthorized
+    rescue JWT::DecodeError => e
+      render json: { errors: e.message }, status: :unauthorized
+    end
   end
 
 end

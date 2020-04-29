@@ -10,23 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_26_142415) do
+ActiveRecord::Schema.define(version: 2020_04_29_073549) do
 
   create_table "accounting_periods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "start"
     t.string "end"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "account_id"
+    t.integer "status"
+    t.index ["account_id"], name: "index_accounting_periods_on_account_id"
   end
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
-    t.bigint "accounting_period_id"
-    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["accounting_period_id"], name: "index_accounts_on_accounting_period_id"
-    t.index ["user_id"], name: "index_accounts_on_user_id"
   end
 
   create_table "asset_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -63,6 +62,7 @@ ActiveRecord::Schema.define(version: 2020_04_26_142415) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "account_id"
     t.integer "year_start_book_value"
+    t.date "depreciation_start_date"
     t.index ["account_id"], name: "index_assets_on_account_id"
     t.index ["asset_item_id"], name: "index_assets_on_asset_item_id"
     t.index ["depreciation_method_id"], name: "index_assets_on_depreciation_method_id"
@@ -104,16 +104,18 @@ ActiveRecord::Schema.define(version: 2020_04_26_142415) do
     t.bigint "role_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "account_id"
+    t.index ["account_id"], name: "index_users_on_account_id"
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
-  add_foreign_key "accounts", "accounting_periods"
-  add_foreign_key "accounts", "users"
+  add_foreign_key "accounting_periods", "accounts"
   add_foreign_key "asset_groups", "asset_types"
   add_foreign_key "asset_items", "asset_groups"
   add_foreign_key "asset_items", "useful_lives"
   add_foreign_key "assets", "accounts"
   add_foreign_key "assets", "asset_items"
   add_foreign_key "assets", "depreciation_methods"
+  add_foreign_key "users", "accounts"
   add_foreign_key "users", "roles"
 end

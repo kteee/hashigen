@@ -62,14 +62,19 @@ export const NewAssetStepTwo = (props: Props) => {
     switch (e.target.name) {
       case ASSET_NAME:
         setAssetName(e.target.value)
+        break
       case ACQUISITION_DATE:
         setAcquisitionDate(e.target.value)
+        break
       case DEPRECIATION_METHOD:
         setDepreciationMethod(e.target.value)
+        break
       case ACQUISITION_VALUE:
         setAcquisitionValue(e.target.value)
+        break
       case YEAR_START_BOOK_VALUE:
         setYearStarBookValue(e.target.value)
+        break
       default:
         console.log('nothing')
     }

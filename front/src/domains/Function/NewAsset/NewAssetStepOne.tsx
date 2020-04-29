@@ -24,6 +24,8 @@ const NewAssetStepOne = (props: NewAssetStepOneProps) => {
   const getData = async () => {
     const url = `${GET_ASSET_ITEM_URL}?per=${perPageCount}&page=${currentPage}&q=${queryWrod}`
     const { data: { items, pages } } = await axios.get(url)
+    console.log(items)
+    console.log(pages)
     setAssetItems(items)
     setTotalPages(parseInt(pages))
   }

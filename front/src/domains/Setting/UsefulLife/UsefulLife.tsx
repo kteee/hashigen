@@ -12,7 +12,8 @@ export const UsefulLife = () => {
 
   const getUsefuLife = async () => {
     const response = await axios.get(url)
-    setUsefulLife(response.data.data)
+    console.log(response)
+    setUsefulLife(response.data)
   }
 
   useEffect((): void => {
