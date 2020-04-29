@@ -1,7 +1,39 @@
 // common
 type NumberOrString = Number | String // railsからのデータが何か分からないときはこれを使う
 
+// reducers
+export interface LoginReducerState {
+  loggedIn: boolean
+}
+
+export interface LoginReducerDispatch {
+  login: any
+}
+
+export interface LoginReducerDispatchType {
+  type: string
+}
+
+export interface LoginReducerProps extends LoginReducerState, LoginReducerDispatch {}
+
 // props
+export interface ReduxProps {
+  state: object
+  login: any
+}
+
+export interface SnackbarProps {
+  open: boolean
+  autoHideDuration: number
+  onClose: any
+  message: string
+}
+
+
+// useState
+type UseStateArgs = (string | number)
+export type UseState<T> = (T | undefined)
+export type UseStateCallback = { (args: UseStateArgs) :void }
 
 // api fetch
 export interface AssetDetailResponse {
@@ -17,6 +49,7 @@ export interface AssetDetailResponse {
 
 export interface DepSimulationResponse {
   year: number
+  month: number
   amount: number
 }
 
