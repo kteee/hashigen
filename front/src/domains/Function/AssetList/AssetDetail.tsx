@@ -33,6 +33,7 @@ export const AssetDetail = () => {
         return (
           <DtDdWrapper>
             <StyledDt>{item.year}</StyledDt>
+            <StyledDt>{item.month}</StyledDt>
             <StyledDd>{item.amount}</StyledDd>
           </DtDdWrapper>
         )

@@ -49,6 +49,7 @@ export interface AssetDetailResponse {
 
 export interface DepSimulationResponse {
   year: number
+  month: number
   amount: number
 }
 

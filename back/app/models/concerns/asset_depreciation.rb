@@ -2,6 +2,8 @@ module AssetDepreciation
   extend ActiveSupport::Concern
 
   def depreciate
+  # includeしたmodelのインスタンスメソッドとして実行できる
+  # このメソッドはAssetで呼ばれるので、AssetInstance.depreciate(asset_instance_id)で実行
     useful_life_id = self.asset_item.useful_life.id
     dep_ratios = UsefulLife.find(useful_life_id)
     dep_method =  self.depreciation_method.id
@@ -16,14 +18,16 @@ module AssetDepreciation
     # 3 two_five_zero_same_ratio 250%定率法
     # 4 old_same_amount 旧定額法
     # 5 old_same_ratio  旧定率法
-    if dep_method == 1 then #200%定率法
+    if dep_method == 1 then
+    #200%定率法
       acquisition_value = self.acquisition_value
       dep_ratio_base = dep_ratios.two_zero_zero_same_ratio_base
       guaranteed_amount = self.acquisition_value * dep_ratios.two_zero_zero_same_ratio_guaranteed
       dep_ratio_revised = dep_ratios.two_zero_zero_same_ratio_revised
-      same_ratio_method(acquisition_value, dep_ratio_base, guaranteed_amount, dep_ratio_revised)
+      same_ratio_method(acquisition_value, first_year_depricable_months, dep_ratio_base, guaranteed_amount, dep_ratio_revised)
     
-    elsif dep_method == 2 then #新定額法
+    elsif dep_method == 2 then
+    #新定額法
       acquisition_value = self.acquisition_value
       book_value = acquisition_value
       dep_ratio = dep_ratios.new_same_amount
@@ -33,32 +37,28 @@ module AssetDepreciation
         first_year_apportionment = ( year == 1 ? first_year_depricable_months.quo(12) : 1 ) 
         depreciation = acquisition_value * dep_ratio * first_year_apportionment
         if (book_value - 1) > depreciation then
-          result.push({
-            year: year,
-            amount: depreciation
-          })
+          result.concat(allocate_depreciation_by_monthly(year, depreciation))
           year += 1
           book_value -= depreciation
         else
           depreciation = book_value - 1
-          result.push({
-            year: year,
-            amount: depreciation
-          })
+          result.concat(allocate_depreciation_by_monthly(year, depreciation))
           year += 1
           book_value -= depreciation
         end
       end
       result
 
-    elsif dep_method == 3 then #250%定率法
+    elsif dep_method == 3 then
+    #250%定率法
       acquisition_value = self.acquisition_value
       dep_ratio_base = dep_ratios.two_five_zero_same_ratio_base
       guaranteed_amount = self.acquisition_value * dep_ratios.two_five_zero_same_ratio_guaranteed
       dep_ratio_revised = dep_ratios.two_five_zero_same_ratio_revised
-      same_ratio_method(acquisition_value, dep_ratio_base, guaranteed_amount, dep_ratio_revised)
+      same_ratio_method(acquisition_value, first_year_depricable_months, dep_ratio_base, guaranteed_amount, dep_ratio_revised)
     
-    elsif dep_method == 4 then #旧定額法
+    elsif dep_method == 4 then
+    #旧定額法
       acquisition_value = self.acquisition_value
       book_value = acquisition_value
       acquisition_value_5percent = acquisition_value * 0.05
@@ -67,7 +67,8 @@ module AssetDepreciation
       year = 1
       while book_value > 1 do
         if book_value > acquisition_value_5percent then
-          depreciation = acquisition_value * dep_ratio * 0.9
+          first_year_apportionment = ( year == 1 ? first_year_depricable_months.quo(12) : 1 ) 
+          depreciation = acquisition_value * dep_ratio * 0.9 * first_year_apportionment
           if (book_value - acquisition_value_5percent) > depreciation then
             result.push({
               year: year,
@@ -106,7 +107,8 @@ module AssetDepreciation
       end
       result
 
-    elsif dep_method == 5 then #旧定率法
+    elsif dep_method == 5 then
+    #旧定率法
       acquisition_value = self.acquisition_value
       book_value = acquisition_value
       acquisition_value_5percent = acquisition_value * 0.05
@@ -115,7 +117,8 @@ module AssetDepreciation
       year = 1
       while book_value > 1 do
         if book_value > acquisition_value_5percent then
-          depreciation = book_value * dep_ratio
+          first_year_apportionment = ( year == 1 ? first_year_depricable_months.quo(12) : 1 ) 
+          depreciation = book_value * dep_ratio * first_year_apportionment
           if (book_value - acquisition_value_5percent) > depreciation then
             result.push({
               year: year,
@@ -159,21 +162,22 @@ module AssetDepreciation
   end
 
   private
-    def same_ratio_method(acquisition_value, dep_ratio_base, guaranteed_amount, dep_ratio_revised)
-      # ロジック
-      # ①簿価1円超なら計算を回す
-      #   ②通常計算償却費が保証価格より多きければ通常計算を回す
-      #     （②に該当しない場合）
-      #     ③改定取得価格が決まってない時は初年度なので改定取得価格と残り期間償却費を設定する
-      #     ④③で設定した償却費だと過剰償却を起こす場合は簿価を1円残すようにする
-      #     ⑤④に該当しない場合は改定取得価格に改定償却率をかけた金額を落とす
+    def same_ratio_method(acquisition_value, first_year_depricable_months, dep_ratio_base, guaranteed_amount, dep_ratio_revised)
+    # ロジック
+    # ①簿価1円超なら計算を回す
+    #   ②通常計算償却費が保証価格より多きければ通常計算を回す
+    #     （②に該当しない場合）
+    #     ③改定取得価格が決まってない時は初年度なので改定取得価格と残り期間償却費を設定する
+    #     ④③で設定した償却費だと過剰償却を起こす場合は簿価を1円残すようにする
+    #     ⑤④に該当しない場合は改定取得価格に改定償却率をかけた金額を落とす
       book_value = acquisition_value
       acquisition_value_revised = 0 # 改定取得価格
       depreciation_rest = 0 # 改定後償却
       result = []
       year = 1
       while book_value > 1 do
-        depreciation = book_value * dep_ratio_base
+        first_year_apportionment = ( year == 1 ? first_year_depricable_months.quo(12) : 1 )
+        depreciation = book_value * dep_ratio_base * first_year_apportionment
         if depreciation > guaranteed_amount then
           result.push({
             year: year,
@@ -230,6 +234,27 @@ module AssetDepreciation
         first_year_depricable_months = ( end_date.mon + 12 ) - start_date.mon + 1
       end
       first_year_depricable_months
+    end
+
+    def allocate_depreciation_by_monthly(year, depreciation)
+      result = []
+      monthly_depreciation = depreciation.div(12) #ここはあとから修正する
+      (1..12).each do |month|
+        if month == 12 then
+          result.push({
+            year: year,
+            month: month,
+            amount: depreciation - ( monthly_depreciation * 11 )
+          })
+        else
+          result.push({
+            year: year,
+            month: month,
+            amount: monthly_depreciation
+          })
+        end
+      end
+      result
     end
 
 end
