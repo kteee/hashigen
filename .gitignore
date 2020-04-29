@@ -24,12 +24,13 @@ yarn-debug.log*
 yarn-error.log*
 
 # rails
-/.bundle
-/log/*
-/tmp/*
-!/log/.keep
-!/tmp/.keep
-/storage/*
-!/storage/.keep
+/back/.bundle
+/back/log/*
+/back/tmp/*
+!/back/log/.keep
+!/back/tmp/.keep
+/back/storage/*
+!/back/storage/.keep
 .byebug_history
-/config/master.key
+/back/config/master.key
+
