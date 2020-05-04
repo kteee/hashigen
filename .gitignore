@@ -23,14 +23,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# rails
-/back/.bundle
-/back/log/*
-/back/tmp/*
-!/back/log/.keep
-!/back/tmp/.keep
-/back/storage/*
-!/back/storage/.keep
-.byebug_history
-/back/config/master.key
+
 

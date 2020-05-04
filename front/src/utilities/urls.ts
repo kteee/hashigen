@@ -1,5 +1,5 @@
 // デフォルトのrails側のURL
-const defaultDevServerUrl = 'http://localhost:3000'
+const defaultDevServerUrl = 'http://localhost:5000'
 
 // 環境変数ファイルの設定が読めたらそれを返すけど、だめならデフォルトを返す
 const makeBaseUrl = () => {

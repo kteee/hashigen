@@ -23,22 +23,24 @@ interface methodsProps {
   display_name: string
 }
 
-export const NewAssetStepTwo = (props: Props) => {
+export const TransferAssetStepTwo = (props: Props) => {
 
   const ASSET_NAME = 'asset-name'
   const ACQUISITION_DATE = 'acquisition-date'
   const DEPRECIATION_START_DATE = 'depreciation-start-date'
   const DEPRECIATION_METHOD = 'depreciation-method'
   const ACQUISITION_VALUE = 'acquisition-value'
+  const YEAR_START_BOOK_VALUE = 'year-start-book-value'
 
-  const [methods, setMethods] = useState<methodsProps[]>([])
+  const [methods, setMethods] = useState([])
   const [assetName, setAssetName] = useState<UseState<string>>(undefined)
   const [acquisitionDate, setAcquisitionDate] = useState<UseState<string>>(undefined)
   const [depreciationStartDate, setDepreciationStartDate] = useState<UseState<string>>(undefined)
   const [depreciationMethod, setDepreciationMethod] = useState<UseState<string>>(undefined)
   const [acquisitionValue, setAcquisitionValue] = useState<UseState<string>>(undefined)
+  const [yearStarBookValue, setYearStarBookValue] = useState<UseState<string>>(undefined)
 
-  const [depreciationStartDateInput, setDepreciationStartDateInput] = useState(true)
+  const [depreciationStartDateInput, setDepreciationStartDateInput] = useState(false)
   
   const getDepMethods = async () => {
     const { data : { methods }} = await axios.get(GET_DEP_METHOD_URL)
@@ -53,10 +55,10 @@ export const NewAssetStepTwo = (props: Props) => {
         asset_item_id: props.itemSelected,
         name: assetName,
         acquisition_date: acquisitionDate,
-        depreciation_start_date: ( depreciationStartDateInput ? acquisitionDate : depreciationStartDate),
+        depreciation_start_date: depreciationStartDate,
         depreciation_method_id: depreciationMethod,
         acquisition_value: acquisitionValue,
-        year_start_book_value: acquisitionValue
+        year_start_book_value: yearStarBookValue
       },
       headers
     )
@@ -84,6 +86,9 @@ export const NewAssetStepTwo = (props: Props) => {
       case ACQUISITION_VALUE:
         setAcquisitionValue(e.target.value)
         break
+      case YEAR_START_BOOK_VALUE:
+        setYearStarBookValue(e.target.value)
+        break
       default:
         console.log('nothing')
     }
@@ -105,40 +110,6 @@ export const NewAssetStepTwo = (props: Props) => {
     )
   })
 
-  const checkHandler = () => {
-    setDepreciationStartDateInput(!depreciationStartDateInput)
-  }
-
-  const getDepreciationStartDate = () => {
-    if(depreciationStartDateInput) {
-      return (
-        <StyledDiv>
-          <label>
-            償却開始日：取得日と同じ日をセットする
-            <input type='checkbox' checked={depreciationStartDateInput} onChange={checkHandler} />
-          </label>
-        </StyledDiv>
-      )
-    } else {
-      return (
-        <StyledDiv>
-          <div>
-            <label>
-              償却開始日：
-              <StyledInput type='date' name={DEPRECIATION_START_DATE} placeholder='償却開始日' onChange={onChangeHandler}/>
-            </label>
-          </div>
-          <div>
-            取得日と同じ日をセットする
-            <input type='checkbox' checked={depreciationStartDateInput} onChange={checkHandler} />
-          </div>
-        </StyledDiv>
-      )
-    }
-  }
-
-  const DepreciationStartDate = getDepreciationStartDate()
-
   return (
     <Fragment>
       <H3>STEP2. 固定資産情報を登録</H3>
@@ -157,12 +128,17 @@ export const NewAssetStepTwo = (props: Props) => {
         </label>
       </StyledDiv>
       {/* 償却開始日 */}
-      {DepreciationStartDate}
+      <StyledDiv>
+        <label>
+          償却開始日：
+          <StyledInput type='date' name={DEPRECIATION_START_DATE} placeholder='償却開始日' onChange={onChangeHandler}/>
+        </label>
+      </StyledDiv>
       {/* 償却方法 */}
       <StyledDiv>
         <label>
           償却方法：
-          <select name={DEPRECIATION_METHOD} onChange={onChangeHandler} defaultValue={ methods[0] ? methods[0].id : ''}>
+          <select name={DEPRECIATION_METHOD} onChange={onChangeHandler}>
             {Methods}
           </select>
         </label>
@@ -172,6 +148,13 @@ export const NewAssetStepTwo = (props: Props) => {
         <label>
           取得価格：
           <StyledInput type='number' name={ACQUISITION_VALUE} placeholder='取得価格'  onChange={onChangeHandler}/>
+        </label>
+      </StyledDiv>
+      {/* 期首簿価 */}
+      <StyledDiv>
+        <label>
+          期首簿価：
+          <StyledInput type='number' name={YEAR_START_BOOK_VALUE} placeholder='期首簿価'  onChange={onChangeHandler}/>
         </label>
       </StyledDiv>
       {/*ボタン */}
