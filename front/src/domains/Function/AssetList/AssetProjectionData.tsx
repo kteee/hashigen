@@ -34,9 +34,8 @@ export const AssetProjectionData = (props: Props) => {
 
   const showAssetInfo = () => {
     const DepSimulation = depSimulation.map((item: DepSimulationResponse) => {
-      console.log(item)
       return (
-        <StyledTd>{item.amount}</StyledTd>
+        <StyledTd align='right'>{item.amount}</StyledTd>
       )
     })
     return DepSimulation

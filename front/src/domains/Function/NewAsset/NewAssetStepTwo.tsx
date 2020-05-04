@@ -7,7 +7,9 @@ import { StyledInput } from '../../../materials/Input'
 import { StyledButton } from '../../../materials/Button'
 import { GET_DEP_METHOD_URL, ASSETS_URL } from '../../../utilities/urls'
 import { UseState } from '../../../utilities/types'
+import { NumberOrString } from '../../../utilities/types'
 import { setHeaders } from '../../../utilities/auth'
+import { Messagebox } from '../../../components/Mesagebox'
 
 const StyledDiv = styled.div`
   margin-top: 1em;
@@ -18,7 +20,7 @@ interface Props {
 }
 
 interface methodsProps {
-  id: string | number
+  id: string
   name: string
   display_name: string
 }
@@ -30,19 +32,22 @@ export const NewAssetStepTwo = (props: Props) => {
   const DEPRECIATION_START_DATE = 'depreciation-start-date'
   const DEPRECIATION_METHOD = 'depreciation-method'
   const ACQUISITION_VALUE = 'acquisition-value'
+  const message = '登録しました'
 
   const [methods, setMethods] = useState<methodsProps[]>([])
   const [assetName, setAssetName] = useState<UseState<string>>(undefined)
   const [acquisitionDate, setAcquisitionDate] = useState<UseState<string>>(undefined)
   const [depreciationStartDate, setDepreciationStartDate] = useState<UseState<string>>(undefined)
-  const [depreciationMethod, setDepreciationMethod] = useState<UseState<string>>(undefined)
+  const [depreciationMethod, setDepreciationMethod] = useState<UseState<NumberOrString>>(undefined)
   const [acquisitionValue, setAcquisitionValue] = useState<UseState<string>>(undefined)
+  const [open, setOpen] = useState(false)
 
   const [depreciationStartDateInput, setDepreciationStartDateInput] = useState(true)
   
   const getDepMethods = async () => {
     const { data : { methods }} = await axios.get(GET_DEP_METHOD_URL)
     setMethods(methods)
+    setDepreciationMethod(methods[0].id)
   }
 
   const postNewAsset = async () => {
@@ -139,6 +144,10 @@ export const NewAssetStepTwo = (props: Props) => {
 
   const DepreciationStartDate = getDepreciationStartDate()
 
+  const messageClose = () => {
+    setOpen(false)
+  }
+
   return (
     <Fragment>
       <H3>STEP2. 固定資産情報を登録</H3>
@@ -162,9 +171,9 @@ export const NewAssetStepTwo = (props: Props) => {
       <StyledDiv>
         <label>
           償却方法：
-          <select name={DEPRECIATION_METHOD} onChange={onChangeHandler} defaultValue={ methods[0] ? methods[0].id : ''}>
+          <select name={DEPRECIATION_METHOD} onChange={onChangeHandler}>
             {Methods}
-          </select>
+          </select>4
         </label>
       </StyledDiv>
       {/* 取得価格 */}
@@ -178,6 +187,12 @@ export const NewAssetStepTwo = (props: Props) => {
       <StyledDiv>
         <StyledButton color='#eea29a' onClick={onClickHandler}>登録する</StyledButton>
       </StyledDiv>
+      <Messagebox
+        open={open}
+        autoHideDuration={6000}
+        onClose={messageClose}
+        message={message}
+      />
     </Fragment>
   )
 }

@@ -41,14 +41,13 @@ export type UseStateCallback = { (args: UseStateArgs) :void }
 
 // api fetch
 export interface AssetDetailResponse {
-  id: NumberOrString 
+  id: number 
   name: string
-  acquisition_date: NumberOrString
-  acquisition_value: number
+  acquisition_value: string
   useful_life: number
   depreciation_method: string
-  created_at: NumberOrString
-  updated_at: NumberOrString
+  acquisition_date: string
+  updated_at: string
 }
 
 export interface DepSimulationResponse {

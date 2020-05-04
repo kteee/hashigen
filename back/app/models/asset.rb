@@ -39,7 +39,7 @@ class Asset < ApplicationRecord
           acquisition_value: asset.acquisition_value.to_s(:delimited),
           useful_life: asset.asset_item.useful_life.year,
           depreciation_method: asset.depreciation_method.display_name,
-          created_at: asset.created_at.strftime("%Y-%m-%d"),
+          # created_at: asset.created_at.strftime("%Y-%m-%d"),
           updated_at: asset.updated_at.strftime("%Y-%m-%d")
         })
       end

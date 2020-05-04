@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 
+interface StyledTdProps {
+  align?: string
+}
+
 export const StyledTable = styled.table`
   table-layout: auto;
   margin-top: 1em;
@@ -16,6 +20,7 @@ export const StyledTh = styled.th`
 `
 
 export const StyledTd = styled.td`
+  text-align: ${(props: StyledTdProps) => props.align ? props.align : 'left'};
   white-space: nowrap;
   padding: 0 1em;
 `

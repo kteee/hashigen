@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import axios from 'axios'
 import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
@@ -10,7 +10,7 @@ import { AssetProjectionData } from './AssetProjectionData'
 import { StyledTable, StyledTr, StyledTh, StyledTd } from '../../../materials/Table'
 import { ASSETS_URL } from '../../../utilities/urls'
 import { setHeaders } from '../../../utilities/auth'
-import { TableHeaderCell } from '../../../utilities/types'
+import { TableHeaderCell, AssetDetailResponse } from '../../../utilities/types'
 
 const StyledLink = styled(Link)`
 `
@@ -31,16 +31,16 @@ export const AssetList = () => {
     getAssets()
   }, [])
 
-  const AssetList = assetList.map((asset: any) => {
+  const AssetList = assetList.map((asset: AssetDetailResponse) => {
+    console.log(asset)
     return (
       <StyledTr>
         <StyledTd>{asset.id}</StyledTd>
         <StyledTd>{asset.name}</StyledTd>
-        <StyledTd>{asset.acquisition_date}</StyledTd>
-        <StyledTd>{asset.acquisition_value}</StyledTd>
+        <StyledTd align='right'>{asset.acquisition_value}</StyledTd>
         <StyledTd>{asset.useful_life}</StyledTd>
         <StyledTd>{asset.depreciation_method}</StyledTd>
-        <StyledTd>{asset.created_at}</StyledTd>
+        <StyledTd>{asset.acquisition_date}</StyledTd>
         <StyledTd>{asset.updated_at}</StyledTd>
         <StyledTd><StyledLink to={ pathname + `/${asset.id}`} >詳細</StyledLink></StyledTd>
         <AssetProjectionData key={asset.id} assetId={asset.id} tableHeaderCells={tableHeaderCells} setTableHeaderCells={setTableHeaderCells}/>
@@ -48,9 +48,15 @@ export const AssetList = () => {
     )
   })
 
-  const AssetProjectionHeader = tableHeaderCells.map((cell:TableHeaderCell) => {
+  const AssetProjectionHeaderFirstRow = tableHeaderCells.map((cell:TableHeaderCell) => {
     return (
       <StyledTh>{cell.fiscal_year}</StyledTh>
+    )
+  })
+
+  const AssetProjectionHeaderSecondRow = tableHeaderCells.map((cell:TableHeaderCell) => {
+    return (
+      <StyledTh>{cell.fiscal_year_month}</StyledTh>
     )
   })
 
@@ -64,16 +70,19 @@ export const AssetList = () => {
           <StyledTable>
             <thead>
               <StyledTr>
-                <StyledTh>ID</StyledTh>
-                <StyledTh>名称</StyledTh>
-                <StyledTh>取得日</StyledTh>
-                <StyledTh>取得価格</StyledTh>
-                <StyledTh>耐用年数</StyledTh>
-                <StyledTh>償却方法</StyledTh>
-                <StyledTh>作成日</StyledTh>
-                <StyledTh>更新日</StyledTh>
-                <StyledTh>詳細</StyledTh>
-                {AssetProjectionHeader}
+                <StyledTh rowSpan={2}>ID</StyledTh>
+                <StyledTh rowSpan={2}>名称</StyledTh>
+                <StyledTh rowSpan={2}>取得日</StyledTh>
+                <StyledTh rowSpan={2}>取得価格</StyledTh>
+                <StyledTh rowSpan={2}>耐用年数</StyledTh>
+                <StyledTh rowSpan={2}>償却方法</StyledTh>
+                <StyledTh rowSpan={2}>作成日</StyledTh>
+                <StyledTh rowSpan={2}>更新日</StyledTh>
+                <StyledTh rowSpan={2}>詳細</StyledTh>
+                {AssetProjectionHeaderFirstRow}
+              </StyledTr>
+              <StyledTr>
+                {AssetProjectionHeaderSecondRow}
               </StyledTr>
             </thead>
             <tbody>

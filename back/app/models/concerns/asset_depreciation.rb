@@ -473,9 +473,6 @@ module AssetDepreciation
       depreciation_start_index_month = fiscal_year_months - depricable_months + 1
       (1..fiscal_year_months).each do |index_month|
         if index_month == fiscal_year_months then
-          puts depreciation
-          puts monthly_depreciation
-          puts (depricable_months - 1)
           monthly_depreciation_adjusted = depreciation - ( monthly_depreciation * ( depricable_months - 1 ) )
           result, fiscal_year_month = set_depreciation_result(
             index_year: index_year,
