@@ -5,7 +5,7 @@ import axios from 'axios'
 import { Container } from '../../../materials/Container'
 import { ScreenWrapper, ScreenLeft, ScreenRight } from '../../../materials/ScreenDivider'
 import { FunctionListBase } from '../FunctionListBase'
-import { StyledDl, DtDdWrapper, StyledDt, StyledDd } from '../../../materials/Definition'
+import { StyledTable } from '../../../materials/Table'
 import { ASSETS_URL } from '../../../utilities/urls'
 import { AssetDetailResponse, DepSimulationResponse } from '../../../utilities/types'
 import { setHeaders } from '../../../utilities/auth'
@@ -20,6 +20,7 @@ export const AssetDetail = () => {
     const url = `${ASSETS_URL}/${id}`
     const headers = setHeaders()
     const { data } = await axios.get(url, headers)
+    console.log(data)
     setDepSimulation(data)
   }
   
@@ -31,11 +32,11 @@ export const AssetDetail = () => {
     if(depSimulation != undefined) {
       const DepSimulation = depSimulation.map((item: DepSimulationResponse) => {
         return (
-          <DtDdWrapper>
-            <StyledDt>{item.year}</StyledDt>
-            <StyledDt>{item.month}</StyledDt>
-            <StyledDd>{item.amount}</StyledDd>
-          </DtDdWrapper>
+          <tr>
+            <td>{item.fiscal_year}</td>
+            <td>{item.fiscal_year_month}</td>
+            <td>{item.amount}</td>
+          </tr>
         )
       })
       return DepSimulation
@@ -55,9 +56,18 @@ export const AssetDetail = () => {
           <FunctionListBase />
         </ScreenLeft>
         <ScreenRight>
-          <StyledDl>
-            {Asset}
-          </StyledDl>
+          <StyledTable>
+            <thead>
+              <tr>
+                <th>年</th>
+                <th>月</th>
+                <th>金額</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Asset}
+            </tbody>
+          </StyledTable>
         </ScreenRight>
       </ScreenWrapper>
     </Container>

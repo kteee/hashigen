@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import axios from 'axios'
 import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
@@ -6,17 +6,19 @@ import styled from 'styled-components'
 import { Container } from '../../../materials/Container'
 import { ScreenWrapper, ScreenLeft, ScreenRight } from '../../../materials/ScreenDivider'
 import { FunctionListBase } from '../FunctionListBase'
-import { StyledTable } from '../../../materials/Table'
+import { AssetProjectionData } from './AssetProjectionData'
+import { StyledTable, StyledTr, StyledTh, StyledTd } from '../../../materials/Table'
 import { ASSETS_URL } from '../../../utilities/urls'
 import { setHeaders } from '../../../utilities/auth'
+import { TableHeaderCell, AssetDetailResponse } from '../../../utilities/types'
 
 const StyledLink = styled(Link)`
-
 `
 
 export const AssetList = () => {
 
   const [assetList, setAssetList] = useState([])
+  const [tableHeaderCells, setTableHeaderCells] = useState<TableHeaderCell[]>([])
   const { pathname } = useLocation()
 
   const getAssets = async () => {
@@ -29,19 +31,32 @@ export const AssetList = () => {
     getAssets()
   }, [])
 
-  const AssetList = assetList.map((asset: any) => {
+  const AssetList = assetList.map((asset: AssetDetailResponse) => {
+    console.log(asset)
     return (
-      <tr>
-        <td>{asset.id}</td>
-        <td>{asset.name}</td>
-        <td>{asset.acquisition_date}</td>
-        <td>{asset.acquisition_value}</td>
-        <td>{asset.useful_life}</td>
-        <td>{asset.depreciation_method}</td>
-        <td>{asset.created_at}</td>
-        <td>{asset.updated_at}</td>
-        <td><StyledLink to={ pathname + `/${asset.id}`} >詳細</StyledLink></td>
-      </tr>
+      <StyledTr>
+        <StyledTd>{asset.id}</StyledTd>
+        <StyledTd>{asset.name}</StyledTd>
+        <StyledTd align='right'>{asset.acquisition_value}</StyledTd>
+        <StyledTd>{asset.useful_life}</StyledTd>
+        <StyledTd>{asset.depreciation_method}</StyledTd>
+        <StyledTd>{asset.acquisition_date}</StyledTd>
+        <StyledTd>{asset.updated_at}</StyledTd>
+        <StyledTd><StyledLink to={ pathname + `/${asset.id}`} >詳細</StyledLink></StyledTd>
+        <AssetProjectionData key={asset.id} assetId={asset.id} tableHeaderCells={tableHeaderCells} setTableHeaderCells={setTableHeaderCells}/>
+      </StyledTr>
+    )
+  })
+
+  const AssetProjectionHeaderFirstRow = tableHeaderCells.map((cell:TableHeaderCell) => {
+    return (
+      <StyledTh>{cell.fiscal_year}</StyledTh>
+    )
+  })
+
+  const AssetProjectionHeaderSecondRow = tableHeaderCells.map((cell:TableHeaderCell) => {
+    return (
+      <StyledTh>{cell.fiscal_year_month}</StyledTh>
     )
   })
 
@@ -54,17 +69,21 @@ export const AssetList = () => {
         <ScreenRight>
           <StyledTable>
             <thead>
-              <tr>
-                <th>ID</th>
-                <th>名称</th>
-                <th>取得日</th>
-                <th>取得価格</th>
-                <th>耐用年数</th>
-                <th>償却方法</th>
-                <th>作成日</th>
-                <th>更新日</th>
-                <th>詳細</th>
-              </tr>
+              <StyledTr>
+                <StyledTh rowSpan={2}>ID</StyledTh>
+                <StyledTh rowSpan={2}>名称</StyledTh>
+                <StyledTh rowSpan={2}>取得日</StyledTh>
+                <StyledTh rowSpan={2}>取得価格</StyledTh>
+                <StyledTh rowSpan={2}>耐用年数</StyledTh>
+                <StyledTh rowSpan={2}>償却方法</StyledTh>
+                <StyledTh rowSpan={2}>作成日</StyledTh>
+                <StyledTh rowSpan={2}>更新日</StyledTh>
+                <StyledTh rowSpan={2}>詳細</StyledTh>
+                {AssetProjectionHeaderFirstRow}
+              </StyledTr>
+              <StyledTr>
+                {AssetProjectionHeaderSecondRow}
+              </StyledTr>
             </thead>
             <tbody>
               {AssetList}

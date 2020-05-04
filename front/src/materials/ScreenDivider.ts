@@ -10,6 +10,7 @@ export const ScreenLeft = styled.div`
 `
 
 export const ScreenRight = styled.div`
+  overflow: scroll;
   flex-grow: 1;
   padding: 1em;
 `

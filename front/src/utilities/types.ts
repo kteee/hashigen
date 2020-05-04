@@ -1,5 +1,5 @@
 // common
-type NumberOrString = Number | String // railsからのデータが何か分からないときはこれを使う
+export type NumberOrString = Number | String // railsからのデータが何か分からないときはこれを使う
 
 // reducers
 export interface LoginReducerState {
@@ -29,6 +29,10 @@ export interface SnackbarProps {
   message: string
 }
 
+export interface TableHeaderCell {
+  fiscal_year: number
+  fiscal_year_month: number
+}
 
 // useState
 type UseStateArgs = (string | number)
@@ -37,19 +41,20 @@ export type UseStateCallback = { (args: UseStateArgs) :void }
 
 // api fetch
 export interface AssetDetailResponse {
-  id: NumberOrString 
+  id: number 
   name: string
-  acquisition_date: NumberOrString
-  acquisition_value: number
+  acquisition_value: string
   useful_life: number
   depreciation_method: string
-  created_at: NumberOrString
-  updated_at: NumberOrString
+  acquisition_date: string
+  updated_at: string
 }
 
 export interface DepSimulationResponse {
   year: number
   month: number
+  fiscal_year: number
+  fiscal_year_month: number
   amount: number
 }
 
