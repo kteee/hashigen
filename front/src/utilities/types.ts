@@ -4,6 +4,7 @@ export type NumberOrString = Number | String // railsからのデータが何か
 // reducers
 export interface LoginReducerState {
   loggedIn: boolean
+  accountId: number|undefined
 }
 
 export interface LoginReducerDispatch {
@@ -32,6 +33,12 @@ export interface SnackbarProps {
 export interface TableHeaderCell {
   fiscal_year: number
   fiscal_year_month: number
+}
+
+export interface MonthlyTablePeriodProps {
+  month: number
+  monthStartDate: String
+  monthEndDate: String
 }
 
 // useState

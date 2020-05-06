@@ -3,6 +3,15 @@ class Account < ApplicationRecord
   has_many :users
   has_many :assets
 
+  def make_basic_info
+    basic_info = {
+      name: self.name,
+      start: self.get_current_period[:start],
+      end: self.get_current_period[:end]
+    }
+    basic_info
+  end
+
   def get_current_period
     current_period = {}
     self.accounting_periods.each do |period|

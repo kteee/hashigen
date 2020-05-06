@@ -1,4 +1,4 @@
-module AssetDepreciation
+module AssetConcern
   extend ActiveSupport::Concern
 
   def depreciate
@@ -12,16 +12,16 @@ module AssetDepreciation
     dep_method =  self.depreciation_method.id
     periods = self.account.accounting_periods
     current_period = get_current_period(periods)
-    fiscal_year = Time.parse(current_period[:end]).year
-    fiscal_year_start_month = Time.parse(current_period[:start]).month
+    fiscal_year = current_period[:end].year
+    fiscal_year_start_month = current_period[:start].month
     depreciation_start_fiscal_year_month = self.acquisition_date.month
     fiscal_year_months = get_months_of_period(
-      start_date: Time.parse(current_period[:start]),
-      end_date: Time.parse(current_period[:end])
+      start_date: current_period[:start],
+      end_date: current_period[:end]
     )
     first_year_depricable_months = get_months_of_period(
       start_date: self.acquisition_date,
-      end_date: Time.parse(current_period[:end])
+      end_date: current_period[:end]
     )
 
     if dep_method == 1 then #200%定率法

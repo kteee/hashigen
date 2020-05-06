@@ -1,6 +1,8 @@
-import React, {useState, ChangeEvent} from 'react'
+import React, {useState, useEffect, ChangeEvent} from 'react'
 import axios from 'axios'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
+import "react-datepicker/dist/react-datepicker.css";
 
 import { SettingListBase } from '../SettingListBase'
 import { Container } from '../../../materials/Container'
@@ -9,50 +11,49 @@ import { H2 } from '../../../materials/Text'
 import { StyledInput } from '../../../materials/Input'
 import { StyledButton } from '../../../materials/Button'
 import { ACCOUNTS_URL } from '../../../utilities/urls'
-import { UseState } from '../../../utilities/types'
+import { UseState, LoginReducerState } from '../../../utilities/types'
 import { setHeaders } from '../../../utilities/auth'
 
 const StyledDiv = styled.div`
   margin-top: 1em;
 `
 
+interface StoreState {
+  loginReducer: LoginReducerState
+}
+
+const loginAccountIdSelector = (state: StoreState) => state.loginReducer.accountId
+
 export const Account = () => {
 
-  const ACCOUNT_NAME = 'account-name'
-  const ACCOUNT_PERIOD_START = 'account-period-start'
-  const ACCOUNT_PERIOD_END = 'account-period-end'
+  const accountId = useSelector(loginAccountIdSelector)
 
   const [accountName, setAccountName] = useState<UseState<string>>(undefined)
-  const [accountPeriodStart, setAccountPeriodStart] = useState<UseState<string>>(undefined)
-  const [accountPeriodEnd, setAccountPeriodEnd] = useState<UseState<string>>(undefined)
 
-  const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const val = e.target.value
-    switch(e.target.name) {
-      case ACCOUNT_NAME:
-        setAccountName(val)
-        break
-      case ACCOUNT_PERIOD_START:
-        setAccountPeriodStart(val)
-        break
-      case ACCOUNT_PERIOD_END:
-        setAccountPeriodEnd(val)
-        break
-    }
+  const getAccountName = async () => {
+    const url = `${ACCOUNTS_URL}/${accountId}`
+    const headers = setHeaders()
+    const { data: { name }} = await axios.get(url, headers)
+    setAccountName(name)
   }
 
   const createAccount = async () => {
     const headers = setHeaders()
     const response = await axios.post(ACCOUNTS_URL, {
-      account_name: accountName,
-      account_period_start: accountPeriodStart,
-      account_period_end: accountPeriodEnd
+      account_name: accountName
     }, headers)
     console.log(response)
   }
 
+  useEffect(() => {
+    getAccountName()
+  }, [accountId])
+
   const clickHandler = () => {
     createAccount()
+  }
+  const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setAccountName(e.target.value)
   }
 
   return (
@@ -64,13 +65,13 @@ export const Account = () => {
         <ScreenRight>
           <H2>アカウント設定</H2>
           <StyledDiv>
-            <StyledInput type='text' name={ACCOUNT_NAME} placeholder='事業所名' onChange={changeHandler}/>
+            <p>事業所番号：{accountId}</p>
           </StyledDiv>
           <StyledDiv>
-            <StyledInput type='date' name={ACCOUNT_PERIOD_START} placeholder='開始日' onChange={changeHandler}/>
-          </StyledDiv>
-          <StyledDiv>
-            <StyledInput type='date' name={ACCOUNT_PERIOD_END} placeholder='終了日' onChange={changeHandler}/>
+            <label>
+              事業所名：
+              <StyledInput type='text' placeholder='事業所名' onChange={changeHandler} value={accountName} />
+            </label>
           </StyledDiv>
           <StyledDiv>
             <StyledButton onClick={clickHandler}>更新する</StyledButton>

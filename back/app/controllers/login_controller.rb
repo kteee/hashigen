@@ -2,11 +2,16 @@ class LoginController < ApplicationController
 
   def login
     strong_params = login_params
-    @user = User.find_by(email: strong_params[:email])
-    if @user.authenticate(strong_params[:password])
-      token = JsonWebToken.encode(user_id: @user.id)
+    user = User.find_by(email: strong_params[:email])
+    if user.authenticate(strong_params[:password])
+      token = JsonWebToken.encode(user_id: user.id)
       time = Time.now + 24.hours.to_i
-      render json: { token: token, exp: time.strftime("%m-%d-%Y %H:%M"), user_id: @user.id }, status: :ok
+      render status: :ok, json: { 
+        token: token,
+        exp: time.strftime("%m-%d-%Y %H:%M"),
+        user_id: user.id,
+        account_id: user.account.id
+      }
     else
       render json: { error: 'unauthorized' }, status: :unauthorized
     end
@@ -15,7 +20,9 @@ class LoginController < ApplicationController
   def session
     validate_token
     if @current_user
-      render status: 200, json: { message: 'token seems fine' }
+      render status: :ok, json: {
+        account_id: @current_user.account.id
+      }
     end
   end
 

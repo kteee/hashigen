@@ -4,8 +4,8 @@ class ApplicationController < ActionController::API
     render status: 200, json: response_item
   end
 
-  def response_post_success
-    render status: 201, json: { message: 'Successfully created!'}
+  def post_request_response_success(response_item)
+    render status: 201, json: response_item
   end
 
   def response_error

@@ -36,7 +36,7 @@ export const Login = () => {
   const dispatch = useDispatch()
 
   const loginUser = async () => {
-    const { data: { token, exp } } = await axios.post(LOGIN_URL, {
+    const { data: { token, exp, account_id } } = await axios.post(LOGIN_URL, {
       email: email,
       password: password
     })
@@ -44,7 +44,7 @@ export const Login = () => {
       setOpen(true)
       localStorage.setItem('token', token)
       localStorage.setItem('exp', exp)
-      dispatch(loginAction())
+      dispatch(loginAction(account_id))
       history.push({pathname: '/'})
     } else {
       setMessage('ログインに失敗しました')

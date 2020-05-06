@@ -15,6 +15,7 @@ const FunctionItemsWrapper = styled.div`
 export const SettingListBase = () => {
   const functionItems: functionItemProps[] = [
     {name:'アカウント', link_to:'/setting/account'},
+    {name:'会計期間', link_to:'/setting/accounting-period'},
     {name:'ユーザー', link_to:'/setting/user'},
     {name:'耐用年数', link_to:'/setting/useful-life'}
   ];

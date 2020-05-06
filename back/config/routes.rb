@@ -4,7 +4,10 @@ Rails.application.routes.draw do
     resources :users
     resources :assets
     resources :accounts
+    resources :accounting_periods
   end
+
+  get '/api/account/setting', to: 'accounts#setting'
 
   # 法定設定周りはgetしかせずcontrollerを増やしたくないので手動で作成  
   get '/api/masters/useful-life', to: 'masters#useful_life'

@@ -78,9 +78,9 @@ export const Header = () => {
       const currentDate = new Date()
       if(tokenExpDate > currentDate) {
         const headers = setHeaders()
-        const response = await axios.post(SESSION_URL, {}, headers)
-        if(response.status===200) {
-          dispatch(loginAction())
+        const { status, data: { account_id } } = await axios.post(SESSION_URL, {}, headers)
+        if(status===200) {
+          dispatch(loginAction(account_id))
         }
       }
     }

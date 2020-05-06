@@ -12,6 +12,7 @@ import { AssetList } from './domains/Function/AssetList/AssetList'
 import { AssetDetail } from './domains/Function/AssetList/AssetDetail'
 import { SettingList } from './domains/Setting/SettingList'
 import { Account } from './domains/Setting/Account/Account'
+import { AccountingPeriod } from './domains/Setting/AccountingPeriod/AccountingPeriod'
 import { UsefulLife } from './domains/Setting/UsefulLife/UsefulLife'
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
           <Route exact path='/function/list/:id'><AssetDetail /></Route>
           <Route exact path='/setting' component={SettingList}/>
           <Route exact path='/setting/account' component={Account}/>
+          <Route exact path='/setting/accounting-period' component={AccountingPeriod}/>
           <Route exact path='/setting/useful-life' component={UsefulLife}/>
         </Switch>
       </BrowserRouter>

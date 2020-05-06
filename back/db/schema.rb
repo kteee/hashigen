@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_29_073549) do
+ActiveRecord::Schema.define(version: 2020_05_05_140646) do
 
   create_table "accounting_periods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "start"
-    t.string "end"
+    t.date "start"
+    t.date "end"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "account_id"
@@ -63,9 +63,11 @@ ActiveRecord::Schema.define(version: 2020_04_29_073549) do
     t.bigint "account_id"
     t.integer "year_start_book_value"
     t.date "depreciation_start_date"
+    t.bigint "location_id"
     t.index ["account_id"], name: "index_assets_on_account_id"
     t.index ["asset_item_id"], name: "index_assets_on_asset_item_id"
     t.index ["depreciation_method_id"], name: "index_assets_on_depreciation_method_id"
+    t.index ["location_id"], name: "index_assets_on_location_id"
   end
 
   create_table "depreciation_methods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -75,11 +77,50 @@ ActiveRecord::Schema.define(version: 2020_04_29_073549) do
     t.string "display_name"
   end
 
+  create_table "locations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "code"
+    t.string "prefecture"
+    t.string "city"
+    t.string "prefecture_kana"
+    t.string "city_kana"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "monthly_periods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.date "start", null: false
+    t.date "end", null: false
+    t.bigint "accounting_period_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["accounting_period_id"], name: "index_monthly_periods_on_accounting_period_id"
+  end
+
   create_table "roles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "display_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "transaction_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.string "display_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "asset_id", null: false
+    t.bigint "monthly_period_id", null: false
+    t.bigint "transaction_type_id", null: false
+    t.integer "amount", null: false
+    t.integer "status", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["asset_id"], name: "index_transactions_on_asset_id"
+    t.index ["monthly_period_id"], name: "index_transactions_on_monthly_period_id"
+    t.index ["transaction_type_id"], name: "index_transactions_on_transaction_type_id"
   end
 
   create_table "useful_lives", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -116,6 +157,11 @@ ActiveRecord::Schema.define(version: 2020_04_29_073549) do
   add_foreign_key "assets", "accounts"
   add_foreign_key "assets", "asset_items"
   add_foreign_key "assets", "depreciation_methods"
+  add_foreign_key "assets", "locations"
+  add_foreign_key "monthly_periods", "accounting_periods"
+  add_foreign_key "transactions", "assets"
+  add_foreign_key "transactions", "monthly_periods"
+  add_foreign_key "transactions", "transaction_types"
   add_foreign_key "users", "accounts"
   add_foreign_key "users", "roles"
 end

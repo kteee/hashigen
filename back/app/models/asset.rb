@@ -1,12 +1,14 @@
 class Asset < ApplicationRecord
 
   # concernの読み込み
-  include AssetDepreciation
+  include AssetConcern
 
   # relations
   belongs_to :account
   belongs_to :asset_item
   belongs_to :depreciation_method
+  belongs_to :location
+  has_many :transactions
 
   # validations
   validate :depreciation_start_date_cannot_be_before_acquisition_date
