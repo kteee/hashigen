@@ -1,11 +1,12 @@
-import React from 'react'
+import React from 'react';
 
-import { Container } from '../../../materials/Container'
-import { ScreenWrapper, ScreenLeft, ScreenRight } from '../../../materials/ScreenDivider'
 import { FunctionListBase } from '../FunctionListBase'
-import { AssetListBase } from './AssetListBase'
+import { Container } from '../../../materials/Container'
+import { H2 } from '../../../materials/Text'
+import { ScreenWrapper, ScreenLeft, ScreenRight } from '../../../materials/ScreenDivider'
+import { DepreciationBase } from './DepreciationBase'
 
-export const AssetList = () => {
+export const Depreciation = () => {
   return (
     <Container>
       <ScreenWrapper>
@@ -13,7 +14,8 @@ export const AssetList = () => {
           <FunctionListBase />
         </ScreenLeft>
         <ScreenRight>
-          <AssetListBase />
+          <H2>減価償却実行</H2>
+          <DepreciationBase />
         </ScreenRight>
       </ScreenWrapper>
     </Container>

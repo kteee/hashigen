@@ -5,7 +5,7 @@ import axios from 'axios'
 import { Container } from '../../../materials/Container'
 import { ScreenWrapper, ScreenLeft, ScreenRight } from '../../../materials/ScreenDivider'
 import { FunctionListBase } from '../FunctionListBase'
-import { StyledTable } from '../../../materials/Table'
+import { STable } from '../../../materials/Table'
 import { ASSETS_URL } from '../../../utilities/urls'
 import { AssetDetailResponse, DepSimulationResponse } from '../../../utilities/types'
 import { setHeaders } from '../../../utilities/auth'
@@ -56,7 +56,7 @@ export const AssetDetail = () => {
           <FunctionListBase />
         </ScreenLeft>
         <ScreenRight>
-          <StyledTable>
+          <STable>
             <thead>
               <tr>
                 <th>年</th>
@@ -67,7 +67,7 @@ export const AssetDetail = () => {
             <tbody>
               {Asset}
             </tbody>
-          </StyledTable>
+          </STable>
         </ScreenRight>
       </ScreenWrapper>
     </Container>

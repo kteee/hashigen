@@ -1,21 +1,23 @@
 import React, {useState} from 'react'
 
-import {FunctionListBase} from '../FunctionListBase'
+import { FunctionListBase } from '../FunctionListBase'
 import NewAssetStepOne from './NewAssetStepOne'
-import {NewAssetStepTwo} from './NewAssetStepTwo'
-import {Container} from '../../../materials/Container'
-import {H2} from '../../../materials/Text'
-import {ScreenWrapper, ScreenLeft, ScreenRight} from '../../../materials/ScreenDivider'
+import { NewAssetStepTwo } from './NewAssetStepTwo'
+import { Container } from '../../../materials/Container'
+import { H2 } from '../../../materials/Text'
+import { ScreenWrapper, ScreenLeft, ScreenRight } from '../../../materials/ScreenDivider'
+import { AssetItemsResponse } from '../../../utilities/types'
 
 export const NewAsset = () => {
 
-  const [itemSelected, setItemSelected] = useState(null)
+  const [selectedItem, setSelectedItem] = useState<AssetItemsResponse>()
 
   const getDisplayComponent = () => {
-    if(itemSelected) {
-      return <NewAssetStepTwo itemSelected={itemSelected} />
+    console.log(selectedItem)
+    if(selectedItem) {
+      return <NewAssetStepTwo selectedItem={selectedItem} />
     } else {
-      return <NewAssetStepOne setItemSelected={setItemSelected} />
+      return <NewAssetStepOne setSelectedItem={setSelectedItem} />
     }
   }
   

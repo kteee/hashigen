@@ -3,10 +3,17 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { RightArrowAlt } from '@styled-icons/boxicons-regular/RightArrowAlt'
 
-import {functionItemProps} from '../domains/Function/FunctionListBase';
+import { MenuListItemsProps } from '../utilities/types';
+
+interface MenuItemOuterProps {
+  backgroundColor?: string
+  color?: string
+}
 
 const MenuItemOuter = styled.div`
- width: 15em;
+  background-color: ${(props: MenuItemOuterProps) => props.backgroundColor ? props.backgroundColor : ''};
+  color: ${(props: MenuItemOuterProps) => props.color ? props.color : ''};
+  width: 15em;
   padding: 1em;
   border: 1px solid #e6e2d3;
   cursor: pointer;
@@ -30,7 +37,7 @@ const MenuItemName = styled.div`
 const MenuItemArrow = styled.div`
 `
 
-export const MenuItem = (props: functionItemProps) => {
+export const MenuItem = (props: MenuListItemsProps) => {
 
   return (
     <MenuItemOuter>

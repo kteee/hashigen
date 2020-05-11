@@ -1,3 +1,5 @@
+import { MonthlyTablePeriodProps } from './types'
+
 export const getLastDayOfOneYearLater = (date: Date) => {
   let newDate = new Date()
   newDate.setFullYear(date.getFullYear() + 1)
@@ -32,4 +34,22 @@ export const dateToYYYYMMDDStr = (date: Date) => {
   } else {
     return `${year}-${month}-${day}`
   }
+}
+
+export const createMonthlyTable = (monthStartDateArg: Date, monthEndDateArg = getLastDayOfOneYearLater(monthStartDateArg)) => {
+  const months = (monthEndDateArg.getFullYear() - monthStartDateArg.getFullYear()) * 12
+   + (monthEndDateArg.getMonth() - monthStartDateArg.getMonth())
+  const arrayToBeSet: MonthlyTablePeriodProps[] = []
+  let monthStartDate = monthStartDateArg
+  let monthEndDate = getLastDateOfMonth(monthStartDate)
+  for (let index = 0; index <= months; index++) {
+    arrayToBeSet.push({
+      month: index + 1,
+      monthStartDate: dateToYYYYMMDDStr(monthStartDate),
+      monthEndDate: dateToYYYYMMDDStr(monthEndDate),
+    })
+    monthStartDate = getFirstDateOfNextMonth(monthEndDate)
+    monthEndDate = getLastDateOfMonth(monthStartDate)
+  }
+  return arrayToBeSet
 }

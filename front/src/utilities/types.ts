@@ -18,6 +18,11 @@ export interface LoginReducerDispatchType {
 export interface LoginReducerProps extends LoginReducerState, LoginReducerDispatch {}
 
 // props
+export interface MenuListItemsProps {
+  name: string
+  link_to: string
+}
+
 export interface ReduxProps {
   state: object
   login: any
@@ -39,6 +44,21 @@ export interface MonthlyTablePeriodProps {
   month: number
   monthStartDate: String
   monthEndDate: String
+}
+
+export interface DateInputProps {
+  selectedState: any
+  selectHandler: any
+}
+
+export interface DepreciationProjectionProps {
+  assetId: number | string
+  tableHeaderCells: TableHeaderCell[]
+  setTableHeaderCells: any
+}
+
+export interface NewAssetProcessProps {
+  selectedItem: AssetItemsResponse
 }
 
 // useState
@@ -77,4 +97,36 @@ export interface UsefulLifeResponse {
   two_zero_zero_same_ratio_base: number
   two_zero_zero_same_ratio_guaranteed: number
   two_zero_zero_same_ratio_revised: number
+}
+
+export interface AccountingPeriodResponse {
+  id: number
+  start: string
+  end: string
+  status: number
+}
+
+export interface MonthlyPeriodResponse {
+  id: number
+  accounting_period_id: number
+  created_at: string
+  start: string
+  end: string
+}
+
+export interface DepreciationMethodsProps {
+  id: string
+  name: string
+  display_name: string
+}
+
+type AssetItemsResponseItemArray = [] | [
+  string, string, string, string, string, string, string
+]
+
+export interface AssetItemsResponse {
+  id: number
+  group: string
+  item: AssetItemsResponseItemArray
+  useful_life: number
 }

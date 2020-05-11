@@ -1,26 +1,26 @@
 import styled from 'styled-components'
 
-interface StyledTdProps {
+interface STdProps {
   align?: string
 }
 
-export const StyledTable = styled.table`
+export const STable = styled.table`
   table-layout: auto;
   margin-top: 1em;
   border-collapse: collapse;
 `
 
-export const StyledTr = styled.tr`
-  padding: 10em 0;
-  border-bottom: 1px solid darkgray;
+export const STr = styled.tr`
+  border-bottom: 1px dotted lightgray;
 `
 
-export const StyledTh = styled.th`
+export const STh = styled.th`
   white-space: nowrap;
+  border-bottom: 2px solid darkgray;
 `
 
-export const StyledTd = styled.td`
-  text-align: ${(props: StyledTdProps) => props.align ? props.align : 'left'};
+export const STd = styled.td`
+  text-align: ${(props: STdProps) => props.align ? props.align : 'left'};
   white-space: nowrap;
-  padding: 0 1em;
+  padding: 0.5em 1em;
 `

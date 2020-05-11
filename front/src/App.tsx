@@ -10,6 +10,7 @@ import { NewAsset } from './domains/Function/NewAsset/NewAsset'
 import { TransferAsset } from './domains/Function/TransferAsset/TransferAsset'
 import { AssetList } from './domains/Function/AssetList/AssetList'
 import { AssetDetail } from './domains/Function/AssetList/AssetDetail'
+import { Depreciation } from './domains/Function/Depreciation/Depreciation'
 import { SettingList } from './domains/Setting/SettingList'
 import { Account } from './domains/Setting/Account/Account'
 import { AccountingPeriod } from './domains/Setting/AccountingPeriod/AccountingPeriod'
@@ -28,6 +29,7 @@ const App = () => {
           <Route exact path='/function/new' component={NewAsset}/>
           <Route exact path='/function/transfer' component={TransferAsset}/>
           <Route exact path='/function/list' component={AssetList}/>
+          <Route exact path='/function/depreciate' component={Depreciation}/>
           <Route exact path='/function/list/:id'><AssetDetail /></Route>
           <Route exact path='/setting' component={SettingList}/>
           <Route exact path='/setting/account' component={Account}/>

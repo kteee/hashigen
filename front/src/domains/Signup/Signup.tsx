@@ -1,17 +1,13 @@
 import React, { useState, ChangeEvent } from 'react'
 import axios from 'axios'
-import styled from 'styled-components'
 
 import { Container } from '../../materials/Container'
 import { H2 }  from '../../materials/Text'
-import { StyledInput } from '../../materials/Input'
-import { StyledButton } from '../../materials/Button'
+import { SInput } from '../../materials/Input'
+import { SButton } from '../../materials/Button'
+import { SDiv } from '../../materials/Div'
 import { USERS_URL } from '../../utilities/urls'
 import { UseState } from '../../utilities/types'
-
-const StyledDiv = styled.div`
-  margin-bottom: 1em;
-`
 
 export const Signup = () => {
 
@@ -50,18 +46,18 @@ export const Signup = () => {
   return (
     <Container>
       <H2>新規作成</H2>
-      <StyledDiv>
-        <StyledInput type='email' name='email' placeholder='E-mail' onChange={changeHandler}/>
-      </StyledDiv>
-      <StyledDiv>
-        <StyledInput type='password' name='password' placeholder='Password' onChange={changeHandler}/>
-      </StyledDiv>
-      <StyledDiv>
-        <StyledInput type='password' name='password-confirmation' placeholder='Password確認用' onChange={changeHandler}/>
-      </StyledDiv>
-      <StyledDiv>
-        <StyledButton onClick={clickHandler}>新規登録</StyledButton>
-      </StyledDiv>
+      <SDiv>
+        <SInput type='email' name='email' placeholder='E-mail' onChange={changeHandler}/>
+      </SDiv>
+      <SDiv>
+        <SInput type='password' name='password' placeholder='Password' onChange={changeHandler}/>
+      </SDiv>
+      <SDiv>
+        <SInput type='password' name='password-confirmation' placeholder='Password確認用' onChange={changeHandler}/>
+      </SDiv>
+      <SDiv>
+        <SButton onClick={clickHandler}>新規登録</SButton>
+      </SDiv>
     </Container>
   )
 }

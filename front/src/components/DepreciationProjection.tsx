@@ -1,20 +1,14 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import axios from 'axios'
 
-import { ASSETS_URL } from '../../../utilities/urls'
-import { DepSimulationResponse } from '../../../utilities/types'
-import { setHeaders } from '../../../utilities/auth'
-import { TableHeaderCell } from '../../../utilities/types'
-import { StyledTd } from '../../../materials/Table'
+import { ASSETS_URL } from '../utilities/urls'
+import { DepSimulationResponse } from '../utilities/types'
+import { setHeaders } from '../utilities/auth'
+import { TableHeaderCell, DepreciationProjectionProps } from '../utilities/types'
+import { STd } from '../materials/Table'
 
 
-interface Props {
-  assetId: number | string
-  tableHeaderCells: TableHeaderCell[]
-  setTableHeaderCells: any
-}
-
-export const AssetProjectionData = (props: Props) => {
+export const DepreciationProjection = (props: DepreciationProjectionProps) => {
   
   const [depSimulation, setDepSimulation] = useState<DepSimulationResponse[]>([])
 
@@ -33,9 +27,9 @@ export const AssetProjectionData = (props: Props) => {
   }, [])
 
   const showAssetInfo = () => {
-    const DepSimulation = depSimulation.map((item: DepSimulationResponse) => {
+    const DepSimulation = depSimulation.map(item => {
       return (
-        <StyledTd align='right'>{item.amount}</StyledTd>
+        <STd align='right'>{item.amount}</STd>
       )
     })
     return DepSimulation

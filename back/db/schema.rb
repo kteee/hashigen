@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_05_140646) do
+ActiveRecord::Schema.define(version: 2020_05_09_045721) do
 
   create_table "accounting_periods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.date "start"
@@ -90,9 +90,11 @@ ActiveRecord::Schema.define(version: 2020_05_05_140646) do
   create_table "monthly_periods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.date "start", null: false
     t.date "end", null: false
-    t.bigint "accounting_period_id", null: false
+    t.bigint "accounting_period_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "account_id"
+    t.index ["account_id"], name: "index_monthly_periods_on_account_id"
     t.index ["accounting_period_id"], name: "index_monthly_periods_on_accounting_period_id"
   end
 
@@ -159,6 +161,7 @@ ActiveRecord::Schema.define(version: 2020_05_05_140646) do
   add_foreign_key "assets", "depreciation_methods"
   add_foreign_key "assets", "locations"
   add_foreign_key "monthly_periods", "accounting_periods"
+  add_foreign_key "monthly_periods", "accounts"
   add_foreign_key "transactions", "assets"
   add_foreign_key "transactions", "monthly_periods"
   add_foreign_key "transactions", "transaction_types"

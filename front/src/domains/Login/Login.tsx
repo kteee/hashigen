@@ -7,18 +7,15 @@ import styled from 'styled-components'
 import { Signup } from '../Signup/Signup'
 import { Container } from '../../materials/Container'
 import { H2 }  from '../../materials/Text'
-import { StyledInput } from '../../materials/Input'
-import { StyledButton } from '../../materials/Button'
+import { SInput } from '../../materials/Input'
+import { SButton } from '../../materials/Button'
+import { SDiv } from '../../materials/Div'
 import { LOGIN_URL } from '../../utilities/urls'
 import { UseState } from '../../utilities/types'
 import { loginAction } from '../../reducer/action'
 import { Messagebox } from '../../components/Mesagebox'
 
-const StyledDiv = styled.div`
-  margin-bottom: 1em;
-`
-
-const StyledLink = styled(Link)`
+const SLink = styled(Link)`
 `
 
 export const Login = () => {
@@ -74,18 +71,18 @@ export const Login = () => {
   return (
     <Container>
       <H2>ログイン</H2>
-      <StyledDiv>
-        <StyledInput type='email' name={EMAIL} placeholder='E-mail' onChange={changeHandler}/>
-      </StyledDiv>
-      <StyledDiv>
-        <StyledInput type='password' name={PASSWORD} placeholder='Password' onChange={changeHandler}/>
-      </StyledDiv>
-      <StyledDiv>
-        <StyledButton onClick={clickHandler}>ログイン</StyledButton>
-      </StyledDiv>
-      <StyledDiv>
-        <StyledLink to='/signup'>アカウント未登録の場合</StyledLink>
-      </StyledDiv>
+      <SDiv>
+        <SInput type='email' name={EMAIL} placeholder='E-mail' onChange={changeHandler}/>
+      </SDiv>
+      <SDiv>
+        <SInput type='password' name={PASSWORD} placeholder='Password' onChange={changeHandler}/>
+      </SDiv>
+      <SDiv>
+        <SButton onClick={clickHandler}>ログイン</SButton>
+      </SDiv>
+      <SDiv>
+        <SLink to='/signup'>アカウント未登録の場合</SLink>
+      </SDiv>
       <Messagebox 
         open={open}
         autoHideDuration={6000}

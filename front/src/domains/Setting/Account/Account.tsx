@@ -8,15 +8,12 @@ import { SettingListBase } from '../SettingListBase'
 import { Container } from '../../../materials/Container'
 import { ScreenWrapper, ScreenLeft, ScreenRight } from '../../../materials/ScreenDivider'
 import { H2 } from '../../../materials/Text'
-import { StyledInput } from '../../../materials/Input'
-import { StyledButton } from '../../../materials/Button'
+import { SInput } from '../../../materials/Input'
+import { SButton } from '../../../materials/Button'
+import { SDiv } from '../../../materials/Div'
 import { ACCOUNTS_URL } from '../../../utilities/urls'
 import { UseState, LoginReducerState } from '../../../utilities/types'
 import { setHeaders } from '../../../utilities/auth'
-
-const StyledDiv = styled.div`
-  margin-top: 1em;
-`
 
 interface StoreState {
   loginReducer: LoginReducerState
@@ -64,18 +61,18 @@ export const Account = () => {
         </ScreenLeft>
         <ScreenRight>
           <H2>アカウント設定</H2>
-          <StyledDiv>
+          <SDiv>
             <p>事業所番号：{accountId}</p>
-          </StyledDiv>
-          <StyledDiv>
+          </SDiv>
+          <SDiv>
             <label>
               事業所名：
-              <StyledInput type='text' placeholder='事業所名' onChange={changeHandler} value={accountName} />
+              <SInput type='text' placeholder='事業所名' onChange={changeHandler} value={accountName} />
             </label>
-          </StyledDiv>
-          <StyledDiv>
-            <StyledButton onClick={clickHandler}>更新する</StyledButton>
-          </StyledDiv>
+          </SDiv>
+          <SDiv>
+            <SButton onClick={clickHandler}>更新する</SButton>
+          </SDiv>
         </ScreenRight>
       </ScreenWrapper>
     </Container>
