@@ -57,8 +57,20 @@ export interface DepreciationProjectionProps {
   setTableHeaderCells: any
 }
 
+export interface NewAssetItem {
+  asset_item_id: number
+  name: string
+  acquisition_date: string
+  depreciation_start_date: string
+  depreciation_method_id: number
+  acquisition_value: number
+  year_start_book_value: number
+  location_id: number
+}
+
 export interface NewAssetProcessProps {
-  selectedItem: AssetItemsResponse
+  stepOne: AssetItemsResponse
+  stepTwo: NewAssetItem
 }
 
 // useState
@@ -75,6 +87,12 @@ export interface AssetDetailResponse {
   depreciation_method: string
   acquisition_date: string
   updated_at: string
+}
+
+export interface DepreciationPreviewResponse {
+  fy: number
+  dep: number
+  book_val: number
 }
 
 export interface DepSimulationResponse {
@@ -109,7 +127,6 @@ export interface AccountingPeriodResponse {
 export interface MonthlyPeriodResponse {
   id: number
   accounting_period_id: number
-  created_at: string
   start: string
   end: string
 }
@@ -129,4 +146,11 @@ export interface AssetItemsResponse {
   group: string
   item: AssetItemsResponseItemArray
   useful_life: number
+}
+
+export interface LocationsResponse {
+  id: number
+  code: string
+  prefecture: string
+  city: string
 }

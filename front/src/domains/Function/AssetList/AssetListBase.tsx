@@ -3,7 +3,6 @@ import axios from 'axios'
 import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { DepreciationProjection } from '../../../components/DepreciationProjection'
 import { STable, STr, STh, STd } from '../../../materials/Table'
 import { ASSETS_URL } from '../../../utilities/urls'
 import { setHeaders } from '../../../utilities/auth'
@@ -15,7 +14,6 @@ const SLink = styled(Link)`
 export const AssetListBase = () => {
 
   const [assetList, setAssetList] = useState([])
-  const [tableHeaderCells, setTableHeaderCells] = useState<TableHeaderCell[]>([])
   const { pathname } = useLocation()
 
   const getAssets = async () => {
@@ -28,10 +26,9 @@ export const AssetListBase = () => {
     getAssets()
   }, [])
 
-  const AssetList = assetList.map((asset: AssetDetailResponse) => {
-    console.log(asset)
+  const AssetList = assetList.map((asset: AssetDetailResponse, index: number) => {
     return (
-      <STr>
+      <STr key={index}>
         <STd>{asset.id}</STd>
         <STd>{asset.name}</STd>
         <STd>{asset.acquisition_date}</STd>
@@ -40,20 +37,7 @@ export const AssetListBase = () => {
         <STd>{asset.depreciation_method}</STd>
         <STd>{asset.updated_at}</STd>
         <STd><SLink to={ pathname + `/${asset.id}`} >詳細</SLink></STd>
-        <DepreciationProjection key={asset.id} assetId={asset.id} tableHeaderCells={tableHeaderCells} setTableHeaderCells={setTableHeaderCells}/>
       </STr>
-    )
-  })
-
-  const AssetProjectionHeaderFirstRow = tableHeaderCells.map((cell:TableHeaderCell) => {
-    return (
-      <STh>{cell.fiscal_year}</STh>
-    )
-  })
-
-  const AssetProjectionHeaderSecondRow = tableHeaderCells.map((cell:TableHeaderCell) => {
-    return (
-      <STh>{cell.fiscal_year_month}</STh>
     )
   })
 
@@ -61,18 +45,14 @@ export const AssetListBase = () => {
     <STable>
       <thead>
         <STr>
-          <STh rowSpan={2}>ID</STh>
-          <STh rowSpan={2}>名称</STh>
-          <STh rowSpan={2}>取得日</STh>
-          <STh rowSpan={2}>取得価格</STh>
-          <STh rowSpan={2}>耐用年数</STh>
-          <STh rowSpan={2}>償却方法</STh>
-          <STh rowSpan={2}>作成日</STh>
-          <STh rowSpan={2}>詳細</STh>
-          {AssetProjectionHeaderFirstRow}
-        </STr>
-        <STr>
-          {AssetProjectionHeaderSecondRow}
+          <STh>ID</STh>
+          <STh>名称</STh>
+          <STh>取得日</STh>
+          <STh>取得価格</STh>
+          <STh>耐用年数</STh>
+          <STh>償却方法</STh>
+          <STh>作成日</STh>
+          <STh>詳細</STh>
         </STr>
       </thead>
       <tbody>

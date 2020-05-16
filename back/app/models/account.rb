@@ -1,4 +1,11 @@
 class Account < ApplicationRecord
+
+  enum round_config: {
+    rounddown: 0,
+    roundup: 1,
+    roundoff: 2
+  }
+
   has_many :accounting_periods
   has_many :monthly_periods
   has_many :users
@@ -18,7 +25,7 @@ class Account < ApplicationRecord
     self.accounting_periods.each do |period|
       puts period.status
       if period.status == 0 then
-        current_period = { start: Date.parse(period.start), end: Date.parse(period.end) }
+        current_period = { start: period.start, end: period.end }
         break
       end
     end

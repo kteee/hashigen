@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_action :validate_token
+  before_action :validate_token, except: :create
 
   def index
   end
@@ -24,6 +24,14 @@ class AccountsController < ApplicationController
   end
 
   def update
+    account = Account.find(@current_account.id)
+    account.name = params[:name]
+    account.round_config = params[:round_config]
+    if account.save
+      post_request_response_success(account)
+    else
+      response_error
+    end
   end
   
   def destroy

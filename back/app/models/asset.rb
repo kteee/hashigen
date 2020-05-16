@@ -1,7 +1,8 @@
 class Asset < ApplicationRecord
 
   # concernの読み込み
-  include AssetConcern
+  include AssetAcquisition
+  include AssetDepreciation
 
   # relations
   belongs_to :account
@@ -32,9 +33,8 @@ class Asset < ApplicationRecord
 
     def make_all_assets_list(account_id)
       assets = self.where(account_id: account_id)
-      all_items_list = []
-      assets.each do |asset|
-        all_items_list.push({
+       all_items_list = assets.map do |asset|
+        {
           id: asset.id, 
           name: asset.name,
           acquisition_date: asset.acquisition_date,
@@ -43,7 +43,7 @@ class Asset < ApplicationRecord
           depreciation_method: asset.depreciation_method.display_name,
           # created_at: asset.created_at.strftime("%Y-%m-%d"),
           updated_at: asset.updated_at.strftime("%Y-%m-%d")
-        })
+        }
       end
       { assets: all_items_list }
     end

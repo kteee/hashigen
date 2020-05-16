@@ -5,7 +5,7 @@ import { STable, STr, STh, STd } from '../../../materials/Table'
 import { SDiv } from '../../../materials/Div'
 import { SButton } from '../../../materials/Button'
 import { SInput } from '../../../materials/Input'
-import { CURRENT_ACCOUNTING_PERIOD_MONTHLY_PERIODS_URL } from '../../../utilities/urls'
+import { CURRENT_ACCOUNTING_PERIOD_MONTHLY_PERIODS_URL, ASSETS_DEPRECIATION_URL } from '../../../utilities/urls'
 import { setHeaders } from '../../../utilities/auth'
 import { MonthlyPeriodResponse } from '../../../utilities/types'
 
@@ -32,6 +32,16 @@ export const DepreciationBase = () => {
     setMonthlyPeriods(monthlyPeriodResponseWithCheckedStatus)
   }
 
+  const createDepreciation = async () => {
+    const headers = setHeaders()
+    const response = await axios.post(
+      ASSETS_DEPRECIATION_URL,
+      monthlyPeriods,
+      headers
+    )
+    console.log(response)
+  }
+
   useEffect(() => {
     getAccountingPeriod()
   }, [])
@@ -55,8 +65,8 @@ export const DepreciationBase = () => {
     setMonthlyPeriods(newArray)
   }
 
-  const clickHandler = () => {
-    
+  const execCreateDepreciation = () => {
+    createDepreciation()
   }
 
   const Assets = monthlyPeriods.map(period => {
@@ -88,7 +98,7 @@ export const DepreciationBase = () => {
         </tbody>
       </STable>
       <SDiv>
-        <SButton onClick={clickHandler}>実行</SButton>
+        <SButton onClick={execCreateDepreciation}>実行</SButton>
       </SDiv>
     </Fragment>
   )

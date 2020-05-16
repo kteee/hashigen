@@ -1,7 +1,7 @@
 type NumberOrString = ( string | number )
 
 export const digitComma = (arg: NumberOrString) => {
-  
+
   const typeUnifier = (arg: NumberOrString): string => {
     if (typeof arg === 'number') {
       return String(arg)

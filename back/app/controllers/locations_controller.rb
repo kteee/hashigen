@@ -1,11 +1,8 @@
 class LocationsController < ApplicationController
   def index
-    puts params[:q]
-    locations = Location.ransack(params[:q]).result.limit(10)
-    locations.each do |location|
-      puts location.city
-    end
-    # get_request_response_success(locations)
+    locations = Location.ransack(prefecture_or_city_or_prefecture_kana_or_city_kana_cont: params[:q]).
+      result.select("id", "code", "prefecture", "city").limit(10)
+    get_request_response_success(locations)
   end
 
   def show

@@ -1,12 +1,7 @@
-class AssetsController < ApplicationController
+class AssetPreviewController < ApplicationController
   before_action :validate_token
 
-  def index
-    all_assets_list = Asset.make_all_assets_list(@current_account.id)
-    get_request_response_success(all_assets_list)
-  end
-  
-  def create
+  def show
     new_asset = Asset.new(
       name: params[:name],
       acquisition_date: Date.parse(params[:acquisition_date]),
@@ -18,23 +13,7 @@ class AssetsController < ApplicationController
       depreciation_start_date:  Date.parse(params[:depreciation_start_date]),
       location_id: params[:location_id]
     )
-    if new_asset.create_with_transaction
-      post_request_response_success(new_asset)
-    else
-      response_error
-    end
-  end
-
-  def show
-    asset = Asset.find(params[:id])
-    depreciation = asset.depreciate
-    get_request_response_success(depreciation)
-  end
-
-  def updated
-  end
-
-  def destroy
+    get_request_response_success(new_asset.preview_depreciation)
   end
 
 end

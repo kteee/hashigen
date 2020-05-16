@@ -1,8 +1,6 @@
 import React, {useState, useEffect, ChangeEvent} from 'react'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
-import styled from 'styled-components'
-import "react-datepicker/dist/react-datepicker.css";
 
 import { SettingListBase } from '../SettingListBase'
 import { Container } from '../../../materials/Container'
@@ -25,20 +23,36 @@ export const Account = () => {
 
   const accountId = useSelector(loginAccountIdSelector)
 
-  const [accountName, setAccountName] = useState<UseState<string>>(undefined)
+  const [accountName, setAccountName] = useState('')
+  const [roundConfig, setRoundConfig] = useState('')
 
   const getAccountName = async () => {
     const url = `${ACCOUNTS_URL}/${accountId}`
     const headers = setHeaders()
-    const { data: { name }} = await axios.get(url, headers)
+    const { data: { name, round_config }} = await axios.get(url, headers)
     setAccountName(name)
+    setRoundConfig(round_config)
   }
 
-  const createAccount = async () => {
+  // const createAccount = async () => {
+  //   const headers = setHeaders()
+  //   const response = await axios.post(ACCOUNTS_URL, {
+  //     account_name: accountName,
+  //     round_config: roundConfig
+  //   }, headers)
+  //   console.log(response)
+  // }
+
+  const changeAccount = async () => {
+    const url = `${ACCOUNTS_URL}/${accountId}`
     const headers = setHeaders()
-    const response = await axios.post(ACCOUNTS_URL, {
-      account_name: accountName
-    }, headers)
+    const response = await axios.patch(
+      url,
+      {
+        name: accountName,
+        round_config: roundConfig
+      },
+      headers)
     console.log(response)
   }
 
@@ -47,11 +61,34 @@ export const Account = () => {
   }, [accountId])
 
   const clickHandler = () => {
-    createAccount()
+    changeAccount()
   }
+
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setAccountName(e.target.value)
   }
+
+  const selectChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+    setRoundConfig(e.target.value)
+  }
+
+  const roundConfigs = [
+    {val: 'rounddown', name: '切り捨て'},
+    {val: 'roundup', name: '切り上げ'},
+    {val: 'roundoff', name: '四捨五入'}
+  ]
+
+  const RoundConfigs = roundConfigs.map((item, index: number) => {
+    if(item.val === roundConfig){
+      return (
+        <option key={index} value={item.val} selected>{item.name}</option>
+      )
+    } else {
+      return (
+        <option key={index} value={item.val}>{item.name}</option>
+      )
+    }
+  })
 
   return (
     <Container>
@@ -68,6 +105,14 @@ export const Account = () => {
             <label>
               事業所名：
               <SInput type='text' placeholder='事業所名' onChange={changeHandler} value={accountName} />
+            </label>
+          </SDiv>
+          <SDiv>
+            <label>
+              端数処理設定：
+              <select onChange={selectChangeHandler} size={3}>
+                {RoundConfigs}
+              </select>
             </label>
           </SDiv>
           <SDiv>

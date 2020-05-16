@@ -8,9 +8,10 @@ import { SInput } from '../../../materials/Input'
 import { SDiv } from '../../../materials/Div'
 import { GET_ASSET_ITEM_URL } from '../../../utilities/urls'
 import { FlexWrapper } from '../../../materials/Flex'
-import { AssetItemsResponse } from '../../../utilities/types'
+import { AssetItemsResponse, NewAssetProcessProps } from '../../../utilities/types'
 
 interface NewAssetStepOneProps {
+  selectedItem: NewAssetProcessProps
   setSelectedItem: any
 }
 
@@ -34,8 +35,11 @@ const NewAssetStepOne = (props: NewAssetStepOneProps) => {
     getData()
   }, [currentPage, perPageCount, queryWord])
 
-  const itemSelector = (selectedItem: AssetItemsResponse) => {
-    props.setSelectedItem(selectedItem)
+  const itemSelector = (item: AssetItemsResponse) => {
+    props.setSelectedItem((prevState: NewAssetProcessProps) => ({
+      ...prevState,
+      stepOne: item
+    }))
   }
   
   const onSelectHandler = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -97,10 +101,12 @@ const NewAssetStepOne = (props: NewAssetStepOneProps) => {
       </FlexWrapper>
       <STable>
         <thead>
-          <STh>ID</STh>
-          <STh>構造</STh>
-          <STh colSpan={7}>細目等</STh>
-          <STh>耐用年数</STh>
+          <STr>
+            <STh>ID</STh>
+            <STh>構造</STh>
+            <STh colSpan={7}>細目等</STh>
+            <STh>耐用年数</STh>
+          </STr>
         </thead>
         <tbody>
           {AssetItems}
