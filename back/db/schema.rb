@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_15_145449) do
+ActiveRecord::Schema.define(version: 2020_05_16_044156) do
 
   create_table "accounting_periods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.date "start"
@@ -115,7 +115,7 @@ ActiveRecord::Schema.define(version: 2020_05_15_145449) do
 
   create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "asset_id", null: false
-    t.bigint "monthly_period_id", null: false
+    t.bigint "monthly_period_id"
     t.bigint "transaction_type_id", null: false
     t.integer "amount", null: false
     t.integer "status", null: false

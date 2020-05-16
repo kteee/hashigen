@@ -49,7 +49,7 @@ export const NewAsset = () => {
     }
   }
   
-  let DisplayComponent = getDisplayComponent()
+  const DisplayComponent = getDisplayComponent()
 
   return (
     <Container>

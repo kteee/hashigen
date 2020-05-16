@@ -1,12 +1,38 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import { FunctionListBase } from '../FunctionListBase'
 import { Container } from '../../../materials/Container'
 import { H2 } from '../../../materials/Text'
 import { ScreenWrapper, ScreenLeft, ScreenRight } from '../../../materials/ScreenDivider'
-import { DepreciationBase } from './DepreciationBase'
+import { DepreciationStepOne } from './DepreciationStepOne'
+import { DepreciationStepTwo } from './DepreciationStepTwo'
+import { DepreciationMonth } from '../../../utilities/types'
+
 
 export const Depreciation = () => {
+
+  const [selectedMonths, setSelectedMonths] = useState<DepreciationMonth[]>([])
+
+  const setDepreciation = () => {
+    if(selectedMonths.length > 0){
+      return (
+        <DepreciationStepTwo
+          selectedMonths={selectedMonths}
+          setSelectedMonths={setSelectedMonths}
+        />
+      )
+    } else {
+      return (
+        <DepreciationStepOne
+          selectedMonths={selectedMonths}
+          setSelectedMonths={setSelectedMonths}
+        />
+      )
+    }
+  }
+
+  const Depreciation = setDepreciation()
+
   return (
     <Container>
       <ScreenWrapper>
@@ -15,7 +41,7 @@ export const Depreciation = () => {
         </ScreenLeft>
         <ScreenRight>
           <H2>減価償却実行</H2>
-          <DepreciationBase />
+          {Depreciation}
         </ScreenRight>
       </ScreenWrapper>
     </Container>

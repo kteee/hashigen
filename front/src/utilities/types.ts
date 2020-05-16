@@ -73,6 +73,15 @@ export interface NewAssetProcessProps {
   stepTwo: NewAssetItem
 }
 
+export interface DepreciationMonth extends MonthlyPeriodResponse {
+  checked: boolean
+}
+
+export interface DepreciationProcessProps {
+  selectedMonths: DepreciationMonth[]
+  setSelectedMonths: any
+}
+
 // useState
 type UseStateArgs = (string | number)
 export type UseState<T> = (T | undefined)
@@ -153,4 +162,11 @@ export interface LocationsResponse {
   code: string
   prefecture: string
   city: string
+}
+
+export interface AssetDepreciationResponse {
+  id: number
+  date: string
+  asset_name: string
+  amount: number
 }

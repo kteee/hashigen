@@ -74,11 +74,12 @@ module AccountingPeriodConcern
         end
         # 2. 1に該当がなかった場合には新規登録としてプログラムを継続する
         unless updated_self_null_monthly_period
-          new_period = MonthlyPeriod.new
-          new_period.start = period_start
-          new_period.end = period_end
-          new_period.account_id = self.account_id
-          new_period.accounting_period_id = self.id
+          new_period = MonthlyPeriod.new(
+            start: period_start,
+            end: period_end,
+            account_id: self.account_id,
+            accounting_period_id: self.id
+          )
           new_period.save!
         end
       end

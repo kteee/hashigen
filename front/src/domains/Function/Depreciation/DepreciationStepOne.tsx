@@ -5,15 +5,11 @@ import { STable, STr, STh, STd } from '../../../materials/Table'
 import { SDiv } from '../../../materials/Div'
 import { SButton } from '../../../materials/Button'
 import { SInput } from '../../../materials/Input'
-import { CURRENT_ACCOUNTING_PERIOD_MONTHLY_PERIODS_URL, ASSETS_DEPRECIATION_URL } from '../../../utilities/urls'
+import { CURRENT_ACCOUNTING_PERIOD_MONTHLY_PERIODS_URL } from '../../../utilities/urls'
 import { setHeaders } from '../../../utilities/auth'
-import { MonthlyPeriodResponse } from '../../../utilities/types'
+import { DepreciationMonth, MonthlyPeriodResponse, DepreciationProcessProps } from '../../../utilities/types'
 
-interface DepreciationMonth extends MonthlyPeriodResponse {
-  checked: boolean
-}
-
-export const DepreciationBase = () => {
+export const DepreciationStepOne = (props: DepreciationProcessProps) => {
 
   const [monthlyPeriods, setMonthlyPeriods] = useState<DepreciationMonth[]>([])
 
@@ -30,16 +26,6 @@ export const DepreciationBase = () => {
       })
     })
     setMonthlyPeriods(monthlyPeriodResponseWithCheckedStatus)
-  }
-
-  const createDepreciation = async () => {
-    const headers = setHeaders()
-    const response = await axios.post(
-      ASSETS_DEPRECIATION_URL,
-      monthlyPeriods,
-      headers
-    )
-    console.log(response)
   }
 
   useEffect(() => {
@@ -65,13 +51,18 @@ export const DepreciationBase = () => {
     setMonthlyPeriods(newArray)
   }
 
-  const execCreateDepreciation = () => {
-    createDepreciation()
+  const setDepreciationPreview = () => {
+    const checkedPeriods = monthlyPeriods.filter(period => period.checked)
+    if(checkedPeriods.length > 0){
+      props.setSelectedMonths(checkedPeriods)
+    } else {
+      alert('期間が1件も選択されていません')
+    }
   }
 
-  const Assets = monthlyPeriods.map(period => {
+  const Assets = monthlyPeriods.map((period, index: number) => {
     return (
-      <STr>
+      <STr key={index}>
         <STd><SInput type='checkbox' name={String(period.id)} checked={period.checked} onChange={changeHandler}/></STd>
         <STd>{period.start}</STd>
         <STd>{period.end}</STd>
@@ -98,7 +89,7 @@ export const DepreciationBase = () => {
         </tbody>
       </STable>
       <SDiv>
-        <SButton onClick={execCreateDepreciation}>実行</SButton>
+        <SButton onClick={setDepreciationPreview}>プレビュー</SButton>
       </SDiv>
     </Fragment>
   )
