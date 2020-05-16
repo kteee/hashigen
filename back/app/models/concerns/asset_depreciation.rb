@@ -2,193 +2,226 @@ module AssetDepreciation
   extend ActiveSupport::Concern
 
   def depreciate
+    # 初期設定
+    book_val = self.acquisition_value
+    r_conf = self.account.round_config
+    periods = self.account.accounting_periods
+    current_period = get_current_period(periods)
+    fy = current_period[:end].year
+    fy_start_month = current_period[:start].month
+    dep_start_fy_month = self.depreciation_start_date.month
+    fy_months = get_months_of_period(
+      start_date: current_period[:start],
+      end_date: current_period[:end]
+    )
+    first_year_depricable_months = get_months_of_period(
+      start_date: self.depreciation_start_date,
+      end_date: current_period[:end]
+    )
+    #preview_depreciation呼ぶと[{fy:, dep:, book_val:}...]が返ってくる
+    #最初のハッシュはjsのグラフとテーブルの描画用なので処理をスキップする
+    yearly_summaries = self.preview_depreciation.select.with_index do |yearly_summary, index|
+      index != 0
+    end
+    #summariesに月次按分償却費を入れる
+    summaries = []
+    date = Date.new(current_period[:start].year, current_period[:start].month, -1)
+    yearly_summaries.each.with_index do |yearly_summary, index|
+      year_end_book_val = yearly_summary[:book_val]
+      # 初年度は12ヶ月以外が来る可能性を想定しているので月数を計算しセットする
+      months = 1..12
+      if index === 1 then
+        months = 1..(first_year_depricable_months)
+      end
+      fy = yearly_summary[:fy]
+      monthly_dep = yearly_summary[:dep].div(months.count)
+      monthly_deps = months.map do |month|
+        # 最終月と償却開始日以前の月は償却費を調整を調整する
+        if month === months.count then
+          monthly_dep = yearly_summary[:dep] - (monthly_dep * (months.count - 1))
+        else
+          if self.depreciation_start_date > date then
+            monthly_dep = 0
+          end
+        end
+        book_val = book_val - monthly_dep
+        monthly_dep_info = {
+          fy: fy,
+          month: month,
+          date: date,
+          monthly_dep: monthly_dep,
+          book_val: book_val,
+          year_end_book_val: year_end_book_val
+        }
+        tomorrow = date.tomorrow
+        date = Date.new(tomorrow.year, tomorrow.month, -1)
+        monthly_dep_info
+      end
+      summaries.concat(monthly_deps)
+    end
+    summaries
+  end
+
+  def preview_depreciation
   # includeしたmodelのインスタンスメソッドとして実行できる
   # このメソッドはAssetで呼ばれるので、AssetInstance.depreciate(asset_instance_id)で実行
-  # 金額部分はフロント側でカンマ区切りで表示するよう文字列にして返す
-  
-    # 償却方法に依らない情報を計算する
+
+    # 償却方法に依らない情報を設定する
     useful_life_id = self.asset_item.useful_life.id
     dep_ratios = UsefulLife.find(useful_life_id)
     dep_method =  self.depreciation_method.id
     periods = self.account.accounting_periods
+    r_conf = self.account.round_config
     current_period = get_current_period(periods)
-    fiscal_year = Time.parse(current_period[:end]).year
-    fiscal_year_start_month = Time.parse(current_period[:start]).month
-    depreciation_start_fiscal_year_month = self.acquisition_date.month
-    fiscal_year_months = get_months_of_period(
-      start_date: Time.parse(current_period[:start]),
-      end_date: Time.parse(current_period[:end])
+    fy = current_period[:end].year
+    fy_start_month = current_period[:start].month
+    dep_start_fy_month = self.depreciation_start_date.month
+    fy_months = get_months_of_period(
+      start_date: current_period[:start],
+      end_date: current_period[:end]
     )
     first_year_depricable_months = get_months_of_period(
-      start_date: self.acquisition_date,
-      end_date: Time.parse(current_period[:end])
+      start_date: self.depreciation_start_date,
+      end_date: current_period[:end]
     )
 
     if dep_method == 1 then #200%定率法
-      acquisition_value = self.acquisition_value
+      acq_val = self.acquisition_value
       dep_ratio_base = dep_ratios.two_zero_zero_same_ratio_base
-      guaranteed_amount = self.acquisition_value * dep_ratios.two_zero_zero_same_ratio_guaranteed
+      guaranteed_val = round(self.acquisition_value * dep_ratios.two_zero_zero_same_ratio_guaranteed, r_conf)
       dep_ratio_revised = dep_ratios.two_zero_zero_same_ratio_revised
       same_ratio_method(
         dep_ratio_base: dep_ratio_base,
         dep_ratio_revised: dep_ratio_revised,
-        fiscal_year: fiscal_year,
-        fiscal_year_start_month: fiscal_year_start_month,
+        fy: fy,
+        fy_start_month: fy_start_month,
         first_year_depricable_months: first_year_depricable_months,
-        depreciation_start_fiscal_year_month: depreciation_start_fiscal_year_month,
-        fiscal_year_months: fiscal_year_months,
-        guaranteed_amount: guaranteed_amount,
-        acquisition_value: acquisition_value
+        dep_start_fy_month: dep_start_fy_month,
+        fy_months: fy_months,
+        guaranteed_val: guaranteed_val,
+        acq_val: acq_val,
+        r_conf: r_conf
       )
     
     elsif dep_method == 2 then #新定額法
-      book_value = acquisition_value = self.acquisition_value
+      book_val = acq_val = self.acquisition_value
       dep_ratio = dep_ratios.new_same_amount
-      results = []
-      index_year = 1
-      while book_value > 1 do
-        depricable_months = ( index_year == 1 ? first_year_depricable_months : 12 ) 
-        first_year_apportionment = ( index_year == 1 ? first_year_depricable_months.quo(12) : 1 ) 
-        depreciation = (acquisition_value * dep_ratio * first_year_apportionment).floor
-        if ( book_value - 1 ) > depreciation then
-          monthly_result = allocate_depreciation_by_month(
-            index_year: index_year,
-            fiscal_year: fiscal_year,
-            fiscal_year_start_month: fiscal_year_start_month,
-            depreciation_start_fiscal_year_month: depreciation_start_fiscal_year_month,
-            fiscal_year_months: fiscal_year_months,
-            depricable_months: depricable_months,
-            depreciation: depreciation
-          )
-          results.concat(monthly_result)
-          index_year, fiscal_year, book_value = close_year(
-            index_year: index_year,
-            fiscal_year: fiscal_year,
-            book_value: book_value,
-            depreciation: depreciation
+      results = [{fy: 0, book_val: acq_val}]
+      iy = 1
+      while book_val > 1 do
+        depricable_months = ( iy == 1 ? first_year_depricable_months : 12 ) 
+        first_year_apportionment = ( iy == 1 ? first_year_depricable_months.quo(12) : 1 ) 
+        dep = round(acq_val * dep_ratio * first_year_apportionment, r_conf)
+        if ( book_val - 1 ) > dep then
+          results << {
+            fy: fy,
+            dep: dep,
+            book_val: book_val - dep
+          }
+          iy, fy, book_val = close_year(
+            iy: iy,
+            fy: fy,
+            book_val: book_val,
+            dep: dep
           )
         else
-          depreciation = book_value - 1
-          monthly_result = allocate_depreciation_by_month(
-            index_year: index_year,
-            fiscal_year: fiscal_year,
-            fiscal_year_start_month: fiscal_year_start_month,
-            depreciation_start_fiscal_year_month: depreciation_start_fiscal_year_month,
-            fiscal_year_months: fiscal_year_months,
-            depricable_months: depricable_months,
-            depreciation: depreciation
-          )
-          results.concat(monthly_result)
-          index_year, fiscal_year, book_value = close_year(
-            index_year: index_year,
-            fiscal_year: fiscal_year,
-            book_value: book_value,
-            depreciation: depreciation
+          dep = book_val - 1
+          results << {
+            fy: fy,
+            dep: dep,
+            book_val: book_val - dep
+          }
+          iy, fy, book_val = close_year(
+            iy: iy,
+            fy: fy,
+            book_val: book_val,
+            dep: dep
           )
         end
       end
       results
 
     elsif dep_method == 3 then #250%定率法
-      acquisition_value = self.acquisition_value
+      acq_val = self.acquisition_value
       dep_ratio_base = dep_ratios.two_five_zero_same_ratio_base
-      guaranteed_amount = self.acquisition_value * dep_ratios.two_five_zero_same_ratio_guaranteed
+      guaranteed_val = round(self.acquisition_value * dep_ratios.two_five_zero_same_ratio_guaranteed, r_conf)
       dep_ratio_revised = dep_ratios.two_five_zero_same_ratio_revised
       same_ratio_method(
         dep_ratio_base: dep_ratio_base,
         dep_ratio_revised: dep_ratio_revised,
-        fiscal_year: fiscal_year,
-        fiscal_year_start_month: fiscal_year_start_month,
+        fy: fy,
+        fy_start_month: fy_start_month,
         first_year_depricable_months: first_year_depricable_months,
-        depreciation_start_fiscal_year_month: depreciation_start_fiscal_year_month,
-        fiscal_year_months: fiscal_year_months,
-        guaranteed_amount: guaranteed_amount,
-        acquisition_value: acquisition_value
+        dep_start_fy_month: dep_start_fy_month,
+        fy_months: fy_months,
+        guaranteed_val: guaranteed_val,
+        acq_val: acq_val,
+        r_conf: r_conf
       )
     
     elsif dep_method == 4 then #旧定額法
-      book_value = acquisition_value = self.acquisition_value
-      acquisition_value_5percent = acquisition_value * 0.05
+      book_val = acq_val = self.acquisition_value
+      acq_val_5percent = round(acq_val * 0.05, r_conf)
       dep_ratio = dep_ratios.old_same_amount
-      results = []
-      index_year = 1
-      while book_value > 1 do
-        if book_value > acquisition_value_5percent then
-          depricable_months = ( index_year == 1 ? first_year_depricable_months : 12 ) 
-          first_year_apportionment = ( index_year == 1 ? first_year_depricable_months.quo(12) : 1 ) 
-          depreciation = (acquisition_value * dep_ratio * 0.9 * first_year_apportionment).floor
-          if (book_value - acquisition_value_5percent) > depreciation then
-            monthly_result = allocate_depreciation_by_month(
-              index_year: index_year,
-              fiscal_year: fiscal_year,
-              fiscal_year_start_month: fiscal_year_start_month,
-              depreciation_start_fiscal_year_month: depreciation_start_fiscal_year_month,
-              fiscal_year_months: fiscal_year_months,
-              depricable_months: depricable_months,
-              depreciation: depreciation
-            )
-            results.concat(monthly_result)
-            index_year, fiscal_year, book_value = close_year(
-              index_year: index_year,
-              fiscal_year: fiscal_year,
-              book_value: book_value,
-              depreciation: depreciation
+      results = [{fy: 0, book_val: acq_val}]
+      iy = 1
+      while book_val > 1 do
+        if book_val > acq_val_5percent then
+          depricable_months = ( iy == 1 ? first_year_depricable_months : 12 ) 
+          first_year_apportionment = ( iy == 1 ? first_year_depricable_months.quo(12) : 1 ) 
+          dep = round(acq_val * dep_ratio * 0.9 * first_year_apportionment, r_conf)
+          if (book_val - acq_val_5percent) > dep then
+            results << {
+              fy: fy,
+              dep: dep,
+              book_val: book_val - dep
+            }
+            iy, fy, book_val = close_year(
+              iy: iy,
+              fy: fy,
+              book_val: book_val,
+              dep: dep
             )
           else
-            depreciation = book_value - acquisition_value_5percent
-            monthly_result = allocate_depreciation_by_month(
-              index_year: index_year,
-              fiscal_year: fiscal_year,
-              fiscal_year_start_month: fiscal_year_start_month,
-              depreciation_start_fiscal_year_month: depreciation_start_fiscal_year_month,
-              fiscal_year_months: fiscal_year_months,
-              depricable_months: depricable_months,
-              depreciation: depreciation
-            )
-            results.concat(monthly_result)
-            index_year, fiscal_year, book_value = close_year(
-              index_year: index_year,
-              fiscal_year: fiscal_year,
-              book_value: book_value,
-              depreciation: depreciation
+            dep = book_val - acq_val_5percent
+            results << {
+              fy: fy,
+              dep: dep,
+              book_val: book_val - dep
+            }
+            iy, fy, book_val = close_year(
+              iy: iy,
+              fy: fy,
+              book_val: book_val,
+              dep: dep
             )
           end
         else
-          depreciation = (acquisition_value_5percent - 1) / 5
-          if (book_value - 1) > depreciation then
-            monthly_result = allocate_depreciation_by_month(
-              index_year: index_year,
-              fiscal_year: fiscal_year,
-              fiscal_year_start_month: fiscal_year_start_month,
-              depreciation_start_fiscal_year_month: depreciation_start_fiscal_year_month,
-              fiscal_year_months: fiscal_year_months,
-              depricable_months: depricable_months,
-              depreciation: depreciation
-            )
-            results.concat(monthly_result)
-            index_year, fiscal_year, book_value = close_year(
-              index_year: index_year,
-              fiscal_year: fiscal_year,
-              book_value: book_value,
-              depreciation: depreciation
+          dep = round(((acq_val_5percent - 1) / 5), r_conf)
+          if (book_val - 1) > dep then
+            results << {
+              fy: fy,
+              dep: dep,
+              book_val: book_val - dep
+            }
+            iy, fy, book_val = close_year(
+              iy: iy,
+              fy: fy,
+              book_val: book_val,
+              dep: dep
             )
           else
-            depreciation = book_value - 1
-            monthly_result = allocate_depreciation_by_month(
-              index_year: index_year,
-              fiscal_year: fiscal_year,
-              fiscal_year_start_month: fiscal_year_start_month,
-              depreciation_start_fiscal_year_month: depreciation_start_fiscal_year_month,
-              fiscal_year_months: fiscal_year_months,
-              depricable_months: depricable_months,
-              depreciation: depreciation
-            )
-            results.concat(monthly_result)
-            index_year, fiscal_year, book_value = close_year(
-              index_year: index_year,
-              fiscal_year: fiscal_year,
-              book_value: book_value,
-              depreciation: depreciation
+            dep = book_val - 1
+            results << {
+              fy: fy,
+              dep: dep,
+              book_val: book_val - dep
+            }
+            iy, fy, book_val = close_year(
+              iy: iy,
+              fy: fy,
+              book_val: book_val,
+              dep: dep
             )
           end
         end
@@ -196,88 +229,68 @@ module AssetDepreciation
       results
 
     elsif dep_method == 5 then #旧定率法
-      book_value = acquisition_value = self.acquisition_value
-      acquisition_value_5percent = acquisition_value * 0.05
+      book_val = acq_val = self.acquisition_value
+      acq_val_5percent = round(acq_val * 0.05, r_conf)
       dep_ratio = dep_ratios.old_same_ratio
-      results = []
-      index_year = 1
-      while book_value > 1 do
-        if book_value > acquisition_value_5percent then
-          months_of_year = ( index_year == 1 ? first_year_depricable_months : 12 ) 
-          first_year_apportionment = ( index_year == 1 ? first_year_depricable_months.quo(12) : 1 ) 
-          depreciation = (book_value * dep_ratio * first_year_apportionment).floor
-          if (book_value - acquisition_value_5percent) > depreciation then
-            result_by_monthly = allocate_depreciation_by_month(
-              index_year: index_year,
-              fiscal_year: fiscal_year,
-              fiscal_year_start_month: fiscal_year_start_month,
-              depreciation_start_fiscal_year_month: depreciation_start_fiscal_year_month,
-              fiscal_year_months: fiscal_year_months,
-              depricable_months: depricable_months,
-              depreciation: depreciation
-            )
-            results.concat(result_by_monthly)
-            index_year, fiscal_year, book_value = close_year(
-              index_year: index_year,
-              fiscal_year: fiscal_year,
-              book_value: book_value,
-              depreciation: depreciation
+      results = [{fy: 0, book_val: acq_val}]
+      iy = 1
+      while book_val > 1 do
+        if book_val > acq_val_5percent then
+          months_of_year = ( iy == 1 ? first_year_depricable_months : 12 ) 
+          first_year_apportionment = ( iy == 1 ? first_year_depricable_months.quo(12) : 1 ) 
+          dep = round(book_val * dep_ratio * first_year_apportionment, r_conf)
+          if (book_val - acq_val_5percent) > dep then
+            results << {
+              fy: fy,
+              dep: dep,
+              book_val: book_val - dep
+            }
+            iy, fy, book_val = close_year(
+              iy: iy,
+              fy: fy,
+              book_val: book_val,
+              dep: dep
             )
           else
-            depreciation = book_value - acquisition_value_5percent
-            result_by_monthly = allocate_depreciation_by_month(
-              index_year: index_year,
-              fiscal_year: fiscal_year,
-              fiscal_year_start_month: fiscal_year_start_month,
-              depreciation_start_fiscal_year_month: depreciation_start_fiscal_year_month,
-              fiscal_year_months: fiscal_year_months,
-              depricable_months: depricable_months,
-              depreciation: depreciation
-            )
-            results.concat(result_by_monthly)
-            index_year, fiscal_year, book_value = close_year(
-              index_year: index_year,
-              fiscal_year: fiscal_year,
-              book_value: book_value,
-              depreciation: depreciation
+            dep = book_val - acq_val_5percent
+            results << {
+              fy: fy,
+              dep: dep,
+              book_val: book_val - dep
+            }
+            iy, fy, book_val = close_year(
+              iy: iy,
+              fy: fy,
+              book_val: book_val,
+              dep: dep
             )
           end
         else
-          depreciation = (acquisition_value_5percent - 1) / 5
-          if (book_value - 1) > depreciation then
-            result_by_monthly = allocate_depreciation_by_month(
-              index_year: index_year,
-              fiscal_year: fiscal_year,
-              fiscal_year_start_month: fiscal_year_start_month,
-              depreciation_start_fiscal_year_month: depreciation_start_fiscal_year_month,
-              fiscal_year_months: fiscal_year_months,
-              depricable_months: depricable_months,
-              depreciation: depreciation
-            )
-            results.concat(result_by_monthly)
-            index_year, fiscal_year, book_value = close_year(
-              index_year: index_year,
-              fiscal_year: fiscal_year,
-              book_value: book_value,
-              depreciation: depreciation
+          dep = (acq_val_5percent - 1) / 5
+          if (book_val - 1) > dep then
+            results << {
+              fy: fy,
+              dep: dep,
+              book_val: book_val - dep
+            }
+            iy, fy, book_val = close_year(
+              iy: iy,
+              fy: fy,
+              book_val: book_val,
+              dep: dep
             )
           else
-            depreciation = book_value - 1
-            result_by_monthly = allocate_depreciation_by_month(
-              index_year: index_year,
-              fiscal_year: fiscal_year,
-              fiscal_year_start_month: fiscal_year_start_month,
-              depreciation_start_fiscal_year_month: depreciation_start_fiscal_year_month,
-              fiscal_year_months: fiscal_year_months,
-              depricable_months: depricable_months,
-              depreciation: depreciation
-            )
-            results.concat(result_by_monthly)
-            index_year, fiscal_year, book_value = close_year(
-              index_year: index_year,
-              fiscal_year: fiscal_year,
-              book_value: book_value,
-              depreciation: depreciation
+            dep = book_val - 1
+            results << {
+              fy: fy,
+              dep: dep,
+              book_val: book_val - dep
+            }
+            iy, fy, book_val = close_year(
+              iy: iy,
+              fy: fy,
+              book_val: book_val,
+              dep: dep
             )
           end
         end
@@ -285,54 +298,44 @@ module AssetDepreciation
       results
 
     elsif dep_method == 6 then #一括償却
-      book_value = acquisition_value = self.acquisition_value
-      results = []
-      index_year = 1
-      while book_value > 0 do
-        dep_ratio = fiscal_year_months.quo(36)
-        depricable_months = ( index_year == 1 ? first_year_depricable_months : 12 ) 
-        # first_year_apportionment = ( index_year == 1 ? first_year_depricable_months.quo(12) : 1 ) 
-        depreciation = acquisition_value * dep_ratio
-        if index_year == 1 then
-          dep_ratio = fiscal_year_months.quo(36)
+      book_val = acq_val = self.acquisition_value
+      results = [{fy: 0, book_val: acq_val}]
+      iy = 1
+      while book_val > 0 do
+        dep_ratio = fy_months.quo(36)
+        depricable_months = ( iy == 1 ? first_year_depricable_months : 12 ) 
+        # first_year_apportionment = ( iy == 1 ? first_year_depricable_months.quo(12) : 1 ) 
+        dep = round(acq_val * dep_ratio, r_conf)
+        if iy == 1 then
+          dep_ratio = fy_months.quo(36)
           depricable_months = first_year_depricable_months
-          depreciation = acquisition_value * dep_ratio
-          monthly_result = allocate_depreciation_by_month(
-            index_year: index_year,
-            fiscal_year: fiscal_year,
-            fiscal_year_start_month: fiscal_year_start_month,
-            depreciation_start_fiscal_year_month: depreciation_start_fiscal_year_month,
-            fiscal_year_months: fiscal_year_months,
-            depricable_months: depricable_months,
-            depreciation: depreciation
-          )
-          results.concat(monthly_result)
-          index_year, fiscal_year, book_value = close_year(
-            index_year: index_year,
-            fiscal_year: fiscal_year,
-            book_value: book_value,
-            depreciation: depreciation
-          )
+          dep = round(acq_val * dep_ratio, r_conf)
+          results << {
+              fy: fy,
+              dep: dep,
+              book_val: book_val - dep
+            }
+            iy, fy, book_val = close_year(
+              iy: iy,
+              fy: fy,
+              book_val: book_val,
+              dep: dep
+            )
         else
           dep_ratio = 12.quo(36)
           depricable_months =  12 
-          depreciation = acquisition_value * dep_ratio
-          monthly_result = allocate_depreciation_by_month(
-            index_year: index_year,
-            fiscal_year: fiscal_year,
-            fiscal_year_start_month: fiscal_year_start_month,
-            depreciation_start_fiscal_year_month: depreciation_start_fiscal_year_month,
-            fiscal_year_months: fiscal_year_months,
-            depricable_months: depricable_months,
-            depreciation: depreciation
-          )
-          results.concat(monthly_result)
-          index_year, fiscal_year, book_value = close_year(
-            index_year: index_year,
-            fiscal_year: fiscal_year,
-            book_value: book_value,
-            depreciation: depreciation
-          )
+          dep = round(acq_val * dep_ratio, r_conf)
+          results << {
+              fy: fy,
+              dep: dep,
+              book_val: book_val - dep
+            }
+            iy, fy, book_val = close_year(
+              iy: iy,
+              fy: fy,
+              book_val: book_val,
+              dep: dep
+            )
         end
       end
       results
@@ -340,16 +343,29 @@ module AssetDepreciation
   end
 
   private
+    def round(decimal, round_config)
+      rounded_int = decimal
+      if round_config === 'rounddown' then
+        rounded_int = decimal.floor
+      elsif round_config === 'roundup' then
+        rounded_int = decimal.ceil
+      elsif round_config === 'roundoff' then
+        rounded_int = decimal.round
+      end
+      rounded_int
+    end
+
     def same_ratio_method(
       dep_ratio_base:,
       dep_ratio_revised:,
-      fiscal_year:,
+      fy:,
+      fy_start_month:,
       first_year_depricable_months:,
-      fiscal_year_start_month:,
-      depreciation_start_fiscal_year_month:,
-      fiscal_year_months:,
-      acquisition_value:,
-      guaranteed_amount:
+      dep_start_fy_month:,
+      fy_months:,
+      guaranteed_val:,
+      acq_val:,
+      r_conf:
     )
     # ロジック
     # ①簿価1円超なら計算を回す
@@ -358,71 +374,57 @@ module AssetDepreciation
     #     ③改定取得価格が決まってない時は初年度なので改定取得価格と残り期間償却費を設定する
     #     ④③で設定した償却費だと過剰償却を起こす場合は簿価を1円残すようにする
     #     ⑤④に該当しない場合は改定取得価格に改定償却率をかけた金額を落とす
-      book_value = acquisition_value
-      acquisition_value_revised = 0 # 改定取得価格
-      depreciation_rest = 0 # 改定後償却
-      results = []
-      index_year = 1
-      while book_value > 1 do
-        depricable_months = ( index_year == 1 ? first_year_depricable_months : 12 ) 
-        first_year_apportionment = ( index_year == 1 ? first_year_depricable_months.quo(12) : 1 )
-        depreciation = (book_value * dep_ratio_base * first_year_apportionment).floor
-        if depreciation > guaranteed_amount then
-          monthly_result = allocate_depreciation_by_month(
-            index_year: index_year,
-            fiscal_year: fiscal_year,
-            fiscal_year_start_month: fiscal_year_start_month,
-            depreciation_start_fiscal_year_month: depreciation_start_fiscal_year_month,
-            fiscal_year_months: fiscal_year_months,
-            depricable_months: depricable_months,
-            depreciation: depreciation
-          )
-          results.concat(monthly_result)
-          index_year, fiscal_year, book_value = close_year(
-            index_year: index_year,
-            fiscal_year: fiscal_year,
-            book_value: book_value,
-            depreciation: depreciation
+      book_val = acq_val
+      acq_val_revised = 0 # 改定取得価格
+      dep_rest = 0 # 改定後償却
+      results = [{fy: 0, book_val: acq_val}]
+      iy = 1
+      while book_val > 1 do
+        depricable_months = ( iy == 1 ? first_year_depricable_months : 12 ) 
+        first_year_apportionment = ( iy == 1 ? first_year_depricable_months.quo(12) : 1 )
+        dep = round(book_val * dep_ratio_base * first_year_apportionment, r_conf)
+        if dep > guaranteed_val then
+          results << {
+            fy: fy,
+            dep: dep,
+            book_val: book_val - dep
+          }
+          iy, fy, book_val = close_year(
+            iy: iy,
+            fy: fy,
+            book_val: book_val,
+            dep: dep
           )
         else
-          if acquisition_value_revised == 0 then
-            acquisition_value_revised = book_value
-            depreciation_rest = acquisition_value_revised * dep_ratio_revised
+          if acq_val_revised == 0 then
+            acq_val_revised = book_val
+            dep_rest = round(acq_val_revised * dep_ratio_revised, r_conf)
           end
-          if depreciation_rest > (book_value - 1) then
-            depreciation_rest = book_value - 1
-            monthly_result = allocate_depreciation_by_month(
-              index_year: index_year,
-              fiscal_year: fiscal_year,
-              fiscal_year_start_month: fiscal_year_start_month,
-              depreciation_start_fiscal_year_month: depreciation_start_fiscal_year_month,
-              fiscal_year_months: fiscal_year_months,
-              depricable_months: depricable_months,
-              depreciation: depreciation
-            )
-            results.concat(monthly_result)
-            index_year, fiscal_year, book_value = close_year(
-              index_year: index_year,
-              fiscal_year: fiscal_year,
-              book_value: book_value,
-              depreciation: depreciation_rest
+          if dep_rest > (book_val - 1) then
+            dep = book_val - 1
+            results << {
+              fy: fy,
+              dep: dep,
+              book_val: book_val - dep
+            }
+            iy, fy, book_val = close_year(
+              iy: iy,
+              fy: fy,
+              book_val: book_val,
+              dep: dep
             )
           else
-            monthly_result = allocate_depreciation_by_month(
-              index_year: index_year,
-              fiscal_year: fiscal_year,
-              fiscal_year_start_month: fiscal_year_start_month,
-              depreciation_start_fiscal_year_month: depreciation_start_fiscal_year_month,
-              fiscal_year_months: fiscal_year_months,
-              depricable_months: depricable_months,
-              depreciation: depreciation
-            )
-            results.concat(monthly_result)
-            index_year, fiscal_year, book_value = close_year(
-              index_year: index_year,
-              fiscal_year: fiscal_year,
-              book_value: book_value,
-              depreciation: depreciation_rest
+            dep = dep_rest
+            results << {
+              fy: fy,
+              dep: dep,
+              book_val: book_val - dep
+            }
+            iy, fy, book_val = close_year(
+              iy: iy,
+              fy: fy,
+              book_val: book_val,
+              dep: dep
             )
           end
         end
@@ -458,81 +460,16 @@ module AssetDepreciation
       months
     end
 
-    def allocate_depreciation_by_month(
-      index_year:,
-      fiscal_year:,
-      fiscal_year_start_month:,
-      depreciation_start_fiscal_year_month:,
-      fiscal_year_months:,
-      depricable_months:,
-      depreciation:
-    )
-      results = []
-      monthly_depreciation = depreciation.div(depricable_months)
-      fiscal_year_month = fiscal_year_start_month
-      depreciation_start_index_month = fiscal_year_months - depricable_months + 1
-      (1..fiscal_year_months).each do |index_month|
-        if index_month == fiscal_year_months then
-          monthly_depreciation_adjusted = depreciation - ( monthly_depreciation * ( depricable_months - 1 ) )
-          result, fiscal_year_month = set_depreciation_result(
-            index_year: index_year,
-            index_month: index_month,
-            fiscal_year: fiscal_year,
-            fiscal_year_month: fiscal_year_month,
-            monthly_depreciation: monthly_depreciation_adjusted.to_s(:delimited)
-          )
-          results.push(result)
-        elsif index_month >= depreciation_start_index_month then
-          result, fiscal_year_month = set_depreciation_result(
-            index_year: index_year,
-            index_month: index_month,
-            fiscal_year: fiscal_year,
-            fiscal_year_month: fiscal_year_month,
-            monthly_depreciation: monthly_depreciation.to_s(:delimited)
-          )
-          results.push(result)
-        else 
-          result, fiscal_year_month = set_depreciation_result(
-            index_year: index_year,
-            index_month: index_month,
-            fiscal_year: fiscal_year,
-            fiscal_year_month: fiscal_year_month,
-            monthly_depreciation: "0"
-          )
-          results.push(result)
-        end
-      end
-      results
-    end
-
-    def set_depreciation_result(
-      index_year:,
-      index_month:,
-      fiscal_year:,
-      fiscal_year_month:,
-      monthly_depreciation:
-    )
-      result = {
-        index_year: index_year,
-        index_month: index_month,
-        fiscal_year: fiscal_year,
-        fiscal_year_month: fiscal_year_month,
-        amount: monthly_depreciation
-      }
-      fiscal_year_month == 12 ? fiscal_year_month = 0 : fiscal_year_month += 1
-      return result, fiscal_year_month
-    end
-
     def close_year(
-      index_year:,
-      fiscal_year:,
-      book_value:,
-      depreciation:
+      iy:,
+      fy:,
+      book_val:,
+      dep:
     )
-      index_year += 1
-      fiscal_year += 1
-      book_value -= depreciation
-      return index_year, fiscal_year, book_value
+      iy += 1
+      fy += 1
+      book_val -= dep
+      return iy, fy, book_val
     end
 
 end

@@ -1,10 +1,11 @@
 import React, {Fragment, useState, useEffect, ChangeEvent} from 'react';
 import axios from 'axios'
 import Pagination from '@material-ui/lab/Pagination';
-import styled from 'styled-components'
 
 import {H3} from '../../../materials/Text'
-import {StyledInput} from '../../../materials/Input'
+import { STable } from '../../../materials/Table'
+import { SInput } from '../../../materials/Input'
+import { SDiv } from '../../../materials/Div'
 import {GET_ASSET_ITEM_URL} from '../../../utilities/urls'
 import {FlexWrapper} from '../../../materials/Flex'
 
@@ -70,18 +71,18 @@ export const TransferAssetStepOne = (props: NewAssetStepOneProps) => {
   return (
     <Fragment>
       <H3>STEP1. 登録資産区分を選択</H3>
-      <StyledDiv>
-        <StyledInput type='text' name='asset-name' placeholder='検索ワード' onInput={onInputHandler}/>
-      </StyledDiv>
+      <SDiv>
+        <SInput type='text' name='asset-name' placeholder='検索ワード' onInput={onInputHandler}/>
+      </SDiv>
       <FlexWrapper>
-        <StyledDiv>            
+        <SDiv>            
           <Pagination
             count={totalPages}
             onChange={pageChanger}
             page={currentPage}
           />
-        </StyledDiv>
-        <StyledDiv>
+        </SDiv>
+        <SDiv>
           <label>表示数</label>
           <select onChange={onSelectHandler}>
             <option></option>
@@ -90,21 +91,13 @@ export const TransferAssetStepOne = (props: NewAssetStepOneProps) => {
             <option value={15}>15</option>
             <option value={20}>20</option>
           </select>
-        </StyledDiv>
+        </SDiv>
       </FlexWrapper>
-      <StyledTable>
+      <STable>
         <tbody>
           {AssetItems}
         </tbody>
-      </StyledTable>
+      </STable>
     </Fragment>
-  );
-};
-
-const StyledDiv = styled.div`
-  margin-top: 1em;
-`
-
-const StyledTable = styled.table`
-  margin-top: 1em;
-`
+  )
+}

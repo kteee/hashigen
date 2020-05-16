@@ -4,6 +4,7 @@ export type NumberOrString = Number | String // railsからのデータが何か
 // reducers
 export interface LoginReducerState {
   loggedIn: boolean
+  accountId: number|undefined
 }
 
 export interface LoginReducerDispatch {
@@ -17,6 +18,11 @@ export interface LoginReducerDispatchType {
 export interface LoginReducerProps extends LoginReducerState, LoginReducerDispatch {}
 
 // props
+export interface MenuListItemsProps {
+  name: string
+  link_to: string
+}
+
 export interface ReduxProps {
   state: object
   login: any
@@ -34,6 +40,48 @@ export interface TableHeaderCell {
   fiscal_year_month: number
 }
 
+export interface MonthlyTablePeriodProps {
+  month: number
+  monthStartDate: String
+  monthEndDate: String
+}
+
+export interface DateInputProps {
+  selectedState: any
+  selectHandler: any
+}
+
+export interface DepreciationProjectionProps {
+  assetId: number | string
+  tableHeaderCells: TableHeaderCell[]
+  setTableHeaderCells: any
+}
+
+export interface NewAssetItem {
+  asset_item_id: number
+  name: string
+  acquisition_date: string
+  depreciation_start_date: string
+  depreciation_method_id: number
+  acquisition_value: number
+  year_start_book_value: number
+  location_id: number
+}
+
+export interface NewAssetProcessProps {
+  stepOne: AssetItemsResponse
+  stepTwo: NewAssetItem
+}
+
+export interface DepreciationMonth extends MonthlyPeriodResponse {
+  checked: boolean
+}
+
+export interface DepreciationProcessProps {
+  selectedMonths: DepreciationMonth[]
+  setSelectedMonths: any
+}
+
 // useState
 type UseStateArgs = (string | number)
 export type UseState<T> = (T | undefined)
@@ -48,6 +96,12 @@ export interface AssetDetailResponse {
   depreciation_method: string
   acquisition_date: string
   updated_at: string
+}
+
+export interface DepreciationPreviewResponse {
+  fy: number
+  dep: number
+  book_val: number
 }
 
 export interface DepSimulationResponse {
@@ -70,4 +124,49 @@ export interface UsefulLifeResponse {
   two_zero_zero_same_ratio_base: number
   two_zero_zero_same_ratio_guaranteed: number
   two_zero_zero_same_ratio_revised: number
+}
+
+export interface AccountingPeriodResponse {
+  id: number
+  start: string
+  end: string
+  status: number
+}
+
+export interface MonthlyPeriodResponse {
+  id: number
+  accounting_period_id: number
+  start: string
+  end: string
+}
+
+export interface DepreciationMethodsProps {
+  id: string
+  name: string
+  display_name: string
+}
+
+type AssetItemsResponseItemArray = [] | [
+  string, string, string, string, string, string, string
+]
+
+export interface AssetItemsResponse {
+  id: number
+  group: string
+  item: AssetItemsResponseItemArray
+  useful_life: number
+}
+
+export interface LocationsResponse {
+  id: number
+  code: string
+  prefecture: string
+  city: string
+}
+
+export interface AssetDepreciationResponse {
+  id: number
+  date: string
+  asset_name: string
+  amount: number
 }

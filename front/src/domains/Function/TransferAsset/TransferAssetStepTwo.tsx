@@ -3,24 +3,15 @@ import axios from 'axios'
 import styled from 'styled-components'
 
 import { H3 } from '../../../materials/Text'
-import { StyledInput } from '../../../materials/Input'
-import { StyledButton } from '../../../materials/Button'
+import { SInput } from '../../../materials/Input'
+import { SButton } from '../../../materials/Button'
+import { SDiv } from '../../../materials/Div'
 import { GET_DEP_METHOD_URL, ASSETS_URL } from '../../../utilities/urls'
-import { UseState } from '../../../utilities/types'
+import { UseState, DepreciationMethodsProps } from '../../../utilities/types'
 import { setHeaders } from '../../../utilities/auth'
-
-const StyledDiv = styled.div`
-  margin-top: 1em;
-`
 
 interface Props {
   itemSelected: string | number | null
-}
-
-interface methodsProps {
-  id: string | number
-  name: string
-  display_name: string
 }
 
 export const TransferAssetStepTwo = (props: Props) => {
@@ -32,7 +23,7 @@ export const TransferAssetStepTwo = (props: Props) => {
   const ACQUISITION_VALUE = 'acquisition-value'
   const YEAR_START_BOOK_VALUE = 'year-start-book-value'
 
-  const [methods, setMethods] = useState([])
+  const [methods, setMethods] = useState<DepreciationMethodsProps[]>([])
   const [assetName, setAssetName] = useState<UseState<string>>(undefined)
   const [acquisitionDate, setAcquisitionDate] = useState<UseState<string>>(undefined)
   const [depreciationStartDate, setDepreciationStartDate] = useState<UseState<string>>(undefined)
@@ -102,7 +93,7 @@ export const TransferAssetStepTwo = (props: Props) => {
     }
   }
 
-  let Methods = methods.map((val: methodsProps, index: number) => {
+  let Methods = methods.map((val, index: number) => {
     return (
       <option key={index} value={val.id}>
         {val.display_name}
@@ -114,53 +105,53 @@ export const TransferAssetStepTwo = (props: Props) => {
     <Fragment>
       <H3>STEP2. 固定資産情報を登録</H3>
       {/* 資産名称 */}
-      <StyledDiv>
+      <SDiv>
         <label>
           資産名称：
-          <StyledInput type='text' name={ASSET_NAME} placeholder='資産名称' onChange={onChangeHandler}/>
+          <SInput type='text' name={ASSET_NAME} placeholder='資産名称' onChange={onChangeHandler}/>
         </label>
-      </StyledDiv>
+      </SDiv>
       {/* 取得年月日 */}
-      <StyledDiv>
+      <SDiv>
         <label>
           取得年月日：
-          <StyledInput type='date' name={ACQUISITION_DATE} placeholder='取得年月日' onChange={onChangeHandler}/>
+          <SInput type='date' name={ACQUISITION_DATE} placeholder='取得年月日' onChange={onChangeHandler}/>
         </label>
-      </StyledDiv>
+      </SDiv>
       {/* 償却開始日 */}
-      <StyledDiv>
+      <SDiv>
         <label>
           償却開始日：
-          <StyledInput type='date' name={DEPRECIATION_START_DATE} placeholder='償却開始日' onChange={onChangeHandler}/>
+          <SInput type='date' name={DEPRECIATION_START_DATE} placeholder='償却開始日' onChange={onChangeHandler}/>
         </label>
-      </StyledDiv>
+      </SDiv>
       {/* 償却方法 */}
-      <StyledDiv>
+      <SDiv>
         <label>
           償却方法：
           <select name={DEPRECIATION_METHOD} onChange={onChangeHandler}>
             {Methods}
           </select>
         </label>
-      </StyledDiv>
+      </SDiv>
       {/* 取得価格 */}
-      <StyledDiv>
+      <SDiv>
         <label>
           取得価格：
-          <StyledInput type='number' name={ACQUISITION_VALUE} placeholder='取得価格'  onChange={onChangeHandler}/>
+          <SInput type='number' name={ACQUISITION_VALUE} placeholder='取得価格'  onChange={onChangeHandler}/>
         </label>
-      </StyledDiv>
+      </SDiv>
       {/* 期首簿価 */}
-      <StyledDiv>
+      <SDiv>
         <label>
           期首簿価：
-          <StyledInput type='number' name={YEAR_START_BOOK_VALUE} placeholder='期首簿価'  onChange={onChangeHandler}/>
+          <SInput type='number' name={YEAR_START_BOOK_VALUE} placeholder='期首簿価'  onChange={onChangeHandler}/>
         </label>
-      </StyledDiv>
+      </SDiv>
       {/*ボタン */}
-      <StyledDiv>
-        <StyledButton color='#eea29a' onClick={onClickHandler}>登録する</StyledButton>
-      </StyledDiv>
+      <SDiv>
+        <SButton color='#eea29a' onClick={onClickHandler}>登録する</SButton>
+      </SDiv>
     </Fragment>
   )
 }

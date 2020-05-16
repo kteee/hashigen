@@ -9,17 +9,17 @@ class AssetsController < ApplicationController
   def create
     new_asset = Asset.new(
       name: params[:name],
-      acquisition_date: params[:acquisition_date],
+      acquisition_date: Date.parse(params[:acquisition_date]),
       acquisition_value: params[:acquisition_value],
       asset_item_id: params[:asset_item_id],
       depreciation_method_id: params[:depreciation_method_id],
       account_id: @current_account.id,
       year_start_book_value: params[:year_start_book_value],
-      depreciation_start_date:  params[:depreciation_start_date]
+      depreciation_start_date:  Date.parse(params[:depreciation_start_date]),
+      location_id: params[:location_id]
     )
-    puts new_asset
-    if new_asset.save
-      response_post_success
+    if new_asset.create_with_transaction
+      post_request_response_success(new_asset)
     else
       response_error
     end

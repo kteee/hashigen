@@ -1,41 +1,45 @@
 import React, {Fragment, useState, useEffect, ChangeEvent} from 'react';
 import axios from 'axios'
 import Pagination from '@material-ui/lab/Pagination';
-import styled from 'styled-components'
 
-import {H3} from '../../../materials/Text'
-import {StyledInput} from '../../../materials/Input'
-import {GET_ASSET_ITEM_URL} from '../../../utilities/urls'
-import {FlexWrapper} from '../../../materials/Flex'
+import { H3 } from '../../../materials/Text'
+import { STable, STr, STh, STd } from '../../../materials/Table'
+import { SInput } from '../../../materials/Input'
+import { SDiv } from '../../../materials/Div'
+import { GET_ASSET_ITEM_URL } from '../../../utilities/urls'
+import { FlexWrapper } from '../../../materials/Flex'
+import { AssetItemsResponse, NewAssetProcessProps } from '../../../utilities/types'
 
 interface NewAssetStepOneProps {
-  setItemSelected: any
+  selectedItem: NewAssetProcessProps
+  setSelectedItem: any
 }
 
 const NewAssetStepOne = (props: NewAssetStepOneProps) => {
 
-  const [assetItems, setAssetItems] = useState([])
+  const [assetItems, setAssetItems] = useState<AssetItemsResponse[]>([])
   const [currentPage, setCurrentPange] = useState(1)
   const [perPageCount, setPerPageCount] = useState(10)
-  const [totalPages, setTotalPages] = useState()
-  const [queryWrod, setQueryWordl] = useState('')
+  const [totalPages, setTotalPages] = useState<number>()
+  const [queryWord, setQueryWord] = useState('')
   
 
   const getData = async () => {
-    const url = `${GET_ASSET_ITEM_URL}?per=${perPageCount}&page=${currentPage}&q=${queryWrod}`
+    const url = `${GET_ASSET_ITEM_URL}?per=${perPageCount}&page=${currentPage}&q=${queryWord}`
     const { data: { items, pages } } = await axios.get(url)
-    console.log(items)
-    console.log(pages)
     setAssetItems(items)
     setTotalPages(parseInt(pages))
   }
 
   useEffect(() => {    
     getData()
-  }, [currentPage, perPageCount, queryWrod])
+  }, [currentPage, perPageCount, queryWord])
 
-  const itemSelector = (assetItemId: string | number) => {
-    props.setItemSelected(assetItemId)
+  const itemSelector = (item: AssetItemsResponse) => {
+    props.setSelectedItem((prevState: NewAssetProcessProps) => ({
+      ...prevState,
+      stepOne: item
+    }))
   }
   
   const onSelectHandler = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -43,45 +47,48 @@ const NewAssetStepOne = (props: NewAssetStepOneProps) => {
   }
 
   const onInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setQueryWordl(e.target.value)
+    setQueryWord(e.target.value)
   }
 
   const pageChanger = (e: ChangeEvent<any>, page: number) => {
     setCurrentPange(page)
   }
 
-  let AssetItems = assetItems.map((value: any, index: number) => {
+  const AssetItems = assetItems.map((value, index: number) => {
     return (
-      <tr key={index} onClick={() => itemSelector(value.id)}>
-        <td>{value.id}</td>
-        <td>{value.group}</td>
-        <td>{value.item[0]}</td>
-        <td>{value.item[1]}</td>
-        <td>{value.item[2]}</td>
-        <td>{value.item[3]}</td>
-        <td>{value.item[4]}</td>
-        <td>{value.item[5]}</td>
-        <td>{value.item[6]}</td>
-        <td>{value.useful_life}</td>
-      </tr>
+      <STr key={index} onClick={() => itemSelector(value)}>
+        <STd align='right'>{value.id}</STd>
+        <STd>{value.group}</STd>
+        <STd>{value.item[0]}</STd>
+        <STd>{value.item[1]}</STd>
+        <STd>{value.item[2]}</STd>
+        <STd>{value.item[3]}</STd>
+        <STd>{value.item[4]}</STd>
+        <STd>{value.item[5]}</STd>
+        <STd>{value.item[6]}</STd>
+        <STd align='right'>{value.useful_life}</STd>
+      </STr>
     )
   })
 
   return (
     <Fragment>
       <H3>STEP1. 登録資産区分を選択</H3>
-      <StyledDiv>
-        <StyledInput type='text' name='asset-name' placeholder='検索ワード' onInput={onInputHandler}/>
-      </StyledDiv>
+      <SDiv>
+        <label>
+          キーワード絞り込み：
+          <SInput type='text' name='asset-name' placeholder='検索ワード' onInput={onInputHandler}/>
+        </label>
+      </SDiv>
       <FlexWrapper>
-        <StyledDiv>            
+        <SDiv>            
           <Pagination
             count={totalPages}
             onChange={pageChanger}
             page={currentPage}
           />
-        </StyledDiv>
-        <StyledDiv>
+        </SDiv>
+        <SDiv>
           <label>表示数</label>
           <select onChange={onSelectHandler}>
             <option></option>
@@ -90,23 +97,23 @@ const NewAssetStepOne = (props: NewAssetStepOneProps) => {
             <option value={15}>15</option>
             <option value={20}>20</option>
           </select>
-        </StyledDiv>
+        </SDiv>
       </FlexWrapper>
-      <StyledTable>
+      <STable>
+        <thead>
+          <STr>
+            <STh>ID</STh>
+            <STh>構造</STh>
+            <STh colSpan={7}>細目等</STh>
+            <STh>耐用年数</STh>
+          </STr>
+        </thead>
         <tbody>
           {AssetItems}
         </tbody>
-      </StyledTable>
+      </STable>
     </Fragment>
   );
 };
 
 export default NewAssetStepOne;
-
-const StyledDiv = styled.div`
-  margin-top: 1em;
-`
-
-const StyledTable = styled.table`
-  margin-top: 1em;
-`
