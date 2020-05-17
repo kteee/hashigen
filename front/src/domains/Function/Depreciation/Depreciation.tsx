@@ -13,7 +13,7 @@ export const Depreciation = () => {
 
   const [selectedMonths, setSelectedMonths] = useState<DepreciationMonth[]>([])
 
-  const setDepreciation = () => {
+  const Depreciation = () => {
     if(selectedMonths.length > 0){
       return (
         <DepreciationStepTwo
@@ -31,8 +31,6 @@ export const Depreciation = () => {
     }
   }
 
-  const Depreciation = setDepreciation()
-
   return (
     <Container>
       <ScreenWrapper>
@@ -41,7 +39,7 @@ export const Depreciation = () => {
         </ScreenLeft>
         <ScreenRight>
           <H2>減価償却実行</H2>
-          {Depreciation}
+          <Depreciation />
         </ScreenRight>
       </ScreenWrapper>
     </Container>

@@ -9,7 +9,7 @@ class Asset < ApplicationRecord
   belongs_to :asset_item
   belongs_to :depreciation_method
   belongs_to :location
-  has_many :transactions
+  has_many :transactions, dependent: :destroy
 
   # validations
   validate :depreciation_start_date_cannot_be_before_acquisition_date
@@ -28,26 +28,54 @@ class Asset < ApplicationRecord
     end
   end
 
-  # custom methods
-  class << self
-
-    def make_all_assets_list(account_id)
-      assets = self.where(account_id: account_id)
-       all_items_list = assets.map do |asset|
-        {
-          id: asset.id, 
-          name: asset.name,
-          acquisition_date: asset.acquisition_date,
-          acquisition_value: asset.acquisition_value.to_s(:delimited),
-          useful_life: asset.asset_item.useful_life.year,
-          depreciation_method: asset.depreciation_method.display_name,
-          # created_at: asset.created_at.strftime("%Y-%m-%d"),
-          updated_at: asset.updated_at.strftime("%Y-%m-%d")
-        }
-      end
-      { assets: all_items_list }
+  # custom method
+  def get_detail
+    custom_txns = self.transactions.map do |txn|
+      {
+        amount: txn.amount,
+        date: txn.date,
+        status: txn.status,
+        transaction_type: txn.transaction_type.display_name
+      }
     end
 
+    {
+      detail: {
+        acquisition_date: self.acquisition_date,
+        acquisition_value: self.acquisition_value,
+        depreciation_start_date: self.depreciation_start_date,
+        id: self.id,
+        prefecture: self.location.prefecture,
+        city: self.location.city,
+        name: self.name,
+        year_start_book_value: self.year_start_book_value,
+        created_at: self.created_at.strftime("%Y-%m-%d"),
+        updated_at: self.updated_at.strftime("%Y-%m-%d")
+      },
+      transactions: custom_txns,
+      accounting: {
+        dep_method: self.depreciation_method,
+        asset_type: self.asset_item.asset_group.asset_type,
+        asset_group: self.asset_item.asset_group,
+        asset_item: self.asset_item
+      }
+    }
+  end
+
+  class << self
+    def make_all_assets_list(account_id)
+      assets = self.where(account_id: account_id)
+      all_items_list = assets.map { |asset| {
+        id: asset.id, 
+        name: asset.name,
+        acquisition_date: asset.acquisition_date,
+        acquisition_value: asset.acquisition_value,
+        useful_life: asset.asset_item.useful_life.year,
+        depreciation_method: asset.depreciation_method.display_name,
+        created_at: asset.created_at.strftime("%Y-%m-%d"),
+        updated_at: asset.updated_at.strftime("%Y-%m-%d")
+      }} 
+    end
   end
 
 end

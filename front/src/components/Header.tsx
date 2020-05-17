@@ -9,6 +9,7 @@ import { setHeaders } from '../utilities/auth'
 import { SESSION_URL } from '../utilities/urls'
 import { LoginReducerState } from '../utilities/types'
 import { loginAction } from '../reducer/action'
+import { bg, text } from '../utilities/colors'
 
 interface ListItemProps {
   color?: string
@@ -18,7 +19,8 @@ const StyledHeader = styled.header`
   display: flex;
   height: 4em;
   align-items: center;
-  background-color: #db7093;
+  background-color: ${bg.teal};
+  color: ${text.white};
 `;
 
 const FlexGrow1 = styled.div`
@@ -42,11 +44,11 @@ const List = styled.ul`
 `;
 
 const ListItem = styled.li`
-  color: ${(props:ListItemProps) => (props.color ? props.color : 'white')};
+  color: ${(props:ListItemProps) => (props.color ? props.color : text.white)};
   height: 100%;
   padding: 0 1em;
   &:hover {
-    background-color: #eea29a;
+    background-color: ${bg.aqua};
   }
 `;
 
@@ -121,7 +123,7 @@ export const Header = () => {
   return (
     <StyledHeader>
       <FlexGrow1>
-        <CustomLink to='/'><HeaderH1 color='white'>Hashigen</HeaderH1></CustomLink>
+        <CustomLink to='/'><HeaderH1 color={text.white}>Hashigen</HeaderH1></CustomLink>
       </FlexGrow1>
       <Nav>
         {MenuList}

@@ -1,7 +1,6 @@
-// common
-export type NumberOrString = Number | String // railsからのデータが何か分からないときはこれを使う
-
-// reducers
+/*************************/
+/* reducers **************/ 
+/*************************/
 export interface LoginReducerState {
   loggedIn: boolean
   accountId: number|undefined
@@ -17,7 +16,12 @@ export interface LoginReducerDispatchType {
 
 export interface LoginReducerProps extends LoginReducerState, LoginReducerDispatch {}
 
-// props
+
+
+/*************************/
+/* props *****************/ 
+/*************************/
+
 export interface MenuListItemsProps {
   name: string
   link_to: string
@@ -69,7 +73,7 @@ export interface NewAssetItem {
 }
 
 export interface NewAssetProcessProps {
-  stepOne: AssetItemsResponse
+  stepOne: AssetListItemResponse
   stepTwo: NewAssetItem
 }
 
@@ -82,20 +86,77 @@ export interface DepreciationProcessProps {
   setSelectedMonths: any
 }
 
-// useState
+export interface MyModalProps {
+  open: boolean
+  onClose: any
+  body: any
+}
+
+
+/*************************/
+/* usestate **************/ 
+/*************************/
 type UseStateArgs = (string | number)
 export type UseState<T> = (T | undefined)
 export type UseStateCallback = { (args: UseStateArgs) :void }
 
-// api fetch
-export interface AssetDetailResponse {
-  id: number 
-  name: string
-  acquisition_value: string
+
+
+/*************************/
+/* api fetch *************/ 
+/*************************/
+
+export type NumberOrString = Number | String // railsからのデータが何か分からないときはこれを使う
+
+export interface AssetListItemResponse {
+  id: number
+  group: string
+  item: AssetItemsResponseItemArray
   useful_life: number
-  depreciation_method: string
+}
+
+export interface AssetListItem {
+  id: number
+  name: string
   acquisition_date: string
+  acquisition_value: number
+  useful_life: number,
+  depreciation_method: string,
+  created_at: string,
   updated_at: string
+}
+
+export interface AssetDetailAccountingResponse {
+  asset_group: AssetGroupResponse
+  asset_item: AssetItemsResponse
+  asset_type: any
+  dep_method: DepMethodResponse
+}
+
+export interface AssetDetailDetailResponse {
+  acquisition_date: string
+  acquisition_value: number
+  depreciation_start_date: string
+  id: number
+  prefecture: string
+  city: string
+  name: string
+  year_start_book_value: number
+  created_at: string
+  updated_at: string
+}
+
+export interface AssetDetailTransactionResponse {
+  amount: number
+  date: string
+  status: string
+  transaction_type: string
+}
+
+export interface AssetDetailResponse {
+  accounting: AssetDetailAccountingResponse
+  detail: AssetDetailDetailResponse
+  transactions: AssetDetailTransactionResponse[]
 }
 
 export interface DepreciationPreviewResponse {
@@ -146,15 +207,33 @@ export interface DepreciationMethodsProps {
   display_name: string
 }
 
+export interface AssetGroupResponse {
+  asset_type_id: number
+  created_at: string
+  id: number
+  name: string
+  updated_at: string
+}
+
+export interface DepMethodResponse {
+  created_at: string
+  display_name: string
+  id: number
+  name: string
+  updated_at: string
+}
+
 type AssetItemsResponseItemArray = [] | [
   string, string, string, string, string, string, string
 ]
 
 export interface AssetItemsResponse {
+  asset_group_id: number
+  created_at: string
   id: number
-  group: string
-  item: AssetItemsResponseItemArray
-  useful_life: number
+  item: string
+  updated_at: string
+  useful_life_id: number
 }
 
 export interface LocationsResponse {

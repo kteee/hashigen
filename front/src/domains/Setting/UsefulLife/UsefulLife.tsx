@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Container } from '../../../materials/Container'
 import { H2 } from '../../../materials/Text'
+import { STable, STr, STh, STd } from '../../../materials/Table'
 import { UsefulLifeResponse } from '../../../utilities/types'
 
 const url = 'http://localhost:5000/api/masters/useful-life'
@@ -22,43 +23,43 @@ export const UsefulLife = () => {
 
   let usefulLifeList = usefulLife.map((item: UsefulLifeResponse) => {
     return (
-      <tr>
-        <td>{item.year}</td>
-        <td>{item.old_same_amount}</td>
-        <td>{item.old_same_ratio}</td>
-        <td>{item.new_same_amount}</td>
-        <td>{item.two_five_zero_same_ratio_base}</td>
-        <td>{item.two_five_zero_same_ratio_guaranteed}</td>
-        <td>{item.two_five_zero_same_ratio_revised}</td>
-        <td>{item.two_zero_zero_same_ratio_base}</td>
-        <td>{item.two_zero_zero_same_ratio_guaranteed}</td>
-        <td>{item.two_zero_zero_same_ratio_revised}</td>
-      </tr>
+      <STr>
+        <STd align='right'>{item.year}</STd>
+        <STd align='right'>{item.old_same_amount}</STd>
+        <STd align='right'>{item.old_same_ratio}</STd>
+        <STd align='right'>{item.new_same_amount}</STd>
+        <STd align='right'>{item.two_five_zero_same_ratio_base}</STd>
+        <STd align='right'>{item.two_five_zero_same_ratio_guaranteed}</STd>
+        <STd align='right'>{item.two_five_zero_same_ratio_revised}</STd>
+        <STd align='right'>{item.two_zero_zero_same_ratio_base}</STd>
+        <STd align='right'>{item.two_zero_zero_same_ratio_guaranteed}</STd>
+        <STd align='right'>{item.two_zero_zero_same_ratio_revised}</STd>
+      </STr>
     )
   })
 
   return (
     <Container>
       <H2>耐用年数表</H2>
-      <table>
+      <STable>
         <thead>
-          <tr>
-            <th>年数</th>
-            <th>旧定額法</th>
-            <th>旧定率法</th>
-            <th>新定額法</th>
-            <th>250%定率法</th>
-            <th>250%定率法保証価格</th>
-            <th>250%定率法改定償却率</th>
-            <th>200%定率法</th>
-            <th>200%定率法保証価格</th>
-            <th>200%定率法改定償却率</th>
-          </tr>
+          <STr>
+            <STh>年数</STh>
+            <STh>旧定額法</STh>
+            <STh>旧定率法</STh>
+            <STh>新定額法</STh>
+            <STh>250%<br></br>定率法</STh>
+            <STh>250%<br></br>定率法保証価格</STh>
+            <STh>250%<br></br>定率法改定償却率</STh>
+            <STh>200%<br></br>定率法</STh>
+            <STh>200%<br></br>定率法保証価格</STh>
+            <STh>200%<br></br>定率法改定償却率</STh>
+          </STr>
         </thead>
         <tbody>      
           {usefulLifeList}
         </tbody>
-      </table>
+      </STable>
     </Container>
   )
 }

@@ -27,14 +27,19 @@ class AssetsController < ApplicationController
 
   def show
     asset = Asset.find(params[:id])
-    depreciation = asset.depreciate
-    get_request_response_success(depreciation)
+    get_request_response_success(asset.get_detail)
   end
 
   def updated
   end
 
   def destroy
+    asset = Asset.find(params[:id])
+    if asset.destroy
+      post_request_response_success('削除に成功しました')
+    else
+      response_error
+    end
   end
 
 end

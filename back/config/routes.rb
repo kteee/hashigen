@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resource :asset, only: [] do
       resource :preview, controller: :asset_preview, only: [:show]
     end
-    resource :assets do
+    resource :assets, only: [] do
       resource :depreciation, controller: :asset_depreciation, only: [:show, :create]
     end
     resources :assets

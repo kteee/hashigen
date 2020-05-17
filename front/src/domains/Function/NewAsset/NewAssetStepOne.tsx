@@ -8,7 +8,7 @@ import { SInput } from '../../../materials/Input'
 import { SDiv } from '../../../materials/Div'
 import { GET_ASSET_ITEM_URL } from '../../../utilities/urls'
 import { FlexWrapper } from '../../../materials/Flex'
-import { AssetItemsResponse, NewAssetProcessProps } from '../../../utilities/types'
+import { AssetListItemResponse, NewAssetProcessProps } from '../../../utilities/types'
 
 interface NewAssetStepOneProps {
   selectedItem: NewAssetProcessProps
@@ -17,7 +17,7 @@ interface NewAssetStepOneProps {
 
 const NewAssetStepOne = (props: NewAssetStepOneProps) => {
 
-  const [assetItems, setAssetItems] = useState<AssetItemsResponse[]>([])
+  const [assetItems, setAssetItems] = useState<AssetListItemResponse[]>([])
   const [currentPage, setCurrentPange] = useState(1)
   const [perPageCount, setPerPageCount] = useState(10)
   const [totalPages, setTotalPages] = useState<number>()
@@ -35,7 +35,7 @@ const NewAssetStepOne = (props: NewAssetStepOneProps) => {
     getData()
   }, [currentPage, perPageCount, queryWord])
 
-  const itemSelector = (item: AssetItemsResponse) => {
+  const itemSelector = (item: AssetListItemResponse) => {
     props.setSelectedItem((prevState: NewAssetProcessProps) => ({
       ...prevState,
       stepOne: item

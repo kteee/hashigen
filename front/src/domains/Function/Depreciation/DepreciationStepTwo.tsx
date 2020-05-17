@@ -8,6 +8,7 @@ import { ASSETS_DEPRECIATION_URL } from '../../../utilities/urls'
 import { setHeaders } from '../../../utilities/auth'
 import { DepreciationProcessProps, AssetDepreciationResponse } from '../../../utilities/types'
 import { digitComma } from '../../../utilities/digitComma'
+import { bg, text } from '../../../utilities/colors'
 
 
 export const DepreciationStepTwo = (props: DepreciationProcessProps) => {
@@ -78,13 +79,13 @@ export const DepreciationStepTwo = (props: DepreciationProcessProps) => {
       </STable>
       <SDiv>
         <SButton
-          backgroundColor='#51d0de'
-          color='white'
+          backgroundColor={bg.aqua}
+          color={text.navy}
           onClick={execCreateDepreciation}
         >実行する</SButton>
         <SButton
-          backgroundColor='#ff5e6c'
-          color='white'
+          backgroundColor={bg.red}
+          color={text.silver}
           margin='0 0 0 1em'
           onClick={setPreviousStep}
         >戻る</SButton>

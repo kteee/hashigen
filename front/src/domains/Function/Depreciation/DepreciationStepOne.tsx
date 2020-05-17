@@ -8,6 +8,7 @@ import { SInput } from '../../../materials/Input'
 import { CURRENT_ACCOUNTING_PERIOD_MONTHLY_PERIODS_URL } from '../../../utilities/urls'
 import { setHeaders } from '../../../utilities/auth'
 import { DepreciationMonth, MonthlyPeriodResponse, DepreciationProcessProps } from '../../../utilities/types'
+import { bg, text } from '../../../utilities/colors'
 
 export const DepreciationStepOne = (props: DepreciationProcessProps) => {
 
@@ -89,7 +90,11 @@ export const DepreciationStepOne = (props: DepreciationProcessProps) => {
         </tbody>
       </STable>
       <SDiv>
-        <SButton onClick={setDepreciationPreview}>プレビュー</SButton>
+        <SButton
+          onClick={setDepreciationPreview}
+          backgroundColor={bg.aqua}
+          color={text.navy}
+        >プレビュー</SButton>
       </SDiv>
     </Fragment>
   )
