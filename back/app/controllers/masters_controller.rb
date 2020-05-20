@@ -1,5 +1,4 @@
 class MastersController < ApplicationController
-
   def useful_life
     all_useful_lives = UsefulLife.all
     get_request_response_success(all_useful_lives)
@@ -10,11 +9,6 @@ class MastersController < ApplicationController
     render status: 200, json: { data: all_types }
   end
 
-  def asset_group
-    all_groups = AssetGroup.all
-    render status: 200, json: { data: all_groups }
-  end
-
   def asset_item_count
     items_count = AssetItem.all.count
     render status: 200, json: { count: items_count }
@@ -23,11 +17,6 @@ class MastersController < ApplicationController
   def asset_item
     items = AssetItem.search_and_pagenate(params[:q], params[:page], params[:per])
     render status:200, json: items
-  end
-
-  def dep_method
-    all_methods = DepreciationMethod.all
-    render status: 200, json: { methods: all_methods }
   end
 
 end

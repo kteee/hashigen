@@ -14,7 +14,8 @@ const baseUrl = makeBaseUrl()
 
 export const GET_ASSET_ITEM_URL = `${baseUrl}/api/masters/asset-item`
 export const GET_USEFUL_LIFE_URL = `${baseUrl}/api/masters/useful-life`
-export const GET_DEP_METHOD_URL = `${baseUrl}/api/masters/dep-method`
+export const GET_DEP_METHODS_URL = `${baseUrl}/api/dep_methods`
+export const GET_ASSET_GROUPS_URL = `${baseUrl}/api/asset_groups`
 export const ASSETS_URL = `${baseUrl}/api/assets`
 export const ASSETS_DEPRECIATION_URL = `${baseUrl}/api/assets/depreciation`
 export const ASSET_PREVIEW_URL = `${baseUrl}/api/asset/preview`

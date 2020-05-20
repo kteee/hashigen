@@ -13,3 +13,7 @@ export const FlexWrapper = styled.div`
   margin: ${(props: FlexWrapperProps) => props.padding ? props.padding : '0 0 0 0'};
   justify-content: ${(props: FlexWrapperProps) => props.justifyContent ? props.justifyContent : 'flex-start'};
 `
+
+export const FlexDiv = styled.div`
+  flex-grow: 1;
+`

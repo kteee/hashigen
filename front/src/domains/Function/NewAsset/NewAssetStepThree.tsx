@@ -5,11 +5,13 @@ import axios from 'axios'
 import { NewAssetProcessProps, DepreciationPreviewResponse } from '../../../utilities/types'
 import { H3 } from '../../../materials/Text'
 import { SDiv } from '../../../materials/Div'
+import { FlexWrapper, FlexDiv } from '../../../materials/Flex'
 import { SButton } from '../../../materials/Button'
 import { STable, STr, STh, STd } from '../../../materials/Table'
 import { setHeaders } from '../../../utilities/auth'
 import { ASSETS_URL, ASSET_PREVIEW_URL } from '../../../utilities/urls'
 import { digitComma } from '../../../utilities/digitComma'
+import { bg } from '../../../utilities/colors'
 
 interface NewAssetStepThreeProps {
   selectedItem: NewAssetProcessProps
@@ -106,8 +108,18 @@ export const NewAssetStepThree = (props: NewAssetStepThreeProps) => {
 
   return (
     <Fragment>
-      <H3>STEP3. 減価償却プレビューを確認して登録</H3>
-      <button onClick={setPreviousStepHandler}>STEP2の選択に戻る</button>
+      <FlexWrapper>
+        <FlexDiv>
+          <H3>STEP3. 減価償却プレビューを確認して登録</H3>
+        </FlexDiv>
+        <SDiv>
+          <SButton
+            backgroundColor={bg.maroon}
+            color={bg.white}
+            onClick={setPreviousStepHandler}
+          >STEP２の選択に戻る</SButton>
+        </SDiv>
+      </FlexWrapper>
       <LineChart
         width={depreciationProjection.length * 80}
         height={400}

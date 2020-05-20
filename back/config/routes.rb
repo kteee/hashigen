@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     resource :current_accounting_period, only: [] do
       resources :monthly_periods, controller: :current_accounting_period_monthly_periods, only: [:index, :show]
     end
+    resources :dep_methods, only: [:index]
+    resources :asset_groups, only: [:index]
   end
 
   get '/api/account/setting', to: 'accounts#setting'

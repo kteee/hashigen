@@ -22,6 +22,17 @@ export interface LoginReducerProps extends LoginReducerState, LoginReducerDispat
 /* props *****************/ 
 /*************************/
 
+export interface ReactSelect  {
+  value: string
+  label: string
+}
+
+export interface AssetListToSearchProps {
+  setAssetGroupId(id: string): void
+  setDepMethodId(id: string): void
+  getAssets(): void
+}
+
 export interface MenuListItemsProps {
   name: string
   link_to: string
@@ -105,6 +116,14 @@ export type UseStateCallback = { (args: UseStateArgs) :void }
 /*************************/
 /* api fetch *************/ 
 /*************************/
+
+export interface AssetGroupResponse {
+  id: number
+  name: string
+  created_at: string
+  updated_at: string
+  asset_type_id: number 
+}
 
 export type NumberOrString = Number | String // railsからのデータが何か分からないときはこれを使う
 
@@ -234,13 +253,6 @@ export interface AssetItemsResponse {
   item: string
   updated_at: string
   useful_life_id: number
-}
-
-export interface LocationsResponse {
-  id: number
-  code: string
-  prefecture: string
-  city: string
 }
 
 export interface AssetDepreciationResponse {

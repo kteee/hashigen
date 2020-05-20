@@ -2,8 +2,7 @@ class AssetsController < ApplicationController
   before_action :validate_token
 
   def index
-    all_assets_list = Asset.make_all_assets_list(@current_account.id)
-    get_request_response_success(all_assets_list)
+    get_request_response_success(Asset.get_list(@current_account.id, params))
   end
   
   def create

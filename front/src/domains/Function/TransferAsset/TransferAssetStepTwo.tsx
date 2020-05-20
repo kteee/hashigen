@@ -6,7 +6,7 @@ import { H3 } from '../../../materials/Text'
 import { SInput } from '../../../materials/Input'
 import { SButton } from '../../../materials/Button'
 import { SDiv } from '../../../materials/Div'
-import { GET_DEP_METHOD_URL, ASSETS_URL } from '../../../utilities/urls'
+import { GET_DEP_METHODS_URL, ASSETS_URL } from '../../../utilities/urls'
 import { UseState, DepreciationMethodsProps } from '../../../utilities/types'
 import { setHeaders } from '../../../utilities/auth'
 
@@ -34,7 +34,7 @@ export const TransferAssetStepTwo = (props: Props) => {
   const [depreciationStartDateInput, setDepreciationStartDateInput] = useState(false)
   
   const getDepMethods = async () => {
-    const { data : { methods }} = await axios.get(GET_DEP_METHOD_URL)
+    const { data : { methods }} = await axios.get(GET_DEP_METHODS_URL)
     setMethods(methods)
   }
 
