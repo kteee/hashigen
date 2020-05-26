@@ -17,18 +17,16 @@ class Account < ApplicationRecord
       start: self.get_current_period[:start],
       end: self.get_current_period[:end]
     }
-    basic_info
   end
 
   def get_current_period
     current_period = {}
-    self.accounting_periods.each do |period|
-      puts period.status
+    self.accounting_periods.each { |period|
       if period.status == 0 then
         current_period = { start: period.start, end: period.end }
         break
       end
-    end
+    }
     current_period
   end
   

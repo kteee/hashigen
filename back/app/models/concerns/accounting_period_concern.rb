@@ -1,7 +1,7 @@
 module AccountingPeriodConcern
   # メモ おそらくmodule名をスネークケースにしたファイル名にしないとincludeに失敗する
-  extend ActiveSupport::Concern
   # AccountingPeriodで呼ばれる
+  extend ActiveSupport::Concern
   def create(account_id, monthly_periods)
   # monthly_periodsにはjs側で表示していた以下のようなオブジェクトの配列を使う
   # {"month"=>1, "monthStartDate"=>"2020-01-01", "monthEndDate"=>"2020-01-31"}

@@ -1,14 +1,20 @@
-import { LoginReducerState } from '../utilities/types'
-import { LOGIN, ActionTypes } from '../reducer/action'
+import { LoginReducerState, MessageReducerState } from '../utilities/types'
+import { LOGIN, SHOW_MESSAGE, HIDE_MESSAGE,
+  LoginActionType, ShowMessageActionType, HideMessageActionType } from '../reducer/action'
 
-const initialState: LoginReducerState = {
+const initialLoginState: LoginReducerState = {
   loggedIn: false,
   accountId: undefined
 }
 
+const initialMesageState: MessageReducerState = {
+  open: false,
+  message: ''
+}
+
 export const loginReducer = (
-  state=initialState,
-  action: ActionTypes
+  state = initialLoginState,
+  action: LoginActionType
 ): LoginReducerState => {
   switch (action.type) {
     case LOGIN:
@@ -16,6 +22,28 @@ export const loginReducer = (
         ...state,
         loggedIn: true,
         accountId: action.accountId
+      })
+    default:
+      return state
+  }
+}
+
+export const messageReducer = (
+  state = initialMesageState,
+  action: ShowMessageActionType | HideMessageActionType
+): MessageReducerState => {
+  switch (action.type) {
+    case SHOW_MESSAGE:
+      return ({
+        ...state,
+        open: true,
+        message: action.message
+      })
+    case HIDE_MESSAGE:
+      return ({
+        ...state,
+        open: false,
+        message: ''
       })
     default:
       return state

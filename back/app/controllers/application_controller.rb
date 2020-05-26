@@ -8,34 +8,20 @@ class ApplicationController < ActionController::API
     render status: 201, json: response_item
   end
 
-  def response_error
-    render status: 400, json: { message: 'something went wrong' }
+  def response_error(message)
+    render status: 400, json: message
   end
 
-  class JsonWebToken
-    SECRET_KEY = Rails.application.secrets.secret_key_base. to_s
-  
-    def self.encode(payload, exp = 24.hours.from_now)
-      payload[:exp] = exp.to_i
-      JWT.encode(payload, SECRET_KEY)
-    end
-  
-    def self.decode(token)
-      decoded = JWT.decode(token, SECRET_KEY)[0]
-      HashWithIndifferentAccess.new decoded
-    end
-  end
-
-  def validate_token
+  def authenticate
     begin
       header = request.headers['Authorization']
       @decoded_data = JsonWebToken.decode(header)
       @current_user = User.find(@decoded_data[:user_id])
       @current_account = @current_user.account
     rescue ActiveRecord::RecordNotFound => e
-      render json: { errors: e.message }, status: :unauthorized
+      render json: { errors: e.message }, status: 401
     rescue JWT::DecodeError => e
-      render json: { errors: e.message }, status: :unauthorized
+      render json: { errors: e.message }, status: 403
     end
   end
 

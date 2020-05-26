@@ -1,5 +1,5 @@
 class AccountingPeriodsController < ApplicationController
-  before_action :validate_token
+  before_action :authenticate
   
   def index
     get_request_response_success(@current_account.accounting_periods)

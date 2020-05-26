@@ -1,25 +1,30 @@
 class UsersController < ApplicationController
-  before_action :validate_token, except: :create
+  before_action :authenticate, except: :create
 
   def index
   end
 
   def create
-    puts 'user create method called'
-    @new_user = User.new(user_params)
-    if @new_user.save
-      response_post_success
+    new_user = User.new(
+      email: params[:email],
+      password_digest: params[:password],
+      name: params[:name],
+      role_id: params[:role_id],
+      account_id: params[:account_id]
+    )
+    if new_user.save
+      post_request_response_success(new_user)
     else
-      response_error
+      response_error('failed')
     end
   end
   
   def show
-    @user = User.find(params[:id])
-    if(@decoded_data.user_id === @user.user_id)
-      response_get_success(@user)
+    user = User.find(params[:id])
+    if(@current_user.id == user.id)
+      get_request_response_success(@current_user)
     else 
-      response_error
+      response_error('unauthenticated')
     end
   end
 

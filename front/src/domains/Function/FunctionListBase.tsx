@@ -7,10 +7,10 @@ import { MenuListItemsProps } from '../../utilities/types'
 export const FunctionListBase = () => {
 
   const functionItems: MenuListItemsProps[] = [
-    {name:'新規資産の登録', link_to:'/function/new'},
-    {name:'既存資産の引き継ぎ', link_to:'/function/transfer'},
-    {name:'資産一覧と検索', link_to:'/function/list'},
-    {name:'減価償却の実行', link_to:'/function/depreciate'}
+    {name:'資産登録', link_to:'/function/new'},
+    {name:'一覧検索', link_to:'/function/list'},
+    {name:'処理承認', link_to:'/function/approval'},
+    {name:'簿価増減', link_to:'/function/report'}
   ];
 
   const FunctionItems = functionItems.map((item, index) => {

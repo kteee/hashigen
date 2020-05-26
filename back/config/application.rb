@@ -42,5 +42,7 @@ module App
             controller_specs: false, 
             routing_specs: false
     end
+    # libフォルダ有効化
+    config.autoload_paths += %W(#{config.root}/lib)
   end
 end

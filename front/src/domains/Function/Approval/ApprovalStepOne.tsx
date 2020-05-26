@@ -5,27 +5,29 @@ import { STable, STr, STh, STd } from '../../../materials/Table'
 import { SDiv } from '../../../materials/Div'
 import { SButton } from '../../../materials/Button'
 import { SInput } from '../../../materials/Input'
-import { CURRENT_ACCOUNTING_PERIOD_MONTHLY_PERIODS_URL } from '../../../utilities/urls'
+import { UNAPPROVED_TRANSACTIONS } from '../../../utilities/urls'
 import { setHeaders } from '../../../utilities/auth'
 import { DepreciationMonth, MonthlyPeriodResponse, DepreciationProcessProps } from '../../../utilities/types'
+import { bg, text } from '../../../utilities/colors'
 
-export const DepreciationStepOne = (props: DepreciationProcessProps) => {
+export const ApprovalStepOne = (props: DepreciationProcessProps) => {
 
   const [monthlyPeriods, setMonthlyPeriods] = useState<DepreciationMonth[]>([])
 
   const getAccountingPeriod = async () => {
     const headers = setHeaders()
-    const { data } = await axios.get(
-      CURRENT_ACCOUNTING_PERIOD_MONTHLY_PERIODS_URL,
+    const response = await axios.get(
+      UNAPPROVED_TRANSACTIONS,
       headers
     )
-    const monthlyPeriodResponseWithCheckedStatus = data.map((item: MonthlyPeriodResponse): DepreciationMonth => {
-      return ({
-        ...item,
-        checked: false
-      })
-    })
-    setMonthlyPeriods(monthlyPeriodResponseWithCheckedStatus)
+    console.log(response)
+    // const monthlyPeriodResponseWithCheckedStatus = data.map((item: MonthlyPeriodResponse): DepreciationMonth => {
+    //   return ({
+    //     ...item,
+    //     checked: false
+    //   })
+    // })
+    // setMonthlyPeriods(monthlyPeriodResponseWithCheckedStatus)
   }
 
   useEffect(() => {
@@ -89,7 +91,11 @@ export const DepreciationStepOne = (props: DepreciationProcessProps) => {
         </tbody>
       </STable>
       <SDiv>
-        <SButton onClick={setDepreciationPreview}>プレビュー</SButton>
+        <SButton
+          onClick={setDepreciationPreview}
+          backgroundColor={bg.aqua}
+          color={text.navy}
+        >プレビュー</SButton>
       </SDiv>
     </Fragment>
   )

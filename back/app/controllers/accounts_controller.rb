@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_action :validate_token, except: :create
+  before_action :authenticate, except: :create
 
   def index
   end
