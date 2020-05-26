@@ -1,9 +1,8 @@
 import React from 'react'
-import { Card } from '../../../materials/Div'
-import { H2 } from '../../../materials/Text'
-import { SDl, SDt, SDd, SDWrapper } from '../../../materials/Definition'
-import { digitComma } from '../../../utilities/digitComma'
-import { AssetDetailAccountingResponse } from '../../../utilities/types'
+import { Card } from '../../../../materials/Div'
+import { H2 } from '../../../../materials/Text'
+import { SDl, SDt, SDd, SDWrapper } from '../../../../materials/Definition'
+import { AssetDetailAccountingResponse } from '../../../../utilities/types'
 
 
 interface AccountingProps {

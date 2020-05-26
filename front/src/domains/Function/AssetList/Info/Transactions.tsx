@@ -1,9 +1,9 @@
 import React from 'react'
-import { Card } from '../../../materials/Div'
-import { H2 } from '../../../materials/Text'
-import { SDl, SDt, SDd, SDWrapper } from '../../../materials/Definition'
-import { digitComma } from '../../../utilities/digitComma'
-import { AssetDetailTransactionResponse } from '../../../utilities/types'
+import { Card } from '../../../../materials/Div'
+import { H2 } from '../../../../materials/Text'
+import { SDl, SDt, SDd, SDWrapper } from '../../../../materials/Definition'
+import { digitComma } from '../../../../utilities/digitComma'
+import { AssetDetailTransactionResponse } from '../../../../utilities/types'
 
 
 interface TransactionslProps {
@@ -12,9 +12,9 @@ interface TransactionslProps {
 
 export const Transactions = (props: TransactionslProps) => {
 
-  const TransactionList = props.transactions.map(txn => {
+  const TransactionList = props.transactions.map((txn, index: number) => {
     return (
-      <SDl>
+      <SDl key={index.toString()}>
         <SDWrapper>
           <SDt>日付</SDt>
           <SDd>{txn.date}</SDd>
@@ -25,7 +25,7 @@ export const Transactions = (props: TransactionslProps) => {
         </SDWrapper>
         <SDWrapper>
           <SDt>取引金額</SDt>
-          <SDd>{digitComma(txn.amount)}</SDd>
+          <SDd>{digitComma(txn.value)}</SDd>
         </SDWrapper>
         <SDWrapper>
           <SDt>ステータス</SDt>

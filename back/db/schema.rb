@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_16_044156) do
+ActiveRecord::Schema.define(version: 2020_05_23_053235) do
 
   create_table "accounting_periods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.date "start"
@@ -65,6 +65,8 @@ ActiveRecord::Schema.define(version: 2020_05_16_044156) do
     t.integer "year_start_book_value"
     t.date "depreciation_start_date"
     t.bigint "location_id"
+    t.integer "unit_value"
+    t.integer "amount"
     t.index ["account_id"], name: "index_assets_on_account_id"
     t.index ["asset_item_id"], name: "index_assets_on_asset_item_id"
     t.index ["depreciation_method_id"], name: "index_assets_on_depreciation_method_id"
@@ -117,11 +119,12 @@ ActiveRecord::Schema.define(version: 2020_05_16_044156) do
     t.bigint "asset_id", null: false
     t.bigint "monthly_period_id"
     t.bigint "transaction_type_id", null: false
-    t.integer "amount", null: false
+    t.integer "value", null: false
     t.integer "status", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.date "date"
+    t.date "exec_date"
+    t.date "txn_date"
     t.index ["asset_id"], name: "index_transactions_on_asset_id"
     t.index ["monthly_period_id"], name: "index_transactions_on_monthly_period_id"
     t.index ["transaction_type_id"], name: "index_transactions_on_transaction_type_id"

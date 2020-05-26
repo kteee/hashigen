@@ -1,11 +1,11 @@
 import React from 'react'
-import { Card } from '../../../materials/Div'
-import { FlexWrapper } from '../../../materials/Flex'
-import { SButton } from '../../../materials/Button'
-import { H2 } from '../../../materials/Text'
-import { SDl, SDt, SDd, SDWrapper } from '../../../materials/Definition'
-import { AssetDetailDetailResponse } from '../../../utilities/types'
-import { digitComma } from '../../../utilities/digitComma'
+import { Card } from '../../../../materials/Div'
+import { FlexWrapper } from '../../../../materials/Flex'
+import { SButton } from '../../../../materials/Button'
+import { H2 } from '../../../../materials/Text'
+import { SDl, SDt, SDd, SDWrapper } from '../../../../materials/Definition'
+import { AssetDetailDetailResponse } from '../../../../utilities/types'
+import { digitComma } from '../../../../utilities/digitComma'
 
 interface DetailProps {
   detail: AssetDetailDetailResponse

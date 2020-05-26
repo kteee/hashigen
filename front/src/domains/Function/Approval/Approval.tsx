@@ -4,26 +4,26 @@ import { FunctionListBase } from '../FunctionListBase'
 import { Container } from '../../../materials/Container'
 import { H2 } from '../../../materials/Text'
 import { ScreenWrapper, ScreenLeft, ScreenRight } from '../../../materials/ScreenDivider'
-import { DepreciationStepOne } from './DepreciationStepOne'
-import { DepreciationStepTwo } from './DepreciationStepTwo'
+import { ApprovalStepOne } from './ApprovalStepOne'
+import { ApprovalStepTwo } from './ApprovalStepTwo'
 import { DepreciationMonth } from '../../../utilities/types'
 
 
-export const Depreciation = () => {
+export const Approval = () => {
 
   const [selectedMonths, setSelectedMonths] = useState<DepreciationMonth[]>([])
 
   const Depreciation = () => {
     if(selectedMonths.length > 0){
       return (
-        <DepreciationStepTwo
+        <ApprovalStepTwo
           selectedMonths={selectedMonths}
           setSelectedMonths={setSelectedMonths}
         />
       )
     } else {
       return (
-        <DepreciationStepOne
+        <ApprovalStepOne
           selectedMonths={selectedMonths}
           setSelectedMonths={setSelectedMonths}
         />

@@ -1,9 +1,19 @@
 /*************************/
 /* reducers **************/ 
 /*************************/
+export interface storeState {
+  login: LoginReducerState
+  message: MessageReducerState
+}
+
 export interface LoginReducerState {
   loggedIn: boolean
   accountId: number|undefined
+}
+
+export interface MessageReducerState {
+  open: boolean
+  message: string
 }
 
 export interface LoginReducerDispatch {
@@ -43,13 +53,6 @@ export interface ReduxProps {
   login: any
 }
 
-export interface SnackbarProps {
-  open: boolean
-  autoHideDuration: number
-  onClose: any
-  message: string
-}
-
 export interface TableHeaderCell {
   fiscal_year: number
   fiscal_year_month: number
@@ -78,14 +81,26 @@ export interface NewAssetItem {
   acquisition_date: string
   depreciation_start_date: string
   depreciation_method_id: number
-  acquisition_value: number
   year_start_book_value: number
   location_id: number
+  unit_value: number
+  amount: number
+  acquisition_value: number
 }
 
 export interface NewAssetProcessProps {
   stepOne: AssetListItemResponse
   stepTwo: NewAssetItem
+}
+
+type setSelectedItemArg = (prevState: NewAssetProcessProps) => {
+  stepOne: AssetListItemResponse
+  stepTwo: NewAssetItem
+}
+
+export interface NewAssetStepProps {
+  selectedItem: NewAssetProcessProps
+  setSelectedItem(arg: setSelectedItemArg): void
 }
 
 export interface DepreciationMonth extends MonthlyPeriodResponse {
@@ -116,6 +131,18 @@ export type UseStateCallback = { (args: UseStateArgs) :void }
 /*************************/
 /* api fetch *************/ 
 /*************************/
+
+interface TransactionResponseInner {
+  type: string
+  status: string
+  value: number
+}
+
+export interface TransactionResponse {
+  [key: string]: TransactionResponseInner[]
+}
+
+
 
 export interface AssetGroupResponse {
   id: number
@@ -166,7 +193,7 @@ export interface AssetDetailDetailResponse {
 }
 
 export interface AssetDetailTransactionResponse {
-  amount: number
+  value: number
   date: string
   status: string
   transaction_type: string

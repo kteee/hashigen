@@ -14,9 +14,10 @@ class Asset < ApplicationRecord
   # normal validations
   validates :name, :acquisition_date, :acquisition_value,
     :asset_item_id, :depreciation_method_id, :account_id,
-    :year_start_book_value, :depreciation_start_date, :location_id, presence: true
-  validates :acquisition_value, numericality: { greater_than: 0 }
-  validates :year_start_book_value, numericality: { greater_than: 0 }
+    :year_start_book_value, :depreciation_start_date, :location_id,
+    :unit_value, :amount, presence: true
+  validates :acquisition_value, :year_start_book_value, :unit_value,
+    :amount, numericality: { greater_than: 0 }
 
   # custom validations
   validate :depreciation_start_date_cannot_be_before_acquisition_date
@@ -30,6 +31,7 @@ class Asset < ApplicationRecord
   end
 
   def depreciation_start_date_cannot_be_before_current_period
+    puts 
     if account.get_current_period[:start] > depreciation_start_date then
       errors.add(:depreciation_start_date, 'は当会計年度の期首日以前の日付にすることはできません')
     end
@@ -39,8 +41,8 @@ class Asset < ApplicationRecord
   def get_detail
     custom_txns = self.transactions.map do |txn|
       {
-        amount: txn.amount,
-        date: txn.date,
+        value: txn.value,
+        date: txn.exec_date,
         status: txn.status,
         transaction_type: txn.transaction_type.display_name
       }
@@ -80,8 +82,6 @@ class Asset < ApplicationRecord
       assets = Asset.filter_account(account_id)
       assets = params[:depreciation_method_id] ? assets.filter_dep_method(params[:depreciation_method_id]) : assets
       assets = params[:asset_group_id] ? assets.filter_asset_group(params[:asset_group_id]) : assets
-      puts '+++++ assets +++++'
-      puts assets
       list = assets.map { |asset| {
         id: asset.id, 
         name: asset.name,

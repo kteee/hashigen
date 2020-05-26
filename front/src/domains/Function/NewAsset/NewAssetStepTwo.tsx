@@ -11,33 +11,31 @@ import { FlexWrapper, FlexDiv } from '../../../materials/Flex'
 import { STable, STr, STh, STd } from '../../../materials/Table'
 import { SDl, SDWrapper, SDt, SDd } from '../../../materials/Definition'
 import { GET_DEP_METHODS_URL, LOCATIONS_URL } from '../../../utilities/urls'
-import { DepreciationMethodsProps, NewAssetProcessProps, ReactSelect } from '../../../utilities/types'
+import { DepreciationMethodsProps, NewAssetProcessProps, ReactSelect, NewAssetItem, NewAssetStepProps } from '../../../utilities/types'
 import { DateInput } from '../../../components/DateInput'
 import { dateToYYYYMMDDStr } from '../../../utilities/dateManipulate'
 import { bg } from '../../../utilities/colors'
+import { digitComma } from '../../../utilities/digitComma'
 
-interface NewAssetSteTwoProps {
-  selectedItem: NewAssetProcessProps
-  setSelectedItem: any
-}
 
-export const NewAssetStepTwo = (props: NewAssetSteTwoProps) => {
+export const NewAssetStepTwo = (props: NewAssetStepProps) => {
 
   const ASSET_NAME = 'asset-name'
   const DEPRECIATION_METHOD = 'depreciation-method'
-  const ACQUISITION_VALUE = 'acquisition-value'
+  const UNIT_VALUE = 'unit-value'
+  const AMOUNT = 'amount'
 
   const [methods, setMethods] = useState<DepreciationMethodsProps[]>([])
   const [assetName, setAssetName] = useState('')
   const [acquisitionDate, setAcquisitionDate] = useState(new Date())
   const [depreciationStartDate, setDepreciationStartDate] = useState(new Date())
-  const [depreciationMethod, setDepreciationMethod] = useState('')
-  const [acquisitionValue, setAcquisitionValue] = useState('')
-  const [locations, setLocations] = useState<ReactSelect[]>([])
-  const [location, setLocation] = useState('') 
-  const [queryWrod, setQueryWord] = useState('')
-
+  const [depreciationMethod, setDepreciationMethod] = useState(0)
+  const [unitValue, setUnitValue] = useState(0)
+  const [amount, setAmount] = useState(1)
+  const [acquisitionValue, setAcquisitionValue] = useState(0)
+  const [location, setLocation] = useState(0) 
   const [depreciationStartDateInput, setDepreciationStartDateInput] = useState(true)
+
   
   const getDepMethods = async () => {
     const { data } = await axios.get(GET_DEP_METHODS_URL)
@@ -45,22 +43,20 @@ export const NewAssetStepTwo = (props: NewAssetSteTwoProps) => {
     setDepreciationMethod(data[0].id)
   }
 
-  // const getLocations = async () => {
-  //   const url = `${LOCATIONS_URL}?q=${queryWrod}`
-  //   const { data } = await axios.get(url)
-  //   console.log(data)
-  //   setLocations(data)
-  // }
-
   const getLocations = async (inputValue: string) => {
     const url = `${LOCATIONS_URL}?q=${inputValue}`
     const { data } = await axios.get(url)
     return data
   }
 
-  useEffect( () => {
+  useEffect(() => {
     getDepMethods()
   }, [])
+
+  useEffect(() => {
+    const val = unitValue * amount
+    setAcquisitionValue(val)
+  }, [unitValue, amount])
 
   const setPreviousStepHandler = () => {
     props.setSelectedItem((prevState: NewAssetProcessProps) => ({
@@ -80,10 +76,13 @@ export const NewAssetStepTwo = (props: NewAssetSteTwoProps) => {
         setAssetName(e.target.value)
         break
       case DEPRECIATION_METHOD:
-        setDepreciationMethod(e.target.value)
+        setDepreciationMethod(parseInt(e.target.value))
         break
-      case ACQUISITION_VALUE:
-        setAcquisitionValue(e.target.value)
+      case UNIT_VALUE:
+        setUnitValue(parseInt(e.target.value))
+        break
+      case AMOUNT:
+        setAmount(parseInt(e.target.value))
         break
       default:
         console.log('nothing')
@@ -101,18 +100,21 @@ export const NewAssetStepTwo = (props: NewAssetSteTwoProps) => {
 
   const onClickHandler = () => {
     if(assetName && acquisitionDate && depreciationMethod && acquisitionValue) {
-      props.setSelectedItem((prevState:NewAssetProcessProps) => ({
+      const stepTwoItem: NewAssetItem = {
+        asset_item_id: props.selectedItem.stepOne.id,
+        name: assetName,
+        acquisition_date: dateToYYYYMMDDStr(acquisitionDate),
+        depreciation_start_date: ( depreciationStartDateInput ? dateToYYYYMMDDStr(acquisitionDate) : dateToYYYYMMDDStr(depreciationStartDate)),
+        depreciation_method_id: depreciationMethod,
+        location_id: location,
+        unit_value: unitValue,
+        amount: amount,
+        acquisition_value: acquisitionValue,
+        year_start_book_value: acquisitionValue
+      }
+      props.setSelectedItem((prevState: NewAssetProcessProps) => ({
         ...prevState,
-        stepTwo: {
-          asset_item_id: props.selectedItem.stepOne.id,
-          name: assetName,
-          acquisition_date: dateToYYYYMMDDStr(acquisitionDate),
-          depreciation_start_date: ( depreciationStartDateInput ? dateToYYYYMMDDStr(acquisitionDate) : dateToYYYYMMDDStr(depreciationStartDate)),
-          depreciation_method_id: depreciationMethod,
-          acquisition_value: acquisitionValue,
-          year_start_book_value: acquisitionValue,
-          location_id: location
-        }
+        stepTwo: stepTwoItem
       }))
     } else {
       alert('必須項目の入力がすべて行われていません')
@@ -123,7 +125,7 @@ export const NewAssetStepTwo = (props: NewAssetSteTwoProps) => {
     setDepreciationStartDateInput(!depreciationStartDateInput)
   }
 
-  const getDepreciationStartDate = () => {
+  const DepreciationStartDate = () => {
     if(!depreciationStartDateInput) {
       return (
         <SDWrapper>
@@ -136,14 +138,10 @@ export const NewAssetStepTwo = (props: NewAssetSteTwoProps) => {
           </SDd>
         </SDWrapper>
       )
+    } else {
+      return null
     }
   }
-
-  const DepreciationStartDate = getDepreciationStartDate()
-
-  // const queryWordHandler = (e: ChangeEvent<HTMLInputElement>) => {
-  //   setQueryWord(e.target.value)
-  // }
   
   const promiseOptions = (inputValue: string) =>
     new Promise(resolve => {
@@ -151,17 +149,13 @@ export const NewAssetStepTwo = (props: NewAssetSteTwoProps) => {
         resolve(getLocations(inputValue));
       }, 100);
     });
-
-  const onInputChangeHandler = (value: string) => {
-    setQueryWord(value)
-  }
   
   const depMethodHandler = (option: any) => {
     setDepreciationMethod(option.value.toString())
   }
 
   const locationHandler = (option: any) => {
-    setLocation(option.value.toString())
+    setLocation(option.value)
   }
 
   return (
@@ -171,7 +165,11 @@ export const NewAssetStepTwo = (props: NewAssetSteTwoProps) => {
           <H3>STEP2. 固定資産情報を登録</H3>
         </FlexDiv>
         <SDiv>
-          <SButton backgroundColor={bg.maroon} color={bg.white} onClick={setPreviousStepHandler}>STEP1の選択に戻る</SButton>
+          <SButton
+            backgroundColor={bg.maroon}
+            color={bg.white}
+            onClick={setPreviousStepHandler}
+          >STEP1の選択に戻る</SButton>
         </SDiv>
       </FlexWrapper>
       <SDiv>
@@ -207,7 +205,12 @@ export const NewAssetStepTwo = (props: NewAssetSteTwoProps) => {
         <SDWrapper>
           <SDt>資産名称</SDt>
           <SDd>
-            <SInput type='text' name={ASSET_NAME} placeholder='資産名称' onChange={onChangeHandler}/>
+            <SInput
+              type='text'
+              name={ASSET_NAME}
+              placeholder='資産名称'
+              onChange={onChangeHandler}
+            />
           </SDd>
         </SDWrapper>
         <SDWrapper>
@@ -222,10 +225,14 @@ export const NewAssetStepTwo = (props: NewAssetSteTwoProps) => {
         <SDWrapper>
           <SDt>取得日と同じ日をセットする</SDt>
           <SDd>
-            <input type='checkbox' checked={depreciationStartDateInput} onChange={checkHandler} />
+            <SInput
+              type='checkbox'
+              checked={depreciationStartDateInput}
+              onChange={checkHandler}
+            />
           </SDd>
         </SDWrapper>
-        {DepreciationStartDate}
+          <DepreciationStartDate />
         <SDWrapper>
           <SDt>償却方法</SDt>
           <SDd width='20em'>
@@ -236,12 +243,6 @@ export const NewAssetStepTwo = (props: NewAssetSteTwoProps) => {
           </SDd>
         </SDWrapper>
         <SDWrapper>
-          <SDt>取得価格</SDt>
-          <SDd>
-            <SInput type='number' name={ACQUISITION_VALUE} placeholder='取得価格'  onChange={onChangeHandler}/>
-          </SDd>
-        </SDWrapper>
-        <SDWrapper>
           <SDt>所在地</SDt>
           <SDd width='20em'>
             <AsyncSelect
@@ -249,10 +250,41 @@ export const NewAssetStepTwo = (props: NewAssetSteTwoProps) => {
               defaultOptions
               loadOptions={promiseOptions}
               onChange={locationHandler}
-              onInputChange={onInputChangeHandler}
             />
           </SDd>
         </SDWrapper>
+        <SDWrapper>
+          <SDt>取得単価</SDt>
+          <SDd>
+            <SInput
+              type='number'
+              min='0'
+              name={UNIT_VALUE}
+              placeholder='取得単価'
+              onChange={onChangeHandler}
+            />
+          </SDd>
+        </SDWrapper>
+        <SDWrapper>
+          <SDt>数量</SDt>
+          <SDd>
+            <SInput
+              type='number'
+              min='0'
+              name={AMOUNT}
+              defaultValue={amount}
+              placeholder='数量'
+              onChange={onChangeHandler}
+            />
+          </SDd>
+        </SDWrapper>
+        <SDWrapper>
+          <SDt>取得合計</SDt>
+          <SDd>
+            {digitComma(acquisitionValue)}
+          </SDd>
+        </SDWrapper>
+  
       </SDl>
       <SDiv>
         <SButton onClick={onClickHandler}>プレビュー確認</SButton>

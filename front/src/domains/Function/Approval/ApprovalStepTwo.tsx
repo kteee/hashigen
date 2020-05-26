@@ -11,7 +11,7 @@ import { digitComma } from '../../../utilities/digitComma'
 import { bg, text } from '../../../utilities/colors'
 
 
-export const DepreciationStepTwo = (props: DepreciationProcessProps) => {
+export const ApprovalStepTwo = (props: DepreciationProcessProps) => {
 
   const [depreciateTransactions, setDepreciateTransactions] = useState<AssetDepreciationResponse[]>([])
 

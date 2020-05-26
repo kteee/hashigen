@@ -10,14 +10,11 @@ import { SInput } from '../../../materials/Input'
 import { SButton } from '../../../materials/Button'
 import { SDiv } from '../../../materials/Div'
 import { ACCOUNTS_URL } from '../../../utilities/urls'
-import { UseState, LoginReducerState } from '../../../utilities/types'
+import { storeState } from '../../../utilities/types'
 import { setHeaders } from '../../../utilities/auth'
 
-interface StoreState {
-  loginReducer: LoginReducerState
-}
 
-const loginAccountIdSelector = (state: StoreState) => state.loginReducer.accountId
+const loginAccountIdSelector = (state: storeState) => state.login.accountId
 
 export const Account = () => {
 

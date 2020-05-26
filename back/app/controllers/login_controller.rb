@@ -1,6 +1,8 @@
+require './lib/json_web_token'
+
 class LoginController < ApplicationController
 
-  def login
+  def post
     strong_params = login_params
     user = User.find_by(email: strong_params[:email])
     if user.authenticate(strong_params[:password])

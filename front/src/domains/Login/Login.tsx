@@ -12,8 +12,7 @@ import { SButton } from '../../materials/Button'
 import { SDiv } from '../../materials/Div'
 import { LOGIN_URL } from '../../utilities/urls'
 import { UseState } from '../../utilities/types'
-import { loginAction } from '../../reducer/action'
-import { Messagebox } from '../../components/Mesagebox'
+import { loginAction, showMessage } from '../../reducer/action'
 
 const SLink = styled(Link)`
 `
@@ -25,11 +24,8 @@ export const Login = () => {
 
   const [email, setEmail] = useState<UseState<string>>(undefined)
   const [password, setPassword] = useState<UseState<string>>(undefined)
-  const [message, setMessage] = useState('ログインしました')
-  const [open, setOpen] = useState(false)
 
   const history = useHistory()
-
   const dispatch = useDispatch()
 
   const loginUser = async () => {
@@ -38,14 +34,11 @@ export const Login = () => {
       password: password
     })
     if(token){
-      setOpen(true)
       localStorage.setItem('token', token)
       localStorage.setItem('exp', exp)
       dispatch(loginAction(account_id))
+      dispatch(showMessage('ログインしました'))
       history.push({pathname: '/'})
-    } else {
-      setMessage('ログインに失敗しました')
-      setOpen(true)
     }
   }
 
@@ -64,10 +57,6 @@ export const Login = () => {
     loginUser()
   }
 
-  const messageClose = () => {
-    setOpen(false)
-  }
-
   return (
     <Container>
       <H2>ログイン</H2>
@@ -83,12 +72,6 @@ export const Login = () => {
       <SDiv>
         <SLink to='/signup'>アカウント未登録の場合</SLink>
       </SDiv>
-      <Messagebox 
-        open={open}
-        autoHideDuration={6000}
-        onClose={messageClose}
-        message={message}
-      />
     </Container>
   )
 }

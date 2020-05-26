@@ -1,6 +1,7 @@
 class Transaction < ApplicationRecord
   # concerns
-  include TransactionDepreciation
+  include TransactionSummary
+  include TransactionApproval
 
   # relations
   belongs_to :asset
@@ -8,16 +9,15 @@ class Transaction < ApplicationRecord
   belongs_to :transaction_type
 
   # enum
-  # enum status: {
-  #   projected: 0,
-  #   monthly_closed: 1,
-  #   yearly_closed: 2
-  # }
+  enum status: {
+    unapproved: 0,
+    approved: 1
+  }
 
   # validations
-  validates :asset_id, :monthly_period_id, :transaction_type_id,
-    :amount, :status, :date, presence: true
-  validates :amount, numericality: { greater_than: 0 }, if: :is_depreciation?
+  validates :asset_id, :transaction_type_id, :value,
+    :status, :exec_date, :txn_date, presence: true
+  validates :value, numericality: { greater_than: 0 }, if: :is_depreciation?
 
   # validation methods
   def is_depreciation?

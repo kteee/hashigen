@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import { H1 } from '../materials/Text'
 import { setHeaders } from '../utilities/auth'
 import { SESSION_URL } from '../utilities/urls'
-import { LoginReducerState } from '../utilities/types'
+import { storeState } from '../utilities/types'
 import { loginAction } from '../reducer/action'
 import { bg, text } from '../utilities/colors'
 
@@ -62,15 +62,12 @@ const CustomLink = styled(Link)`
   line-height: 4em;
 `;
 
-interface StoreState {
-  loginReducer: LoginReducerState
-}
 
-const loginSelector = (state: StoreState) => state.loginReducer.loggedIn
+const loginSelector = (state: storeState) => state.login.loggedIn
 
 export const Header = () => {
 
-  const isLoggedin = useSelector(loginSelector) 
+  const isLoggedin = useSelector(loginSelector)
   const dispatch = useDispatch()
 
   const validateToken = async () => {

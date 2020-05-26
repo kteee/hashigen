@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import axios from 'axios'
 
 import { Container } from '../../../materials/Container'
@@ -7,13 +8,14 @@ import { ScreenWrapper, ScreenLeft, ScreenRight } from '../../../materials/Scree
 import { SButton } from '../../../materials/Button'
 import { FlexWrapper } from '../../../materials/Flex'
 import { FunctionListBase } from '../FunctionListBase'
-import { Detail } from './Detail'
-import { Accounting } from './Accounting'
-import { Transactions } from './Transactions'
+import { Detail } from './Info/Detail'
+import { Accounting } from './Info/Accounting'
+import { Transactions } from './Info/Transactions'
 import { ASSETS_URL } from '../../../utilities/urls'
 import { AssetDetailResponse } from '../../../utilities/types'
 import { bg, text, border } from '../../../utilities/colors'
 import { setHeaders } from '../../../utilities/auth'
+import { showMessage } from '../../../reducer/action'
 
 export const AssetDetail = () => {
 
@@ -64,12 +66,13 @@ export const AssetDetail = () => {
   const [assetDetail, setAssetDetail] = useState<AssetDetailResponse>(initialObject)
   
   const { id: assetId } = useParams()
+  const history = useHistory()
+  const dispatch = useDispatch()
 
   const getAsset = async () => {
     const url = `${ASSETS_URL}/${assetId}`
     const headers = setHeaders()
     const { data } = await axios.get(url, headers)
-    console.log(data)
     setAssetDetail(data)
   }
   
@@ -84,10 +87,15 @@ export const AssetDetail = () => {
       url,
       headers
     )
+    if(status === 201) {
+      history.push({pathname: '/function/list'})
+      dispatch(showMessage('削除しました'))
+    } else {
+      alert('処理に失敗したかもしれません')
+    }
   }
 
   const execDeleteAsset = () => {
-    // 物理削除だけどいつかは論理削除にしたい
     if(window.confirm('現時点では復元機能はありませんが、本当に削除してよろしいですか？')){
       deleteAsset()
     }

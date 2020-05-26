@@ -14,9 +14,4 @@ class MastersController < ApplicationController
     render status: 200, json: { count: items_count }
   end
 
-  def asset_item
-    items = AssetItem.search_and_pagenate(params[:q], params[:page], params[:per])
-    render status:200, json: items
-  end
-
 end

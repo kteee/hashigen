@@ -2,31 +2,21 @@ Rails.application.routes.draw do
   
   scope :api do
     resources :users
-    resource :asset, only: [] do
-      resource :preview, controller: :asset_preview, only: [:show]
-    end
     resource :assets, only: [] do
       resource :depreciation, controller: :asset_depreciation, only: [:show, :create]
     end
     resources :assets
     resources :accounts
-    resources :accounting_periods
+    resources :accounting_periods, path: 'accounting-periods', only: [:index, :create, :update, :destroy]
     resources :locations, only: [:index, :show]
-    resource :current_accounting_period, only: [] do
-      resources :monthly_periods, controller: :current_accounting_period_monthly_periods, only: [:index, :show]
-    end
-    resources :dep_methods, only: [:index]
-    resources :asset_groups, only: [:index]
+    resources :transactions, only: [:index]
+    resource :asset_preview, path: 'asset/preview', controller: :asset_preview, only: [:show]
+    resources :asset_groups, path: 'asset-groups', only: [:index]
+    resources :useful_lives, path: 'useful-lives', only: [:index]
+    resources :dep_methods, path: 'dep-methods', only: [:index]
+    resources :asset_items, path: 'asset-items', only: [:index]
+    resources :unapproved_transactions, path: 'transactions/unapproved', only: [:index]
   end
-
-  get '/api/account/setting', to: 'accounts#setting'
-
-  # 法定設定周りはgetしかせずcontrollerを増やしたくないので手動で作成  
-  get '/api/masters/useful-life', to: 'masters#useful_life'
-  get '/api/masters/asset-type', to: 'masters#asset_type'
-  get '/api/masters/asset-group', to: 'masters#asset_group'
-  get '/api/masters/asset-item', to: 'masters#asset_item'
-  get '/api/masters/dep-method', to: 'masters#dep_method'
 
   post '/api/login', to: 'login#login'
   post '/api/session', to: 'login#session'

@@ -8,30 +8,13 @@ import { Container } from '../../../materials/Container'
 import { H2 } from '../../../materials/Text'
 import { ScreenWrapper, ScreenLeft, ScreenRight } from '../../../materials/ScreenDivider'
 import { NewAssetProcessProps } from '../../../utilities/types'
+import { NewAssetInitialState } from '../../../utilities/initialValue'
 
 export const NewAsset = () => {
 
-  const initialState: NewAssetProcessProps = {
-    stepOne: {
-      id: 0,
-      group: '',
-      item: [],
-      useful_life: 0
-    },
-    stepTwo: { 
-      asset_item_id: 0,
-      name: '',
-      acquisition_date: '',
-      depreciation_start_date: '',
-      depreciation_method_id: 0,
-      acquisition_value: 0,
-      year_start_book_value: 0,
-      location_id: 0
-    }
-  }
-  const [selectedItem, setSelectedItem] = useState<NewAssetProcessProps>(initialState)
+  const [selectedItem, setSelectedItem] = useState<NewAssetProcessProps>(NewAssetInitialState)
 
-  const getDisplayComponent = () => {
+  const CurrentStep = () => {
     if(selectedItem.stepOne.id) {
       if(selectedItem.stepTwo.asset_item_id){
         return (
@@ -49,8 +32,6 @@ export const NewAsset = () => {
     }
   }
   
-  const DisplayComponent = getDisplayComponent()
-
   return (
     <Container>
       <ScreenWrapper>
@@ -59,7 +40,7 @@ export const NewAsset = () => {
         </ScreenLeft>
         <ScreenRight>
           <H2>新規登録</H2>
-          {DisplayComponent}
+          <CurrentStep />
         </ScreenRight>
       </ScreenWrapper>
     </Container>

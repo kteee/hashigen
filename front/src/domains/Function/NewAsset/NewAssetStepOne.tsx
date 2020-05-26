@@ -1,39 +1,47 @@
 import React, {Fragment, useState, useEffect, ChangeEvent} from 'react';
+import Select from 'react-select'
 import axios from 'axios'
 import Pagination from '@material-ui/lab/Pagination';
 
 import { H3 } from '../../../materials/Text'
+import { SDl, SDWrapper, SDt, SDd } from '../../../materials/Definition'
 import { STable, STr, STh, STd } from '../../../materials/Table'
 import { SInput } from '../../../materials/Input'
 import { SDiv } from '../../../materials/Div'
-import { GET_ASSET_ITEM_URL } from '../../../utilities/urls'
+import { GET_ASSET_ITEMS_URL, GET_ASSET_GROUPS_URL } from '../../../utilities/urls'
 import { FlexWrapper } from '../../../materials/Flex'
-import { AssetListItemResponse, NewAssetProcessProps } from '../../../utilities/types'
+import { AssetListItemResponse, NewAssetProcessProps, ReactSelect, NewAssetStepProps } from '../../../utilities/types'
 
-interface NewAssetStepOneProps {
-  selectedItem: NewAssetProcessProps
-  setSelectedItem: any
-}
 
-const NewAssetStepOne = (props: NewAssetStepOneProps) => {
+const NewAssetStepOne = (props: NewAssetStepProps) => {
 
   const [assetItems, setAssetItems] = useState<AssetListItemResponse[]>([])
+  const [assetGroups, setAssetGroups] = useState<ReactSelect[]>([])
+  const [assetGroup, setAssetGroup] = useState('')
   const [currentPage, setCurrentPange] = useState(1)
   const [perPageCount, setPerPageCount] = useState(10)
   const [totalPages, setTotalPages] = useState<number>()
   const [queryWord, setQueryWord] = useState('')
   
-
-  const getData = async () => {
-    const url = `${GET_ASSET_ITEM_URL}?per=${perPageCount}&page=${currentPage}&q=${queryWord}`
+  const getAssetItems = async () => {
+    const url = `${GET_ASSET_ITEMS_URL}?per=${perPageCount}&page=${currentPage}&q=${queryWord}&group=${assetGroup}`
     const { data: { items, pages } } = await axios.get(url)
     setAssetItems(items)
     setTotalPages(parseInt(pages))
   }
 
+  const getAssetGroups = async () => {
+    const { data } = await axios.get(GET_ASSET_GROUPS_URL)
+    setAssetGroups(data)
+  }
+
+  useEffect(() => {
+    getAssetGroups()
+  }, [])
+
   useEffect(() => {    
-    getData()
-  }, [currentPage, perPageCount, queryWord])
+    getAssetItems()
+  }, [currentPage, perPageCount, queryWord, assetGroup])
 
   const itemSelector = (item: AssetListItemResponse) => {
     props.setSelectedItem((prevState: NewAssetProcessProps) => ({
@@ -52,6 +60,10 @@ const NewAssetStepOne = (props: NewAssetStepOneProps) => {
 
   const pageChanger = (e: ChangeEvent<any>, page: number) => {
     setCurrentPange(page)
+  }
+
+  const setAssetGroupId = (option: any) => {
+    setAssetGroup(option.value.toString())
   }
 
   const AssetItems = assetItems.map((value, index: number) => {
@@ -74,12 +86,30 @@ const NewAssetStepOne = (props: NewAssetStepOneProps) => {
   return (
     <Fragment>
       <H3>STEP1. 登録資産区分を選択</H3>
-      <SDiv>
-        <label>
-          キーワード絞り込み：
-          <SInput type='text' name='asset-name' placeholder='検索ワード' onInput={onInputHandler}/>
-        </label>
-      </SDiv>
+      <SDl>
+        <SDWrapper>
+          <SDt>構造<br/>資産グループ</SDt>
+          <SDd width='25em'>
+            <Select
+              options={assetGroups}
+              onChange={setAssetGroupId}
+            />
+          </SDd>
+        </SDWrapper>
+      </SDl>
+      <SDl>
+        <SDWrapper>
+          <SDt>キーワード<br/>絞り込み</SDt>
+          <SDd>
+            <SInput
+              type='text'
+              name='asset-name'
+              placeholder='検索ワード'
+              onInput={onInputHandler}
+            />
+          </SDd>
+        </SDWrapper>
+      </SDl>
       <FlexWrapper>
         <SDiv>            
           <Pagination

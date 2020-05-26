@@ -7,12 +7,12 @@ require 'csv'
 #     old_same_amount: row['旧定額法'],
 #     old_same_ratio: row['旧定率法'],
 #     new_same_amount: row['新定額法'],
-#     two_five_zero_same_ratio: row['250%償却率'],
-#     two_five_zero_same_ratio_point: row['250%改定償却率'],
-#     two_five_zero_same_ratio_after_point: row['250%保証率'],
-#     two_zero_zero_same_ratio: row['200%償却率'],
-#     two_zero_zero_same_ratio_point: row['200%改定償却率'],
-#     two_zero_zero_same_ratio_after_point: row['200%保証率']
+#     two_five_zero_same_ratio_base: row['250%償却率'],
+#     two_five_zero_same_ratio_revised: row['250%改定償却率'],
+#     two_five_zero_same_ratio_guaranteed: row['250%保証率'],
+#     two_zero_zero_same_ratio_base: row['200%償却率'],
+#     two_zero_zero_same_ratio_revised: row['200%改定償却率'],
+#     two_zero_zero_same_ratio_guaranteed: row['200%保証率']
 #   )
 # end
 
@@ -24,7 +24,10 @@ require 'csv'
 
 # AssetGroup(決算書区分)
 # CSV.foreach('db/csv/asset_group.csv') do |row|
-#   AssetGroup.create(name: row[1])
+#   AssetGroup.create(
+#     name: row[1],
+#     asset_type_id: row[2]
+#   )
 # end
 
 # AssetItems
@@ -37,34 +40,38 @@ require 'csv'
 # end
 
 # DepMethods
-# dep_methods = [
-#   {
-#     name: 'two_zero_zero_same_ratio',
-#     display_name: '200%定率法'
-#   },
-#   {
-#     name: 'new_same_amount',
-#     display_name: '新定額法'
-#   },
-#   {
-#     name: 'two_five_zero_same_ratio',
-#     display_name: '250%定率法'
-#   },
-#   {
-#     name: 'old_same_amount',
-#     display_name: '旧定額法'
-#   },
-#   {
-#     name: 'old_same_ratio',
-#     display_name: '旧定率法'
-#   }
-# ]
-# dep_methods.each do |method|
-#   DepreciationMethod.create(
-#     name: method[:name],
-#     display_name: method[:display_name]
-#   )
-# end
+dep_methods = [
+  {
+    name: 'two_zero_zero_same_ratio',
+    display_name: '200%定率法'
+  },
+  {
+    name: 'new_same_amount',
+    display_name: '新定額法'
+  },
+  {
+    name: 'two_five_zero_same_ratio',
+    display_name: '250%定率法'
+  },
+  {
+    name: 'old_same_amount',
+    display_name: '旧定額法'
+  },
+  {
+    name: 'old_same_ratio',
+    display_name: '旧定率法'
+  },
+  {
+    name: 'old_same_amount',
+    display_name: '旧定額法'
+  }
+]
+dep_methods.each do |method|
+  DepreciationMethod.create(
+    name: method[:name],
+    display_name: method[:display_name]
+  )
+end
 
 # DepMethods(DBrollbackで一部の列が落ちたので復元)
 # dep_methods = DepreciationMethod.all
@@ -112,24 +119,24 @@ require 'csv'
 # end
 
 # transaction_types
-monthly_periods = [
-  {start: '2020-02-01', end: '2020-02-28'},
-  {start: '2020-03-01', end: '2020-03-31'},
-  {start: '2020-04-01', end: '2020-04-30'},
-  {start: '2020-05-01', end: '2020-05-31'},
-  {start: '2020-06-01', end: '2020-06-30'},
-  {start: '2020-07-01', end: '2020-07-31'},
-  {start: '2020-08-01', end: '2020-08-31'},
-  {start: '2020-09-01', end: '2020-09-30'},
-  {start: '2020-10-01', end: '2020-10-31'},
-  {start: '2020-11-01', end: '2020-11-30'},
-  {start: '2020-12-01', end: '2020-12-31'},
-]
+# monthly_periods = [
+#   {start: '2020-02-01', end: '2020-02-28'},
+#   {start: '2020-03-01', end: '2020-03-31'},
+#   {start: '2020-04-01', end: '2020-04-30'},
+#   {start: '2020-05-01', end: '2020-05-31'},
+#   {start: '2020-06-01', end: '2020-06-30'},
+#   {start: '2020-07-01', end: '2020-07-31'},
+#   {start: '2020-08-01', end: '2020-08-31'},
+#   {start: '2020-09-01', end: '2020-09-30'},
+#   {start: '2020-10-01', end: '2020-10-31'},
+#   {start: '2020-11-01', end: '2020-11-30'},
+#   {start: '2020-12-01', end: '2020-12-31'},
+# ]
 
-monthly_periods.each do |period|
-  MonthlyPeriod.create(
-    start: Time.parse(period[:start]),
-    end: Time.parse(period[:end]),
-    accounting_period_id: 3
-  )
-end
+# monthly_periods.each do |period|
+#   MonthlyPeriod.create(
+#     start: Time.parse(period[:start]),
+#     end: Time.parse(period[:end]),
+#     accounting_period_id: 3
+#   )
+# end
