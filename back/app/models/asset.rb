@@ -21,7 +21,7 @@ class Asset < ApplicationRecord
 
   # custom validations
   validate :depreciation_start_date_cannot_be_before_acquisition_date
-  validate :depreciation_start_date_cannot_be_before_current_period
+  # validate :depreciation_start_date_cannot_be_before_current_period
 
   # validation methods
   def depreciation_start_date_cannot_be_before_acquisition_date
@@ -30,12 +30,12 @@ class Asset < ApplicationRecord
     end
   end
 
-  def depreciation_start_date_cannot_be_before_current_period
-    puts 
-    if account.get_current_period[:start] > depreciation_start_date then
-      errors.add(:depreciation_start_date, 'は当会計年度の期首日以前の日付にすることはできません')
-    end
-  end
+  # def depreciation_start_date_cannot_be_before_current_period
+  #   puts 
+  #   if account.get_current_period[:start] > depreciation_start_date then
+  #     errors.add(:depreciation_start_date, 'は当会計年度の期首日以前の日付にすることはできません')
+  #   end
+  # end
 
   # custom method
   def get_detail

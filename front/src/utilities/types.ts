@@ -103,14 +103,14 @@ export interface NewAssetStepProps {
   setSelectedItem(arg: setSelectedItemArg): void
 }
 
-export interface DepreciationMonth extends MonthlyPeriodResponse {
-  checked: boolean
-}
+// export interface DepreciationMonth extends UnapprovedTransactions {
+//   checked: boolean
+// }
 
-export interface DepreciationProcessProps {
-  selectedMonths: DepreciationMonth[]
-  setSelectedMonths: any
-}
+// export interface DepreciationProcessProps {
+//   selectedMonths: DepreciationMonth[]
+//   setSelectedMonths: any
+// }
 
 export interface MyModalProps {
   open: boolean
@@ -240,11 +240,13 @@ export interface AccountingPeriodResponse {
   status: number
 }
 
-export interface MonthlyPeriodResponse {
-  id: number
-  accounting_period_id: number
-  start: string
-  end: string
+interface UnapprovedTransaction {
+  type: string
+  count: number
+}
+
+export interface UnapprovedTransactions {
+  [key: string]: UnapprovedTransaction[]
 }
 
 export interface DepreciationMethodsProps {

@@ -6,29 +6,36 @@ import { H2 } from '../../../materials/Text'
 import { ScreenWrapper, ScreenLeft, ScreenRight } from '../../../materials/ScreenDivider'
 import { ApprovalStepOne } from './ApprovalStepOne'
 import { ApprovalStepTwo } from './ApprovalStepTwo'
-import { DepreciationMonth } from '../../../utilities/types'
+import {  } from '../../../utilities/types'
 
 
 export const Approval = () => {
 
-  const [selectedMonths, setSelectedMonths] = useState<DepreciationMonth[]>([])
+  const [selectedMonths, setSelectedMonths] = useState([])
 
   const Depreciation = () => {
-    if(selectedMonths.length > 0){
-      return (
-        <ApprovalStepTwo
-          selectedMonths={selectedMonths}
-          setSelectedMonths={setSelectedMonths}
-        />
-      )
-    } else {
-      return (
-        <ApprovalStepOne
-          selectedMonths={selectedMonths}
-          setSelectedMonths={setSelectedMonths}
-        />
-      )
-    }
+    // if(selectedMonths.length > 0){
+    //   return (
+    //     <ApprovalStepTwo
+    //       selectedMonths={selectedMonths}
+    //       setSelectedMonths={setSelectedMonths}
+    //     />
+    //   )
+    // } else {
+    //   return (
+    //     <ApprovalStepOne
+    //       selectedMonths={selectedMonths}
+    //       setSelectedMonths={setSelectedMonths}
+    //     />
+    //   )
+    // }
+    return (
+      <ApprovalStepOne/>
+      // <ApprovalStepOne
+      //   selectedMonths={selectedMonths}
+      //   setSelectedMonths={setSelectedMonths}
+      // />
+    )
   }
 
   return (
@@ -38,7 +45,7 @@ export const Approval = () => {
           <FunctionListBase />
         </ScreenLeft>
         <ScreenRight>
-          <H2>減価償却実行</H2>
+          <H2>取引承認</H2>
           <Depreciation />
         </ScreenRight>
       </ScreenWrapper>

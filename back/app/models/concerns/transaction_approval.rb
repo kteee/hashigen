@@ -14,9 +14,18 @@ module TransactionApproval
       count = []
       count_base.each do |key, val|
         pushing_item_outer = {}
-        pushing_item_inner = { type: key[1], value: val }
-        pushing_item_outer[key[0].strftime("%Y-%m-%d")] = [pushing_item_inner]
-        count.push(pushing_item_outer)
+        pushing_item_inner = { type: key[1], count: val }
+        if count.length > 0
+          if count[-1].keys[0] == key[0].strftime("%Y-%m-%d")
+            count[-1][key[0].strftime("%Y-%m-%d")].push(pushing_item_inner)
+          else
+            pushing_item_outer[key[0].strftime("%Y-%m-%d")] = [pushing_item_inner]
+            count.push(pushing_item_outer)  
+          end
+        else
+          pushing_item_outer[key[0].strftime("%Y-%m-%d")] = [pushing_item_inner]
+          count.push(pushing_item_outer)
+        end
       end
       count
     end
